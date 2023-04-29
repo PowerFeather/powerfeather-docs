@@ -1,0 +1,39 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&display=swap');
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #c75000;
+  --ifm-color-primary-dark: #b34800;
+  --ifm-color-primary-darker: #a94400;
+  --ifm-color-primary-darkest: #8b3800;
+  --ifm-color-primary-light: #db5800;
+  --ifm-color-primary-lighter: #e55c00;
+  --ifm-color-primary-lightest: #ff6904;
+}
+
+nav .navbar__title {
+  font-size: 22px;
+  font-family: IBM Plex Sans Condensed, sans-serif;
+}
+
+nav .navbar__item {
+  font-family: IBM Plex Sans, sans-serif;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #ff8e39;
+  --ifm-color-primary-dark: #ff7c1a;
+  --ifm-color-primary-darker: #ff730a;
+  --ifm-color-primary-darkest: #da5e00;
+  --ifm-color-primary-light: #ffa058;
+  --ifm-color-primary-lighter: #ffa968;
+  --ifm-color-primary-lightest: #ffc397;
+}
