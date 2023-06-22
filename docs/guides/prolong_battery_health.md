@@ -2,4 +2,7 @@
 sidebar_position: 2
 ---
 
-# Prolonging Li-Po Battery Health
+# Prolonging Battery Health
+
+Li-po batteries degrade as you use them
+
