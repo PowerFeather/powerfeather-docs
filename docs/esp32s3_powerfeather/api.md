@@ -2,9 +2,7 @@
 sidebar_position: 1
 ---
 
-# Board
-
-## C++
+# API
 
 ### `void SetChargerCurrentLimit(float current)`
 

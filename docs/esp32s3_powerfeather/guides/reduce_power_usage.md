@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 ---
 
 # Reducing Power Usage
@@ -14,3 +14,5 @@ The power rails on the PowerFeather can be individually turned off.
 
 ### Disable the Battery Gauge
 
+
+### Put the device in Ship Mode
