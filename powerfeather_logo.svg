@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="powerfeather_logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="1.4260348"
+     inkscape:cx="308.19725"
+     inkscape:cy="222.99596"
+     inkscape:window-width="1864"
+     inkscape:window-height="1131"
+     inkscape:window-x="56"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect1088"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect969"
+       is_visible="true"
+       lpeversion="1" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#ff7f2a;stroke:#ff7f2f;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 285.20357,495.33325 C 197.54622,397.16771 160.0492,256.38682 187.26441,127.62496 c 2.36768,-11.20206 5.19228,-22.30753 8.46444,-33.279531 L 307.67231,19.846253 235.72868,246.51275 275.13957,216.20384 c -15.02078,41.86172 -23.91541,85.91602 -26.31308,130.32636 -2.02082,37.43024 0.56464,75.10692 7.67953,111.91025"
+       id="path967"
+       inkscape:path-effect="#path-effect969"
+       inkscape:original-d="M 285.20357,495.33325 C 240.96572,361.43007 219.9118,250.19539 187.26441,127.62496 154.61703,5.0545242 187.90358,116.95821 195.72885,94.345429 L 307.67231,19.846253 235.72868,246.51275 275.13957,216.20384 c -29.47918,84.43573 54.57302,94.46162 -26.31308,130.32636 -364.24764,161.50669 8.32071,108.51325 7.67953,111.91025"
+       sodipodi:nodetypes="csccccsc" />
+  </g>
+</svg>
