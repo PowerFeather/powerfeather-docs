@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'PowerFeather',
-  tagline: 'Ultimate Battery-Powered Board',
+  tagline: 'Ultimate LiPo-Powered Boards',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
