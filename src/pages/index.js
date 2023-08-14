@@ -14,13 +14,7 @@ function HomepageHeader() {
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
+        <p className="hero__subtitle">Unfortunately this site is still under construction.</p>
       </div>
     </header>
   );
@@ -30,8 +24,7 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Home`}
-      description="PowerFeather Landing Page">
+      title={`Home`}>
       <HomepageHeader />
       <main>
         <HomepageFeatures />
