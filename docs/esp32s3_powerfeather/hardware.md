@@ -4,6 +4,22 @@ sidebar_position: 0
 
 # Hardware
 
+## Overview
+
+## Features
+
+### Low Power
+
+
+
+### Battery
+- Low power
+- Fuel Guage
+- Charger interface
+
+### Compatibility with modules
+
+
 ## Specifications
 
 - Form factor
@@ -48,9 +64,10 @@ sidebar_position: 0
     - Battery Charging LED
 
 
+
 ## Pinout
 
-![An image from the static](board.jpg)
+![ESP32-S3 PowerFeather Pins](board.jpg)
 
 
 ## Comparison
@@ -75,7 +92,7 @@ N/A - Not available/applicable
 | Max Charging Current Adjustment | Firmware send command to charger via I2C interface| Replace soldered resistor | Replace soldered resistor |
 | Charge measurement | Fuel Gauge IC | Voltage divider<sup>3</sup> | Voltage divider<sup>3</sup> |
 | STEMMA QT | 1 | 2 | N/A |
-| Feather-compatible | Yes | No | No |
+| Feather-compatible | Yes | Yes | No |
 | Extra DC power input, aside from USB | Yes | No | No |
 | Load while charging | Yes<sup>4</sup> | Yes | Yes |
 | Battery can temporarily supplement USB/DC supply | Yes<sup>4</sup> | No | No |
@@ -89,7 +106,7 @@ N/A - Not available/applicable
 | Price | $27 | $22 | $9 |
 
 
-1. FeatherS3 does not use a module, instead using bare ESP32-S3 chip. The advantage of using modules is that they have [certifications](https://www.espressif.com/en/support/documents/certificates).
+1. FeatherS3 does not use a module, instead using a bare ESP32-S3 chip. The advantage of using modules is that they have [certifications](https://www.espressif.com/en/support/documents/certificates).
 2. To achieve this, an onboard trace needs to be cut rendering the RGB LED unusable.
 2. The 5V output current depends on the USB output current.
 3. Voltage divider may not represent state-of-charge of a battery, [since it is non-linear](https://www.analog.com/jp/technical-articles/how-to-achieve-greater-accuracy-in-battery-capacity-readings-for-portable-designs.html)
