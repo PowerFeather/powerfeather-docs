@@ -16,8 +16,8 @@ sidebar_position: 0
     - 2.4 GHz Wi-Fi b/g/n
     - Bluetooth 5.0 LE + Mesh
 - Header
-    - 23 Digital Input/Output
-    - 6 Analog
+    - 23 digital input/output
+    - 6 analog capable
     - 1 SPI
     - 1 I2C
 - Current consumption
@@ -48,9 +48,9 @@ sidebar_position: 0
     - Battery Charging LED
 
 
-## Pins
+## Pinout
 
-
+![An image from the static](board.jpg)
 
 
 ## Comparison
@@ -81,7 +81,7 @@ N/A - Not available/applicable
 | Battery can temporarily supplement USB/DC supply | Yes<sup>4</sup> | No | No |
 | BAT power output when no/depleted battery, but has USB/DC supply | Yes<sup>4</sup> | No | No |
 | Castellated Pins | No | No | Yes |
-| Header GPIO | 23 input/output | 21 input/output | 18 input/output + 4 input only |
+| Header GPIOs | 23 input/output | 21 input/output | 18 input/output + 4 input only |
 | Onboard LED | Red Charger Status + Green User LED | Red Charger Status + RGB User LED | Charger Status + RGB User LED <sup>2</sup>
 | Onboard Buttons | Reset + User | Reset + User | Reset + User
 | USB Connector | USB-C | USB-C | USB-C |
