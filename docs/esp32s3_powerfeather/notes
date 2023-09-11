@@ -1,0 +1,70 @@
+
+- BQ25628
+    - Max charge current: 2A
+    - Power Path
+        - Can use load while charging
+        - Battery can supplement USB/DC supply
+        - Battery pin output without battery
+    - I2C interface
+```
+Number of series cells	1
+Charge current (max) (A)	2
+Vin (max) (V)	18
+Cell chemistry	Li-Ion/Li-Polymer, Lithium Phosphate/LiFePO4
+Battery charge voltage (min) (V)	3.5
+Battery charge voltage (max) (V)	4.8
+Absolute max Vin (max) (V)	26
+Control topology	Switch-Mode Buck
+Control interface	I2C
+Features	BAT temp thermistor monitoring (JEITA profile), IC thermal regulation, IINDPM (Input current limit), Input OVP, Integrated ADC, Integrated buck converter, Power Path, USB C/PD compatible, USB OTG integrated, VINDPM (Input voltage threshold to maximize adaptor power)
+Vin (min) (V)	3.9
+Rating	Catalog
+Operating temperature range (°C)	-40 to 85
+
+
+High-efficiency, 1.5-MHz, synchronous switching mode buck charger for single cell battery
+>90% efficiency down to 25-mA output current from 5-V input
+Charge termination from
+Flexible JEITA profile for safe charging over temperature
+BATFET control to support shutdown, ship mode and full system reset
+1.5-µA quiescent current in battery only mode
+0.15-µA battery leakage current in ship mode
+0.1-µA battery leakage current in shutdown
+Supports Boost Mode operation to power accesory
+Boost Mode operation supporting 3.84-V to 5.2-V output
+>90% boost efficiency down to 100-mA boost current for 5-V PMID
+Supports a wide range of input sources
+3.9-V to 18-V wide input operating voltage range with 26-V absolute maximum input voltage
+Maximizes source power with input voltage regulation (VINDPM) and input current regulation (IINDPM)
+VINDPM threshold automatically tracks battery voltage
+Efficient battery operation with 15-mΩ BATFET
+Narrow VDC (NVDC) power path management
+System instant-on with depleted or no battery
+Battery supplement when adapter is fully loaded
+Flexible autonomous or I2C-controlled modes
+Integrated 12-bit ADC for voltage, current, temperature monitoring
+High Accuracy
+±0.4% charge voltage regulation
+±5% charge current regulation
+±5% input current regulation
+Safety
+Thermal regulation and thermal shutdown
+Input, system, and battery overvoltage protection
+Battery, and converter overcurrent protection
+Charging safety timer
+```
+
+- LC709
+    - I2C interface
+    - SOC state
+    - Alarms
+```
+High accuracy gauging
+Low power consumption
+Stable gauging
+Small footprint
+Alarm function: RSOC / Voltage / Temperature
+Battery lifetime measurement
+Multi-thermistor support
+I2C interface(up to 400kHz supported)
+```
