@@ -2,40 +2,43 @@
 sidebar_position: 0
 ---
 
-# Hardware
+# Overview
 
-## Overview
+ESP32-S3 PowerFeather is the ultimate development board for your Li-Po powered projects.
 
 ## Features
 
 ### Low Power
 
-
+- Low quiescent current components
+- Load switch 3.3V rails
 
 ### Battery
-- Low power
 - Fuel Guage
 - Charger interface
 
 ### Compatibility with modules
 
+- FeatherWing
+- Stemma QT/ QWIIC
+
 
 ## Specifications
 
 - Form factor
-    - Feather-compatible
     - 23 mm x 57 mm x 6mm
     - USB-C connector
-- Processor: ESP32-S3-WROOM-1-N16R8
-    - Dual-core 240MHz Xtensa @ 240MHz
-    - 16 MB SPI Flash, 768 KB SRAM + 8 MB PSRAM
-    - 2.4 GHz Wi-Fi b/g/n
-    - Bluetooth 5.0 LE + Mesh
+    - Feather-compatible
 - Header
     - 23 digital input/output
     - 6 analog capable
     - 1 SPI
     - 1 I2C
+- Processor: ESP32-S3-WROOM-1-N16R8
+    - Dual-core 240MHz Xtensa @ 240MHz
+    - 16 MB SPI Flash, 768 KB SRAM + 8 MB PSRAM
+    - 2.4 GHz Wi-Fi b/g/n
+    - Bluetooth 5.0 LE + Mesh
 - Current consumption
     - 1.5uA shutdown mode
     - 2uA ship mode
