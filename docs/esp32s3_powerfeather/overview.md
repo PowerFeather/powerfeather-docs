@@ -75,10 +75,7 @@ ESP32-S3 PowerFeather is the ultimate development board for your Li-Po powered p
 
 ## Comparison
 
-
-N/A - Not available/applicable
-
-| Feature | ESP32-S3 PowerFeather | Unexpected Maker FeatherS3 | DFRobot ESP32 Firebeetle (DFR0654) |
+| Detail | ESP32-S3 PowerFeather | Unexpected Maker FeatherS3 | DFRobot ESP32 Firebeetle (DFR0654) |
 |-|-|-|-|
 | Module | ESP32-S3-WROOM-N16R8 | N/A<sup>1</sup> | ESP32-WROOM-32E-N4 |
 | Processor | ESP32-S3 | ESP32-S3 | ESP32 |
@@ -89,28 +86,32 @@ N/A - Not available/applicable
 | Bluetooth | Bluetooth 5 LE + Mesh | Bluetooth 5 LE + Mesh | Bluetooth 4.2 BR/EDR + LE |
 | Deep Sleep Current | 10 uA | 20 uA | 13 uA<sup>2</sup> |
 | Lowest Power State/Current | Shutdown Mode/1.5 uA  | Deep Sleep/20 uA | Deep Sleep/13 uA |
-| 3.3V Output Max Current | 750mA | 2 x 700mA | 600 mA |
-| 5V Output Max Current | 2A | N/A<sup>2</sup> | N/A<sup>2</sup> |
-| Max Charging Current | 2A | 1A | 1A |
-| Max Charging Current Adjustment | Firmware send command to charger via I2C interface| Replace soldered resistor | Replace soldered resistor |
-| Charge measurement | Fuel Gauge IC | Voltage divider<sup>3</sup> | Voltage divider<sup>3</sup> |
+| 3.3V Output Max Current | 750 mA | 2 x 700 mA | 600 mA |
+| Turn On/Off 3.3V Output | Yes | Yes | No |
+| 5V Output Max Current | 2 A | N/A<sup>3</sup> | N/A<sup>3</sup> |
+| Max Charging Current (no board modifications) | 2 A<sup>4</sup> | 330 mA<sup>5</sup> | 500 mA<sup>5</sup> |
+| Battery charge measurement | Fuel Gauge Chip | Voltage divider<sup>6</sup> | Voltage divider<sup>6</sup> |
 | STEMMA QT | 1 | 2 | N/A |
 | Feather-compatible | Yes | Yes | No |
 | Extra DC power input, aside from USB | Yes | No | No |
-| Load while charging | Yes<sup>4</sup> | Yes | Yes |
-| Battery can temporarily supplement USB/DC supply | Yes<sup>4</sup> | No | No |
-| BAT power output when no/depleted battery, but has USB/DC supply | Yes<sup>4</sup> | No | No |
-| Castellated Pins | No | No | Yes |
+| Load while charging | Yes<sup>7</sup> | Yes | Yes |
+| Battery can temporarily supplement USB/DC supply | Yes<sup>7</sup> | No | No |
+| Battery power output when no/depleted battery, but has USB/DC supply | Yes<sup>7</sup> | No | No |
+| Castellated Header Pins | No | No | Yes |
 | Header GPIOs | 23 input/output | 21 input/output | 18 input/output + 4 input only |
-| Onboard LED | Red Charger Status + Green User LED | Red Charger Status + RGB User LED | Charger Status + RGB User LED <sup>2</sup>
-| Onboard Buttons | Reset + User | Reset + User | Reset + User
+| Onboard LED | Charger Status + User LED | Charger Status + RGB User LED | Charger Status + RGB User LED <sup>2</sup>
+| Onboard Buttons | Reset + User Button | Reset + User Button | Reset + User Button
 | USB Connector | USB-C | USB-C | USB-C |
 | Native USB | Yes | Yes | No |
+| Display Connector | No | No | 18-Pin FPC <sup>8</sup> |
 | Price | $27 | $22 | $9 |
 
 
-1. FeatherS3 does not use a module, instead using a bare ESP32-S3 chip. The advantage of using modules is that they have [certifications](https://www.espressif.com/en/support/documents/certificates).
-2. To achieve this, an onboard trace needs to be cut rendering the RGB LED unusable.
-2. The 5V output current depends on the USB output current.
-3. Voltage divider may not represent state-of-charge of a battery, [since it is non-linear](https://www.analog.com/jp/technical-articles/how-to-achieve-greater-accuracy-in-battery-capacity-readings-for-portable-designs.html)
-4. ESP32-S3 PowerFeather uses charger IC with PowerPath.
+1. The *FeatherS3* does not use a module, instead using a bare ESP32-S3 chip. On the other hand, *ESP32-S3 PowerFeather* and *ESP32-Firebeetle* uses official Espressif modules, which comes with [certifications](https://www.espressif.com/en/support/documents/certificates?keys=&field_product_value%5B%5D=ESP32-S3-WROOM-1&field_product_value%5B%5D=ESP32-WROOM-32E).
+2. To achieve low deep-sleep current consumption, an onboard trace on the *ESP32 Firebeetle* has to be cut which disables the onboard RGB LED.
+3. On *FeatherS3* and *ESP32 Firebeetle*, the maximum 5V output current depends directly on the maximum current the USB input power supply can deliver.
+4. The battery charger chip on the *ESP32-S3 PowerFeather* has an I2C interface, which can accept configuration command for setting the max charging current from the firmware. This makes it easy to set max charging current to balance charging speed and safety for a specific battery size.
+5. On *FeatherS3* and *ESP32 Firebeetle*, a resistor on the board has to be replaced to change max charging current.
+6. The voltage dividers on *FeatherS3* and *ESP32 Firebeetle* [may not be sufficient to determine the battery's state-of-charge](https://www.analog.com/jp/technical-articles/how-to-achieve-greater-accuracy-in-battery-capacity-readings-for-portable-designs.html).
+7. *ESP32-S3 PowerFeather* battery charger chip has integrated power path management, which enables these features.
+8. The 18-pin FPC on the *ESP32 Firebeetle* shares some GPIO pins with header; so pins used as part of the display interface can't be used on the header.
