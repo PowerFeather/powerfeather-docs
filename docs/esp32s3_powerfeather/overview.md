@@ -3,19 +3,17 @@ sidebar_position: 0
 ---
 
 # Overview
-*ESP32-S3 PowerFeather* is the ultimate development board for connected, LiPo-powered projects.
+
 
 ## Features
-
-
-### Powerful brains
+### Powerful Brains
 
 As the name suggests, the board features an Espressif ESP32-S3 module as the brains. When talking about this module, there are three main bullet points:
 
 - speedy dual-core processor
 - tons of flash and RAM
-- awesome Wi-Fi and Bluetooth support
-
+- native Wi-Fi and Bluetooth support
+- rich peripherals
 
 ### Flexible Power
 
@@ -23,20 +21,24 @@ The board can be powered from three power input sources: USB, LiPo battery or an
 
 In terms of power output, the board provides two 3.3V rails, one 5V rail, and one VBAT rail. The two 3.3V rails, one on header and the other on STEMMA QT connector, can be individually turned on or off. The 5V rail can be turned on even when only on battery power; and somewhat contrary to the name, is adjustable. The VBAT rail can be made to track battery voltage or set to a fixed voltage. In case of no or a fully depleted battery, VBAT still has power output as long as there is USB or DC power input.
 
-### Low *Power*
+### Low Power
 
 *ESP32-S3 PowerFeather* uses components with low quiescent current, and the circuitry is designed carefully to minimize leakages. This results to one of the best-in-class deep-sleep current when compared against similar boards on the market.
 
 The board even has power states with lower power consumption than deep-sleep for projects that can take advantage of it.
 
 
-### Battery Smarts
+### Battery Monitoring and Management
 
-For battery powered applications, it's important to know how much juice is left. That's why there's an onboard fuel gauge chip on *ESP32-S3 PowerFeather*. The board also comes with a modern, highly integrated battery charger chip. This charger chip has an I2C interface, which enables the firmware to set configuration or query status. The presence of these two chips enable users to design truly intelligent LiPo-powered applications.
+For battery powered applications, it's important to know how much juice is left. That's why there's an onboard fuel gauge chip on *ESP32-S3 PowerFeather*.
+
+The board also comes with a modern, highly integrated battery charger chip. This charger chip has an I2C interface, which enables the firmware to set configuration or query status. The presence of these two chips enable users to design truly intelligent LiPo-powered applications.
 
 ### Expansions Galore
 
-*ESP32-S3 PowerFeather* has a Feather-compatible form-factor, it can be used with [FeatherWings already existing on the market](https://github.com/adafruit/awesome-feather#featherwings). It also has a STEMMA QT connector, so [existing modules for it](https://github.com/adafruit/awesome-stemma#adafruit-sensors-with-stemma) can also be connected easily. Furthermore, there are several [STEMMA QT-compatible connector systems](https://github.com/adafruit/awesome-stemma#stemma-compatible-and-stemma-like-systems), so modules for these can be connected too! Examples of such are [QWIIC](https://cdn.sparkfun.com/assets/home_page_posts/3/1/7/7/SparkFun_s_Qwiic_Ecosystem.pdf) and [easyC](https://soldered.com/categories/easyc-2/) modules.
+*ESP32-S3 PowerFeather* has a Feather-compatible form-factor, it can be used with [FeatherWings already existing on the market](https://github.com/adafruit/awesome-feather#featherwings).
+
+It also has a STEMMA QT connector, so [existing modules for it](https://github.com/adafruit/awesome-stemma#adafruit-sensors-with-stemma) can also be connected easily. Furthermore, there are several [STEMMA QT-compatible connector systems](https://github.com/adafruit/awesome-stemma#stemma-compatible-and-stemma-like-systems), so modules for these can be connected too! Examples of such are [QWIIC](https://cdn.sparkfun.com/assets/home_page_posts/3/1/7/7/SparkFun_s_Qwiic_Ecosystem.pdf) and [easyC](https://soldered.com/categories/easyc-2/) modules.
 
 
 ## Specifications
@@ -66,14 +68,6 @@ For battery powered applications, it's important to know how much juice is left.
     - 40 mA light sleep
     - 120 mA active
     - 250 mA Wi-Fi active
-- Power Inputs
-    - DC: 5.5V max, 2.5A max
-    - USB: 5V max, 2.5A max
-    - Battery: 3.7-4.2V, 6A max
-- Power Outputs
-    - 3.3V, 750 mA, two switchable outputs
-    - 5V, (3.8 - 5.2V) 2A max
-    - BAT, 3.7 - 4.2V, 3A max
 
 
 ### Battery
@@ -86,6 +80,16 @@ For battery powered applications, it's important to know how much juice is left.
 ### Operating Conditions
 
 - Temperature:
+
+- Power Inputs
+    - DC: 5.5V max, 2.5A max
+    - USB: 5V max, 2.5A max
+    - Battery: 3.7-4.2V
+
+- Power Outputs
+    - 3.3V, 750 mA, two switchable outputs
+    - 5V, (3.8 - 5.2V) 2A max
+    - BAT, 3.7 - 4.2V, 6A max
 
 ### Interface
 - Header
@@ -100,6 +104,8 @@ For battery powered applications, it's important to know how much juice is left.
     - Battery Charging LED
 
 
+
+
 ## Pinout
 
 ![ESP32-S3 PowerFeather Pins](board.jpg)
@@ -110,11 +116,11 @@ For battery powered applications, it's important to know how much juice is left.
 2. Fixed-function - pins that have a fixed function, carries a specific signal, or is connected to a specific component on the board
 3. Power Input - used for connecting input power supplies
 4. Power Output - used for connecting loads that get power from one of the board power output rails
-5. Ground - ground reference for board and connected loads
+5. Ground - 0 V reference for board and connected loads
 
 ### Pin Capability
 
-1. Digital - pins that can output or accept input of 3.3V digital logic
+1. Digital - pins that can output or accept input of 3.3 V digital logic
 2. RTC - pins that can hold output during deep-sleep; or be used as a wake source from deep-sleep
 3. Touch - pins that can be used for capacitive touch input
 4. Analog - pins that can read analog signals
@@ -122,16 +128,27 @@ For battery powered applications, it's important to know how much juice is left.
 
 ### Fixed-Function Pins
 
+#### User-programmable
+
 | Pin | Description |
 |-|-|
-|RST| ESP32-S3 Module Reset |
-|EN| Board Enable |
-|CHG| Battery Charger Status LED |
 |ALARM| Fuel Gauge Alarm |
 |INT| Battery Charger Interrupt |
 |BTN| User Button |
 |LED| User LED |
 |SRC| USB or DC Power Source Indicator |
+|3V3_EN| Header 3.3V Enable (active high) |
+|SQT_EN| STEMMA QT 3.3V Enable (active high) |
+|EN| Board Enable (active high) |
+
+#### Non-programmable
+
+| Pin | Description |
+|-|-|
+|CHG| Battery Charger Status LED |
+|RST| ESP32-S3 Module Reset |
+|USB_DP| Board Enable |
+|USB_DM| Board Enable |
 
 ## Comparison
 | Detail | ESP32-S3 PowerFeather | Unexpected Maker FeatherS3 | DFRobot ESP32 Firebeetle (DFR0654) |

@@ -27,6 +27,14 @@ export default function Home() {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
+
+    Complete package for developing LiPo-powered IoT applications:
+
+    - Speedy processor with tons of flash and RAM, rich peripherals, and native Wi-Fi and Bluetooth
+    - Low-current deep-sleep, and even lower-power states
+    - Flexible power options and control
+    - Charging control and battery montoring
+    - Existing expansions for prototyping
       </main>
     </Layout>
   );

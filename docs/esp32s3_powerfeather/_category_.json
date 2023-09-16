@@ -1,5 +1,5 @@
 {
-  "label": "ESP32S3 PowerFeather",
+  "label": "ESP32-S3 PowerFeather",
   "position": 0,
   "link": {
     "type": "generated-index"
