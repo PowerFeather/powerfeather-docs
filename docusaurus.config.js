@@ -69,11 +69,6 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          {
-            href: 'https://github.com/powerfeather',
-            label: 'GitHub',
-            position: 'right',
-          },
         ],
       },
       footer: {
