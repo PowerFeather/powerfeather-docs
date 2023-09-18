@@ -6,8 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'ESP32-S3 PowerFeather',
-  tagline: 'The Ultimate LiPo-Powered ESP32-S3 Dev Board',
+  title: 'PowerFeather Docs',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -38,6 +37,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -63,12 +63,6 @@ const config = {
           src: 'img/powerfeather.svg',
         },
         items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Docs',
-          },
         ],
       },
       footer: {

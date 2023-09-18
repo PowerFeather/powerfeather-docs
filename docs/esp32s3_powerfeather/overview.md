@@ -1,5 +1,6 @@
 ---
 sidebar_position: 0
+slug: /
 ---
 
 # Overview
@@ -207,6 +208,5 @@ These are pins that are not recommended
 6. Estimation of state-of-charge using battery voltage on *FeatherS3* and *ESP32 Firebeetle* [may not be sufficient](https://www.analog.com/jp/technical-articles/how-to-achieve-greater-accuracy-in-battery-capacity-readings-for-portable-designs.html).
 7. *ESP32-S3 PowerFeather* battery charger chip has integrated power path management, which enables these features.
 8. The 18-pin FPC on the *ESP32 Firebeetle* shares some GPIO pins with header; so pins used as part of the display interface can't be used on the header.
-
 
 
