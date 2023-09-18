@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'PowerFeather Docs',
+  title: 'PowerFeather',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -55,14 +55,21 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
       navbar: {
         title: 'PowerFeather',
         logo: {
           alt: 'PowerFeather Logo',
           src: 'img/powerfeather.svg',
+          href: 'https://www.powerfeather.dev',
+          target: '_self'
         },
         items: [
+          {
+            type: 'docSidebar',
+            sidebarId: 'defaultSidebar',
+            position: 'left',
+            label: 'Docs',
+          },
         ],
       },
       footer: {
