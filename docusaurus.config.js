@@ -61,14 +61,14 @@ const config = {
           alt: 'PowerFeather Logo',
           src: 'img/powerfeather.svg',
           href: 'https://www.powerfeather.dev',
-          target: '_self'
+          target: '_self',
         },
         items: [
           {
             type: 'docSidebar',
             sidebarId: 'defaultSidebar',
             position: 'left',
-            label: 'Docs',
+            label: 'DOCS',
           },
         ],
       },
@@ -81,6 +81,8 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+
+
 };
 
 module.exports = config;
