@@ -72,7 +72,7 @@ slug: /
 
 ## Pinout
 
-![ESP32-S3 PowerFeather Pins](board.jpg)
+![ESP32-S3 PowerFeather Pins](assets/pinout.jpg)
 
 ### Pin Type
 
@@ -173,3 +173,8 @@ These are pins that are not recommended
 8. The 18-pin FPC on the *ESP32 Firebeetle* shares some GPIO pins with header; so pins used as part of the display interface can't be used on the header.
 
 
+### Links
+
+
+Helper Library: https://github.com/PowerFeather/powerfeather-sdk
+Board files: https://github.com/PowerFeather/esp32s3-powerfeather
