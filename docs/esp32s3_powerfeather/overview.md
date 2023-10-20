@@ -90,6 +90,25 @@ slug: /
 4. Analog - pins that can read analog signals
 5. JTAG - pins that connects to JTAG debugger
 
+### Power Pins
+
+#### Power Input
+| Pin | Description | Usage
+|-|-|-|
+|BAT-| Li-Ion/Li-Poly Negative Terminal | Digital/RTC Input
+|BAT+| Li-Ion/Li-Poly Positive Terminal | Digital/RTC Input
+|VUSB| USB 5V | Digital/RTC Input
+|VDC| External DC Supply (up to 18V) | Digital Output
+
+#### Power Output
+| Pin | Description | Usage
+|-|-|-|
+|VBAT| Battery output | Digital/RTC Input
+|VS| Higher of VDC or VUSB | Digital/RTC Input
+|3V3| Header 3.3V | Digital/RTC Input
+|VSQT| STEMMA QT 3.3V | Digital Output
+
+
 ### Fixed-Function Pins
 
 #### Limited user control
@@ -117,7 +136,7 @@ These are pins that are not recommended
 |USB_DM| USB Differential Pair - |
 |SRC| USB or DC Power Source Indicator |
 |3V3_EN| Header 3.3V Enable (active high) |
-|SQT_EN| STEMMA QT 3.3V Enable (active high) |
+|VSQT_EN| STEMMA QT 3.3V Enable (active high) |
 
 
 #### No user control
