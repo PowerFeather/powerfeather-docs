@@ -76,16 +76,14 @@ slug: /
 
 #### Battery
 
-- Max 2 A charging current
-- Trickle charge 10 %
-- Safety timer
-- Protections
-    - Undervoltage
-    - Overvoltage
-    - Overcurrent
-    - Temperature cutoff at 0 °C and 60 °C
-
-
+- Li-Ion/Li-Poly 3.7 V nominal, 4.2 V max
+- Charging current: 2 A Max (software-configurable)
+- Built-in protections
+    - Undervoltage: 2.4 V
+    - Overvoltage: 4.28 V
+    - Overcurrent: 1.5 A
+    - Trickle charging safety timer: 1 hr
+    - Charging cutoff (needs battery pack with 10k NTC thermistor): 0 °C, 60 °C
 
 ## Pinout
 
