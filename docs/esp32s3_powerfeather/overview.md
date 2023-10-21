@@ -7,66 +7,83 @@ slug: /
 
 ## Specifications
 
-### Physical Dimensions
-- Form factor
-    - 23 mm x 57 mm x 6mm
-    - USB-C connector
-    - Feather-compatible
-    - Mounting holes
+### Form Factor
 
-### Core Components
+- Board Dimensions
+    - L: 57 mm
+    - W: 23 mm
+    - H: 6 mm
+- [Feather-compatible](https://learn.adafruit.com/adafruit-feather/feather-specification)
+    - 2 D=2.5mm mounting holes
+    - 2 1x16 2.54 mm headers
+- Connectors
+    - 1 Battery JST PH 
+    - 1 USB-C 
+    - 1 STEMMA QT 
 
-- Module: ESP32-S3-WROOM-1-N16R8
-    - Dual-core 240MHz Xtensa @ 240MHz
-    - 16 MB SPI Flash, 768 KB SRAM + 8 MB PSRAM
-    - 2.4 GHz Wi-Fi b/g/n
-    - Bluetooth 5.0 LE + Mesh
-- Battery Charger: BQ25628
-- Fuel Gauge: LC709204F
+### Processing 
+
+- 240 Mhz Dual-Core Xtensa LX7 Processor
+- RISC-V / FSM Ultra Low Power Coprocessor
+- 16 MB Quad-SPI Flash
+- 8 MB Quad-SPI PSRAM
+- 512 KB SRAM
+- 16 KB RTC SRAM
+
+
+### Connectivity
+
+#### Radio
+- 150 Mbps 2.4 GHz Wi-Fi 802.11b/g/n with on-board PCB antenna
+- 2 Mbps Bluetooth 5 LE + Mesh with on-board PCB antenna
+
+#### Input/Output
+- USB OTG Full-Speed (12 Mbps) on USB-C connector
+- 23 digital I/O pins on 2.54 mm headers
+    - 6 analog output capable pin
+    - 5 touch capable pin
+    - 12 RTC capable pin
+    - 3 UART, 2 SPI, 1 I2C, 1 I2S, 2 SDIO, 1 CAN on any pin
+- 1 I2C via STEMMA QT connector
+- 1 Charger Status LED (Red)
+- 1 Reset Button
+- 1 User LED (Green)
+- 1 User Button
+
 
 ### Power
-- Current consumption
-    - 1.5uA shutdown mode
-    - 2uA ship mode
-    - 10 uA deep sleep
-    - 40 mA light sleep
-    - 120 mA active
-    - 250 mA Wi-Fi active
 
+#### Input
 
-### Battery
-- Charging
-    - Battery
-        - 1S
-        - Li-Ion/Li-Polymer, Lithium Phosphate/LiFePO4
-    - 2A max current
+- 5 V, 2 A max `VUSB` via USB-C connector
+- 3.9 V-18 V, 2A max via `VDC` pin
+- 4.2 V, 2 A max via battery JST PH connector
 
-### Operating Conditions
+#### Output
 
-- Temperature:
+- 3.3 V, 500 mA shared via `3V3` pin and `VSQT` on STEMMA QT connector
+- 3.3 V-4.2 V, 3 A via `VBAT` pin
+- 5 V-18 V, 2 A max via `VS` pin (whichever of `VUSB` or `VDC` is higher)
 
-- Power Inputs
-    - DC: 5.5V max, 2.5A max
-    - USB: 5V max, 2.5A max
-    - Battery: 3.7-4.2V
+#### Consumption
 
-- Power Outputs
-    - 3.3V, 750 mA, two switchable outputs
-    - 5V, (3.8 - 5.2V) 2A max
-    - BAT, 3.7 - 4.2V, 6A max
+| State | Conditions | Current
+|-|-|-|
+|Active| External DC Supply (up to 18V) | Digital Output
+|Deep-Sleep| External DC Supply (up to 18V) | Digital Output
+|Ship Mode| External DC Supply (up to 18V) | Digital Output
+|Shut Down| External DC Supply (up to 18V) | Digital Output
 
-### Interface
-- Header
-    - 23 digital input/output
-    - 6 analog capable
-    - 1 SPI
-    - 1 I2C
-- 1 STEMMA QT/QWIIC
-    - User Button
-    - Reset Button
-    - User LED
-    - Battery Charging LED
+#### Battery
 
+- Max 2 A charging current
+- Trickle charge 10 %
+- Safety timer
+- Protections
+    - Undervoltage
+    - Overvoltage
+    - Overcurrent
+    - Temperature cutoff at 0 °C and 60 °C
 
 
 
@@ -192,8 +209,16 @@ These are pins that are not recommended
 8. The 18-pin FPC on the *ESP32 Firebeetle* shares some GPIO pins with header; so pins used as part of the display interface can't be used on the header.
 
 
-### Links
+## Links
+
+### Datasheets
+
+- Module: ESP32-S3-WROOM-1-N16R8
+- Battery Charger: BQ25628E
+- Battery Fuel Gauge: LC709204F
+- 3.3V Regulator: TPS62840
 
 
-Helper Library: https://github.com/PowerFeather/powerfeather-sdk
-Board files: https://github.com/PowerFeather/esp32s3-powerfeather
+### Hardware Files
+
+https://github.com/PowerFeather/esp32s3-powerfeather
