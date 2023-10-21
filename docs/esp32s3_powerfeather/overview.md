@@ -38,16 +38,16 @@ slug: /
 - 2 Mbps Bluetooth 5 LE + Mesh with on-board PCB antenna
 
 #### Input/Output
-- USB OTG Full-Speed (12 Mbps) on USB-C connector
+- USB OTG Full-Speed on USB-C connector
 - 23 digital I/O pins on 2.54 mm headers
     - 6 analog output capable pin
     - 5 touch capable pin
     - 12 RTC capable pin
     - 3 UART, 2 SPI, 1 I2C, 1 I2S, 2 SDIO, 1 CAN on any pin
 - 1 I2C via STEMMA QT connector
-- 1 Charger Status LED (Red)
+- 1 Red Charger Status LED
 - 1 Reset Button
-- 1 User LED (Green)
+- 1 Green User LED
 - 1 User Button
 
 
@@ -55,15 +55,15 @@ slug: /
 
 #### Input
 
-- 5 V, 2 A max `VUSB` via USB-C connector
-- 3.9 V-18 V, 2A max via `VDC` pin
-- 4.2 V, 2 A max via battery JST PH connector
+- 5 V, 2 A `VUSB` via USB-C connector
+- 3.9 V - 18 V, 2A via `VDC` pin
+- 4.2 V, 2 A via battery JST PH connector
 
 #### Output
 
-- 3.3 V, 500 mA shared via `3V3` pin and `VSQT` on STEMMA QT connector
-- 3.3 V-4.2 V, 3 A via `VBAT` pin
-- 5 V-18 V, 2 A max via `VS` pin (whichever of `VUSB` or `VDC` is higher)
+- 3.3 V, 500 mA shared between `3V3` pin and `VSQT` on STEMMA QT connector
+- 3.3 V - 4.2 V, 3 A via `VBAT` pin
+- 5 V - 18 V, 2 A max via `VS` pin
 
 #### Consumption
 
@@ -76,14 +76,14 @@ slug: /
 
 #### Battery
 
-- Li-Ion/Li-Poly 3.7 V nominal, 4.2 V max
-- Charging current: 2 A Max (software-configurable)
-- Built-in protections
-    - Undervoltage: 2.4 V
-    - Overvoltage: 4.28 V
-    - Overcurrent: 1.5 A
+- Support Li-Ion/Li-Poly batteries with 3.7 V nominal, 4.2 V max voltage
+- 2 A max charging current, configurable from firmware
+- Battery Protections
+    - Undervoltage: 2.2 V
+    - Overvoltage: 4.37 V
+    - Discharge overcurrent: 1.5 A
     - Trickle charging safety timer: 1 hr
-    - Charging cutoff (needs battery pack with 10k NTC thermistor): 0 °C, 60 °C
+    - Temperature cutoff: 0 °C and 60 °C (needs 10k NTC thermistor on battery)
 
 ## Pinout
 
@@ -194,7 +194,7 @@ These are pins that are not recommended
 | USB Connector | USB-C | USB-C | USB-C |
 | Native USB | Yes | Yes | No |
 | Display Connector | No | No | 18-Pin FPC <sup>8</sup> |
-| Price | $28 | $22 | $9 |
+| Price | $29 | $22 | $9 |
 
 
 1. The *FeatherS3* does not use a module, instead using a bare ESP32-S3 chip. On the other hand, *ESP32-S3 PowerFeather* and *ESP32-Firebeetle* uses official Espressif modules, which comes with [certifications](https://www.espressif.com/en/support/documents/certificates?keys=&field_product_value%5B%5D=ESP32-S3-WROOM-1&field_product_value%5B%5D=ESP32-WROOM-32E).
