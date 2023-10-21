@@ -5,7 +5,7 @@ slug: /
 
 # Overview
 
-## Specifications
+## Features & Specifications
 
 ### Form Factor
 
@@ -85,7 +85,7 @@ slug: /
     - Trickle charging safety timer: 1 hr
     - Temperature cutoff: 0 °C and 60 °C (needs 10k NTC thermistor on battery)
 
-## Pinout
+## Pins & Signals
 
 ![ESP32-S3 PowerFeather Pins](assets/pinout.jpg)
 
