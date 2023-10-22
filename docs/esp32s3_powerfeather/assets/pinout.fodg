@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:officeooo="http://openoffice.org/2009/office" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:smil="urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rpt="http://openoffice.org/2005/report" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:xforms="http://www.w3.org/2002/xforms" office:version="1.3" office:mimetype="application/vnd.oasis.opendocument.graphics">
- <office:meta><meta:creation-date>2023-09-11T21:53:40.880543862</meta:creation-date><dc:date>2023-10-22T10:32:06.095630307</dc:date><meta:editing-duration>P2DT8H41M41S</meta:editing-duration><meta:editing-cycles>423</meta:editing-cycles><meta:generator>LibreOffice/7.3.7.2$Linux_X86_64 LibreOffice_project/30$Build-2</meta:generator><meta:document-statistic meta:object-count="214"/></office:meta>
+ <office:meta><meta:creation-date>2023-09-11T21:53:40.880543862</meta:creation-date><dc:date>2023-10-22T11:35:52.536399986</dc:date><meta:editing-duration>P2DT9H45M25S</meta:editing-duration><meta:editing-cycles>426</meta:editing-cycles><meta:generator>LibreOffice/7.3.7.2$Linux_X86_64 LibreOffice_project/30$Build-2</meta:generator><meta:document-statistic meta:object-count="214"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
-   <config:config-item config:name="VisibleAreaTop" config:type="int">4983</config:config-item>
-   <config:config-item config:name="VisibleAreaLeft" config:type="int">13648</config:config-item>
+   <config:config-item config:name="VisibleAreaTop" config:type="int">-1561</config:config-item>
+   <config:config-item config:name="VisibleAreaLeft" config:type="int">2778</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">40428</config:config-item>
    <config:config-item config:name="VisibleAreaHeight" config:type="int">34572</config:config-item>
    <config:config-item-map-indexed config:name="Views">
@@ -36,10 +36,10 @@
      <config:config-item config:name="IsClickChangeRotation" config:type="boolean">true</config:config-item>
      <config:config-item config:name="SlidesPerRow" config:type="short">4</config:config-item>
      <config:config-item config:name="EditMode" config:type="int">0</config:config-item>
-     <config:config-item config:name="VisibleAreaTop" config:type="int">-2437</config:config-item>
-     <config:config-item config:name="VisibleAreaLeft" config:type="int">-4595</config:config-item>
-     <config:config-item config:name="VisibleAreaWidth" config:type="int">41847</config:config-item>
-     <config:config-item config:name="VisibleAreaHeight" config:type="int">34118</config:config-item>
+     <config:config-item config:name="VisibleAreaTop" config:type="int">-1561</config:config-item>
+     <config:config-item config:name="VisibleAreaLeft" config:type="int">2778</config:config-item>
+     <config:config-item config:name="VisibleAreaWidth" config:type="int">31804</config:config-item>
+     <config:config-item config:name="VisibleAreaHeight" config:type="int">25930</config:config-item>
      <config:config-item config:name="GridCoarseWidth" config:type="int">1270</config:config-item>
      <config:config-item config:name="GridCoarseHeight" config:type="int">1270</config:config-item>
      <config:config-item config:name="GridFineWidth" config:type="int">317</config:config-item>
@@ -97,7 +97,7 @@
    <config:config-item config:name="PrinterIndependentLayout" config:type="string">low-resolution</config:config-item>
    <config:config-item config:name="PrinterName" config:type="string">Generic Printer</config:config-item>
    <config:config-item config:name="PrinterPaperFromSetup" config:type="boolean">false</config:config-item>
-   <config:config-item config:name="PrinterSetup" config:type="base64Binary">oAH+/0dlbmVyaWMgUHJpbnRlcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU0dFTlBSVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAMAwQAAAAAAAAAEAAhSAAAEdAAASm9iRGF0YSAxCnByaW50ZXI9R2VuZXJpYyBQcmludGVyCm9yaWVudGF0aW9uPVBvcnRyYWl0CmNvcGllcz0xCmNvbGxhdGU9ZmFsc2UKbWFyZ2luYWRqdXN0bWVudD0wLDAsMCwwCmNvbG9yZGVwdGg9MjQKcHNsZXZlbD0wCnBkZmRldmljZT0xCmNvbG9yZGV2aWNlPTAKUFBEQ29udGV4dERhdGEKRHVwbGV4Ok5vbmUAUGFnZVNpemU6QTQAABIAQ09NUEFUX0RVUExFWF9NT0RFDwBEdXBsZXhNb2RlOjpPZmY=</config:config-item>
+   <config:config-item config:name="PrinterSetup" config:type="base64Binary">oAH+/0dlbmVyaWMgUHJpbnRlcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU0dFTlBSVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAMAwQAAAAAAAAAEAAhSAAAEdAAASm9iRGF0YSAxCnByaW50ZXI9R2VuZXJpYyBQcmludGVyCm9yaWVudGF0aW9uPVBvcnRyYWl0CmNvcGllcz0xCmNvbGxhdGU9ZmFsc2UKbWFyZ2luYWRqdXN0bWVudD0wLDAsMCwwCmNvbG9yZGVwdGg9MjQKcHNsZXZlbD0wCnBkZmRldmljZT0xCmNvbG9yZGV2aWNlPTAKUFBEQ29udGV4dERhdGEKUGFnZVNpemU6QTQARHVwbGV4Ok5vbmUAABIAQ09NUEFUX0RVUExFWF9NT0RFDwBEdXBsZXhNb2RlOjpPZmY=</config:config-item>
    <config:config-item config:name="SaveThumbnail" config:type="boolean">true</config:config-item>
    <config:config-item config:name="SaveVersionOnClose" config:type="boolean">false</config:config-item>
    <config:config-item config:name="ScaleDenominator" config:type="int">1</config:config-item>
@@ -139,7 +139,7 @@
   <draw:stroke-dash draw:name="Dot" draw:style="rect" draw:dots1="1" draw:dots1-length="100%" draw:distance="100%"/>
   <style:default-style style:family="graphic">
    <style:graphic-properties svg:stroke-color="#3465a4" draw:fill-color="#729fcf" fo:wrap-option="no-wrap"/>
-   <style:paragraph-properties style:text-autospace="ideograph-alpha" style:punctuation-wrap="simple" style:line-break="strict" style:writing-mode="lr-tb" style:font-independent-line-spacing="false">
+   <style:paragraph-properties style:text-autospace="ideograph-alpha" style:punctuation-wrap="simple" style:line-break="strict" style:font-independent-line-spacing="false">
     <style:tab-stops/>
    </style:paragraph-properties>
    <style:text-properties style:use-window-font-color="true" loext:opacity="0%" style:font-name="Liberation Serif" fo:font-size="24pt" fo:language="en" fo:country="US" style:font-name-asian="DejaVu Sans1" style:font-size-asian="24pt" style:language-asian="zh" style:country-asian="CN" style:font-name-complex="DejaVu Sans1" style:font-size-complex="24pt" style:language-complex="hi" style:country-complex="IN"/>
@@ -13689,19 +13689,19 @@
      <text:p/>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr17" draw:text-style-name="P19" draw:layer="Pins" svg:width="0.635cm" svg:height="0.635cm" svg:x="2.613cm" svg:y="15.167cm">
+    <draw:custom-shape draw:style-name="gr17" draw:text-style-name="P19" draw:layer="Pins" svg:width="0.635cm" svg:height="0.635cm" svg:x="2.613cm" svg:y="15.367cm">
      <text:p/>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr18" draw:text-style-name="P2" draw:layer="Pins" svg:width="2.722cm" svg:height="0.635cm" svg:x="3.313cm" svg:y="15.167cm">
+    <draw:custom-shape draw:style-name="gr18" draw:text-style-name="P2" draw:layer="Pins" svg:width="2.722cm" svg:height="0.635cm" svg:x="3.313cm" svg:y="15.367cm">
      <text:p text:style-name="P1"><text:span text:style-name="T1">Touch</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr19" draw:text-style-name="P18" draw:layer="Pins" svg:width="0.635cm" svg:height="0.635cm" svg:x="2.613cm" svg:y="15.891cm">
+    <draw:custom-shape draw:style-name="gr19" draw:text-style-name="P18" draw:layer="Pins" svg:width="0.635cm" svg:height="0.635cm" svg:x="2.613cm" svg:y="16.091cm">
      <text:p/>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr20" draw:text-style-name="P2" draw:layer="Pins" svg:width="4.672cm" svg:height="0.635cm" svg:x="3.313cm" svg:y="15.891cm">
+    <draw:custom-shape draw:style-name="gr20" draw:text-style-name="P2" draw:layer="Pins" svg:width="4.672cm" svg:height="0.635cm" svg:x="3.313cm" svg:y="16.091cm">
      <text:p text:style-name="P1"><text:span text:style-name="T1">Analog Input</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
@@ -13745,17 +13745,16 @@
      <text:p/>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr25" draw:text-style-name="P14" draw:layer="Pins" svg:width="0.635cm" svg:height="0.635cm" svg:x="2.61cm" svg:y="16.622cm">
+    <draw:custom-shape draw:style-name="gr25" draw:text-style-name="P14" draw:layer="Pins" svg:width="0.635cm" svg:height="0.635cm" svg:x="2.61cm" svg:y="16.822cm">
      <text:p/>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr26" draw:text-style-name="P2" draw:layer="Pins" svg:width="2.685cm" svg:height="0.635cm" svg:x="3.306cm" svg:y="16.601cm">
+    <draw:custom-shape draw:style-name="gr26" draw:text-style-name="P2" draw:layer="Pins" svg:width="2.685cm" svg:height="0.635cm" svg:x="3.306cm" svg:y="16.801cm">
      <text:p text:style-name="P1"><text:span text:style-name="T1">JTAG</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
     <draw:custom-shape draw:style-name="gr27" draw:text-style-name="P22" draw:layer="Pins" svg:width="4.79cm" svg:height="0.546cm" svg:x="2.342cm" svg:y="12.26cm">
-     <text:p text:style-name="P21"><text:span text:style-name="T3">Free/Fixed </text:span></text:p>
-     <text:p text:style-name="P21"><text:span text:style-name="T3">IO Pin Capability</text:span></text:p>
+     <text:p text:style-name="P21"><text:span text:style-name="T3">Free IO/</text:span><text:span text:style-name="T3"><text:line-break/></text:span><text:span text:style-name="T3">User-Managed Fixed IO Capability</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
     <draw:custom-shape draw:style-name="gr28" draw:text-style-name="P22" draw:layer="Pins" svg:width="7.27cm" svg:height="0.635cm" svg:x="26.705cm" svg:y="3.187cm">
@@ -14035,20 +14034,20 @@
      <text:p text:style-name="P4"><text:span text:style-name="T1">MTMS</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr62" draw:text-style-name="P2" draw:layer="Pins" svg:width="7.697cm" svg:height="0.635cm" svg:x="25.595cm" svg:y="18.623cm">
-     <text:p text:style-name="P1"><text:span text:style-name="T1">Fixed IO Pin, User managed</text:span></text:p>
+    <draw:custom-shape draw:style-name="gr62" draw:text-style-name="P2" draw:layer="Pins" svg:width="7.697cm" svg:height="0.635cm" svg:x="26.795cm" svg:y="18.623cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T1">User-Managed Fixed IO</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr63" draw:text-style-name="P2" draw:layer="Pins" svg:width="7.82cm" svg:height="0.635cm" svg:x="25.055cm" svg:y="19.375cm">
-     <text:p text:style-name="P1"><text:span text:style-name="T1">Fixed IO Signal, SDK managed</text:span></text:p>
+    <draw:custom-shape draw:style-name="gr63" draw:text-style-name="P2" draw:layer="Pins" svg:width="7.82cm" svg:height="0.635cm" svg:x="27.055cm" svg:y="19.375cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T1">SDK-Managed Fixed IO</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
     <draw:custom-shape draw:style-name="gr59" draw:text-style-name="P23" draw:layer="layout" svg:width="0.635cm" svg:height="0.635cm" svg:x="32.537cm" svg:y="18.619cm">
      <text:p/>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr64" draw:text-style-name="P2" draw:layer="layout" svg:width="3.518cm" svg:height="0.635cm" svg:x="29.382cm" svg:y="17.827cm">
-     <text:p text:style-name="P1"><text:span text:style-name="T1">Free IO Pin</text:span></text:p>
+    <draw:custom-shape draw:style-name="gr64" draw:text-style-name="P2" draw:layer="layout" svg:width="3.518cm" svg:height="0.635cm" svg:x="30.282cm" svg:y="17.827cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T1">Free IO</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
     <draw:custom-shape draw:style-name="gr65" draw:text-style-name="P22" draw:layer="layout" svg:width="4.861cm" svg:height="0.546cm" svg:x="28.787cm" svg:y="17.072cm">
@@ -14063,19 +14062,19 @@
      <text:p/>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr67" draw:text-style-name="P13" draw:layer="layout" svg:width="0.635cm" svg:height="0.635cm" svg:x="2.613cm" svg:y="13.724cm">
+    <draw:custom-shape draw:style-name="gr67" draw:text-style-name="P13" draw:layer="layout" svg:width="0.635cm" svg:height="0.635cm" svg:x="2.613cm" svg:y="13.924cm">
      <text:p/>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr68" draw:text-style-name="P15" draw:layer="layout" svg:width="0.635cm" svg:height="0.635cm" svg:x="2.613cm" svg:y="14.448cm">
+    <draw:custom-shape draw:style-name="gr68" draw:text-style-name="P15" draw:layer="layout" svg:width="0.635cm" svg:height="0.635cm" svg:x="2.613cm" svg:y="14.648cm">
      <text:p/>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr69" draw:text-style-name="P2" draw:layer="layout" svg:width="2.05cm" svg:height="0.635cm" svg:x="3.313cm" svg:y="14.448cm">
+    <draw:custom-shape draw:style-name="gr69" draw:text-style-name="P2" draw:layer="layout" svg:width="2.05cm" svg:height="0.635cm" svg:x="3.313cm" svg:y="14.648cm">
      <text:p text:style-name="P1"><text:span text:style-name="T1">RTC</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr18" draw:text-style-name="P2" draw:layer="layout" svg:width="2.722cm" svg:height="0.635cm" svg:x="3.313cm" svg:y="13.724cm">
+    <draw:custom-shape draw:style-name="gr18" draw:text-style-name="P2" draw:layer="layout" svg:width="2.722cm" svg:height="0.635cm" svg:x="3.313cm" svg:y="13.924cm">
      <text:p text:style-name="P1"><text:span text:style-name="T1">Digital</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-horizontal="false" draw:mirror-vertical="false" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>

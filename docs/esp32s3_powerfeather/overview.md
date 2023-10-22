@@ -17,11 +17,11 @@ slug: /
     - 2 D=2.5mm mounting holes
     - 2 1x16 2.54 mm headers
 - Connectors
-    - 1 Battery JST PH 
-    - 1 USB-C 
-    - 1 STEMMA QT 
+    - 1 Battery JST PH
+    - 1 USB-C
+    - 1 STEMMA QT
 
-### Processing 
+### Processing
 
 - 240 Mhz Dual-Core Xtensa LX7 Processor
 - RISC-V / FSM Ultra Low Power Coprocessor
@@ -89,46 +89,65 @@ slug: /
 
 ![ESP32-S3 PowerFeather Pins](assets/pinout.jpg)
 
-### Classification
+### IO
 
-- IO - signals routed to the ESP32-S3 GPIO pins
-    - Types
-            - Free IO Pin - GPIO pin not connected to anything on-board, user can freely configure the pin and use it for any purpose within its capabilities
-            - Fixed IO Pin, User-Managed - GPIO connected to a component on-board, but user maintains control for configuration and use within its capabilities
-            - Fixed IO Signal, SDK-Managed - GPIO connected to a component on-board, and whose configuration and use is managed by the SDK; a user configuring/using these pins will cause faulty functionality
+These are signals routed to the ESP32-S3 GPIO pins.
 
-    - Capabilities (for Free IO Pin, User-Managed Fixed IO Pin)
-            - Digital - pins that can output or accept input of 3.3 V digital logic
-            - RTC - pins that can hold output during deep-sleep; or be used as a wake source from deep-sleep
-            - Touch - pins that can be used for capacitive touch input
-            - Analog - pins that can read analog signals
-            - JTAG - pins that connects to JTAG debugger
+#### Free IO
 
-- Special function - signals not routed to the ESP32-S3 GPIO pins, or to the other integrated circuits on-board such as the charger and fuel gauge, which serves a special function
-- Power Input - pins used for connecting input power supplies
-- Power Output - pins used for connecting loads that get power from one of the board power output rails
-- Ground - 0 V reference for the components on-board, input power supplies and connected loads
+GPIO pin not connected to anything on-board, user can freely configure the pin and use it for any purpose within its capabilities
 
-### Description
+|Name| Recommended Use | Digital | Analog Input | RTC | Touch | JTAG |
+|-|-|-|-|-|-|-|
+|A0| Analog Input 0 | | | | | |
+|A1| Analog Input 1 | | | | | |
+|A2| Analog Input 2 | | | | | |
+|A3| Analog Input 3 | | | | | |
+|A4| Analog Input 4 | | | | | |
+|A5| Analog Input 5 | | | | | |
+|D5|  Digital Input/Output 5 | | | | | |
+|D6|  Digital Input/Output 6 | | | | | |
+|D7|  Digital Input/Output 7 | | | | | |
+|D8|  Digital Input/Output 8 | | | | | |
+|D9|  Digital Input/Output 9 | | | | | |
+|D10| Digital Input/Output 10 | | | | | |
+|D11| Digital Input/Output 11 | | | | | |
+|D12| Digital Input/Output 12 | | | | | |
+|D13| Digital Input/Output 13 | | | | | |
+|MOSI| SPI MOSI | | | | | |
+|MISO| SPI MISO | | | | | |
+|SCK| SPI SCK | | | | | |
+|RX| UART RX | | | | | |
+|TX| UART TX | | | | | |
+|TX0| Serial Log Output | | | | | |
+|SCL| I2C SCL | | | | | |
+|SDA| I2C SDA | | | | | |
 
-#### IO
+##### Capabilities
 
-##### Free IO
+Also applies to User-Managed Fixed IO
 
-##### User-Managed Fixed IO 
+- Digital - pins that can output or accept input of 3.3 V digital logic
+- RTC - pins that can hold output during deep-sleep; or be used as a wake source from deep-sleep
+- Touch - pins that can be used for capacitive touch input
+- Analog Input - pins that can read analog signals
+- JTAG - pins that connects to JTAG debugger
 
-While the following are fixed-function pins, user is able to have limited control of them - mostly to read or write
-signal associated with them. User might want to setup interrupts, set as wake source for inputs, or do PWM for outputs.
+#### User-Managed Fixed IO
 
-| Pin | Description
-|-|-|
-|ALARM| Fuel Gauge Alarm Input
-|INT| Battery Charger Interrupt Input
-|BTN| User Button Input
-|LED| Green User LED Output
-|EN| Board Enable Input |
+GPIO connected to a component on-board, but user maintains control for configuration and use within its capabilities
 
-##### SDK-Managed Fixed IO
+| Pin | Description | Digital | RTC |
+|-|-|-|-|
+|ALARM| Fuel Gauge Alarm Input | | |
+|INT| Battery Charger Interrupt Input | | |
+|BTN| User Button Input | | |
+|LED| Green User LED Output | | |
+|EN| Board Enable Input | | | |
+
+#### SDK-Managed Fixed IO
+
+GPIO connected to a component on-board, and whose configuration and use is managed by the SDK; a user configuring/using these pins will cause faulty functionality.
 
 | Pin | Description |
 |-|-|
@@ -139,7 +158,9 @@ signal associated with them. User might want to setup interrupts, set as wake so
 |VSQT_EN| VSQT Enable Output |
 |EN0| Board Enable Output |
 
-#### Special Function
+### Special Function
+
+Signals not routed to the ESP32-S3 GPIO pins, or to the other integrated circuits on-board such as the charger and fuel gauge, which serves a special function.
 
 | Name | Description |
 |-|-|
@@ -148,7 +169,9 @@ signal associated with them. User might want to setup interrupts, set as wake so
 |QON| Ship Mode Exit|
 |TS| Battery 10k NTC Thermistor Input|
 
-#### Power Input
+### Power Input
+Pins used for connecting input power supplies.
+
 | Name | Description
 |-|-|
 |BATN| Li-Ion/Li-Poly Negative Terminal
@@ -156,7 +179,9 @@ signal associated with them. User might want to setup interrupts, set as wake so
 |VUSB| 5V USB Power Supply |
 |VDC| 3.8 V - 18 V DC Power Supply
 
-#### Power Output
+### Power Output
+Pins used for connecting loads that get power from one of the board power output rails.
+
 | Name | Description
 |-|-|
 |VBAT| 3.7 V - 4.2 V Battery output
@@ -164,7 +189,9 @@ signal associated with them. User might want to setup interrupts, set as wake so
 |3V3| Header 3.3V | Digital/RTC Input
 |VSQT| STEMMA QT 3.3V | Digital Output
 
-#### Ground
+### Ground
+
+0 V reference for the components on-board, input power supplies and connected loads.
 
 | Name | Description |
 |-|-|
