@@ -197,7 +197,7 @@ Powers loads connected to the board.
 |GND| Ground Pin |
 
 
-## Feather Differences
+## Feather Deviations
 
 ESP32-S3 PowerFeather has a few differences from standard Feather mainboards.
 
