@@ -89,77 +89,92 @@ slug: /
 
 ![ESP32-S3 PowerFeather Pins](assets/pinout.jpg)
 
-### Pin Type
+### Classification
 
-1. General-Purpose - free pins for the user to configure and use in firmware
-2. Fixed-function - pins that have a fixed function, carries a specific signal, or is connected to a specific component on the board
-3. Power Input - used for connecting input power supplies
-4. Power Output - used for connecting loads that get power from one of the board power output rails
-5. Ground - 0 V reference for board and connected loads
+- IO - signals routed to the ESP32-S3 GPIO pins
+    - Types
+            - Free IO Pin - GPIO pin not connected to anything on-board, user can freely configure the pin and use it for any purpose within its capabilities
+            - Fixed IO Pin, User-Managed - GPIO connected to a component on-board, but user maintains control for configuration and use within its capabilities
+            - Fixed IO Signal, SDK-Managed - GPIO connected to a component on-board, and whose configuration and use is managed by the SDK; a user configuring/using these pins will cause faulty functionality
 
-### Pin Capability
+    - Capabilities (for Free IO Pin, User-Managed Fixed IO Pin)
+            - Digital - pins that can output or accept input of 3.3 V digital logic
+            - RTC - pins that can hold output during deep-sleep; or be used as a wake source from deep-sleep
+            - Touch - pins that can be used for capacitive touch input
+            - Analog - pins that can read analog signals
+            - JTAG - pins that connects to JTAG debugger
 
-1. Digital - pins that can output or accept input of 3.3 V digital logic
-2. RTC - pins that can hold output during deep-sleep; or be used as a wake source from deep-sleep
-3. Touch - pins that can be used for capacitive touch input
-4. Analog - pins that can read analog signals
-5. JTAG - pins that connects to JTAG debugger
+- Special function - signals not routed to the ESP32-S3 GPIO pins, or to the other integrated circuits on-board such as the charger and fuel gauge, which serves a special function
+- Power Input - pins used for connecting input power supplies
+- Power Output - pins used for connecting loads that get power from one of the board power output rails
+- Ground - 0 V reference for the components on-board, input power supplies and connected loads
 
-### Power Pins
+### Description
 
-#### Power Input
-| Pin | Description | Usage
-|-|-|-|
-|BAT-| Li-Ion/Li-Poly Negative Terminal | Digital/RTC Input
-|BAT+| Li-Ion/Li-Poly Positive Terminal | Digital/RTC Input
-|VUSB| USB 5V | Digital/RTC Input
-|VDC| External DC Supply (up to 18V) | Digital Output
+#### IO
 
-#### Power Output
-| Pin | Description | Usage
-|-|-|-|
-|VBAT| Battery output | Digital/RTC Input
-|VS| Higher of VDC or VUSB | Digital/RTC Input
-|3V3| Header 3.3V | Digital/RTC Input
-|VSQT| STEMMA QT 3.3V | Digital Output
+##### Free IO
 
-
-### Fixed-Function Pins
-
-#### Limited user control
+##### User-Managed Fixed IO 
 
 While the following are fixed-function pins, user is able to have limited control of them - mostly to read or write
 signal associated with them. User might want to setup interrupts, set as wake source for inputs, or do PWM for outputs.
 
-| Pin | Description | Usage
-|-|-|-|
-|ALARM| Fuel Gauge Alarm | Digital/RTC Input
-|INT| Battery Charger Interrupt | Digital/RTC Input
-|BTN| User Button | Digital/RTC Input
-|LED| User LED | Digital Output
-|EN| Board Enable (active high) | Digital/RTC Input
+| Pin | Description
+|-|-|
+|ALARM| Fuel Gauge Alarm Input
+|INT| Battery Charger Interrupt Input
+|BTN| User Button Input
+|LED| Green User LED Output
+|EN| Board Enable Input |
 
-Unlike other Feather boards, pulling `EN` low does not automatically disable power outputs. The firmware must detect that `EN` has been pulled low and disable desired power outputs.
-
-#### User control not recommended
-
-These are pins that are not recommended
+##### SDK-Managed Fixed IO
 
 | Pin | Description |
 |-|-|
-|USB_DP| USB Differential Pair + |
-|USB_DM| USB Differential Pair - |
-|SRC| USB or DC Power Source Indicator |
-|3V3_EN| Header 3.3V Enable (active high) |
-|VSQT_EN| STEMMA QT 3.3V Enable (active high) |
+|USB_DP| USB Data Positive |
+|USB_DM| USB Data Negative |
+|PG| Power Supply Good Indicator Input |
+|3V3_EN| 3V3 Enable Output|
+|VSQT_EN| VSQT Enable Output |
+|EN0| Board Enable Output |
 
+#### Special Function
 
-#### No user control
-
-| Pin | Description |
+| Name | Description |
 |-|-|
 |CHG| Battery Charger Status LED |
 |RST| ESP32-S3 Module Reset |
+|QON| Ship Mode Exit|
+|TS| Battery 10k NTC Thermistor Input|
+
+#### Power Input
+| Name | Description
+|-|-|
+|BATN| Li-Ion/Li-Poly Negative Terminal
+|BATP| Li-Ion/Li-Poly Positive Terminal
+|VUSB| 5V USB Power Supply |
+|VDC| 3.8 V - 18 V DC Power Supply
+
+#### Power Output
+| Name | Description
+|-|-|
+|VBAT| 3.7 V - 4.2 V Battery output
+|VS| 3.8 V - 18 V Power Supply; higher of `VDC` and `VUSB`
+|3V3| Header 3.3V | Digital/RTC Input
+|VSQT| STEMMA QT 3.3V | Digital Output
+
+#### Ground
+
+| Name | Description |
+|-|-|
+|GND| Ground Pin |
+
+## Feather Deviations
+
+- QON pin on AREF
+- EN pin does not automatically disable the board
+- VS instead of 5V
 
 ## Comparison
 | Detail | ESP32-S3 PowerFeather | Unexpected Maker FeatherS3 | DFRobot ESP32 Firebeetle (DFR0654) |
