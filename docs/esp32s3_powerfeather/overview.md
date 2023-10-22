@@ -79,11 +79,11 @@ slug: /
 - Support Li-Ion/Li-Poly batteries with 3.7 V nominal, 4.2 V max voltage
 - 2 A max charging current, configurable from firmware
 - Battery Protections
-    - Undervoltage: 2.2 V
-    - Overvoltage: 4.37 V
-    - Discharge overcurrent: 1.5 A
-    - Trickle charging safety timer: 1 hr
-    - Temperature cutoff: 0 °C and 60 °C (needs 10k NTC thermistor on battery)
+    - Undervoltage Detect @2.2 V, Release @2.4 V
+    - Overvoltage Detect @4.37 V, Release @4.28 V
+    - Discharge overcurrent @1.5 A
+    - Trickle charging safety timer @1 hr
+    - Temperature cutoff @0 °C and @60 °C (needs 10k NTC thermistor on battery)
 
 ## Pins & Signals
 
