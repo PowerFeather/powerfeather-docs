@@ -68,7 +68,7 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'defaultSidebar',
             position: 'left',
-            label: 'DOCS',
+            label: 'Hardware',
           },
         ],
       },
