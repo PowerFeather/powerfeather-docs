@@ -95,59 +95,56 @@ These are signals routed to the ESP32-S3 GPIO pins.
 
 #### Free IO
 
-GPIO pin not connected to anything on-board, user can freely configure the pin and use it for any purpose within its capabilities
+IO signals not connected to anything on-board and user code is free to configure and use it for any purpose, as long as it is within its capabilities. Note that the `Description` in the table below are only suggestions, and together with `Name` only there to maintain compatibility with other Feather and FeatherWings.
 
-|Name| Recommended Use | Digital | Analog Input | RTC | Touch | JTAG |
+|Name| Description | Digital | Analog Input | RTC | Touch | JTAG |
 |-|-|-|-|-|-|-|
-|A0| Analog Input 0 | | | | | |
-|A1| Analog Input 1 | | | | | |
-|A2| Analog Input 2 | | | | | |
-|A3| Analog Input 3 | | | | | |
-|A4| Analog Input 4 | | | | | |
-|A5| Analog Input 5 | | | | | |
-|D5|  Digital Input/Output 5 | | | | | |
-|D6|  Digital Input/Output 6 | | | | | |
-|D7|  Digital Input/Output 7 | | | | | |
-|D8|  Digital Input/Output 8 | | | | | |
-|D9|  Digital Input/Output 9 | | | | | |
-|D10| Digital Input/Output 10 | | | | | |
-|D11| Digital Input/Output 11 | | | | | |
-|D12| Digital Input/Output 12 | | | | | |
-|D13| Digital Input/Output 13 | | | | | |
-|MOSI| SPI MOSI | | | | | |
-|MISO| SPI MISO | | | | | |
-|SCK| SPI SCK | | | | | |
-|RX| UART RX | | | | | |
-|TX| UART TX | | | | | |
-|TX0| Serial Log Output | | | | | |
-|SCL| I2C SCL | | | | | |
-|SDA| I2C SDA | | | | | |
+|A0| Analog Input 0 | GPIO10 | ADC1_9 | RTCIO10 | TOUCH10 | |
+|A1| Analog Input 1 | GPIO9 | ADC1_8 | RTCIO9 | TOUCH9 | |
+|A2| Analog Input 2 | GPIO8 | ADC1_7 | RTCIO8 | TOUCH8 | |
+|A3| Analog Input 3 | GPIO3 | ADC1_2 | RTCIO3 | TOUCH3 | |
+|A4| Analog Input 4 | GPIO2 | ADC1_1 | RTCIO2 | TOUCH2 | |
+|A5| Analog Input 5 | GPIO1 | ADC1_0 | RTCIO1 | TOUCH1 | |
+|D5|  Digital Input/Output 5 | GPIO15 | ADC2_4 | RTCIO15 | | |
+|D6|  Digital Input/Output 6 | GPIO16 | ADC2_5 | RTCIO16 | | |
+|D7|  Digital Input/Output 7 | GPIO37 | | | | |
+|D8|  Digital Input/Output 8 | GPIO6 | ADC1_5 | RTCIO6 | TOUCH6 | |
+|D9|  Digital Input/Output 9 | GPIO17 | ADC2_6 | RTCIO17 | | |
+|D10| Digital Input/Output 10 | GPIO18 | ADC2_7 | RTCIO18 | | |
+|D11| Digital Input/Output 11 | GPIO45 | | | | |
+|D12| Digital Input/Output 12 | GPIO12 | ADC2_1 | RTCIO12 | TOUCH12 | |
+|D13| Digital Input/Output 13 | GPIO11 | ADC2_0 | RTCIO11 | TOUCH11 | |
+|MOSI| SPI MOSI | GPIO40 | | | | MTDO |
+|MISO| SPI MISO | GPIO41 | | | | MTDI |
+|SCK| SPI SCK | GPIO39 | | | | MTCK |
+|RX| UART RX | GPIO32 | | | | MTMS |
+|TX| UART TX | GPIO44 | | | | |
+|TX0| Serial Log Output | GPIO43 | | | | |
+|SCL| I2C SCL | GPIO36 | | | | |
+|SDA| I2C SDA | GPIO35 | | | | |
 
 ##### Capabilities
 
-Also applies to User-Managed Fixed IO
-
-- Digital - pins that can output or accept input of 3.3 V digital logic
-- RTC - pins that can hold output during deep-sleep; or be used as a wake source from deep-sleep
-- Touch - pins that can be used for capacitive touch input
-- Analog Input - pins that can read analog signals
-- JTAG - pins that connects to JTAG debugger
+- Digital -  IO that can output or accept input of 3.3 V digital logic; supports UART, I2C, SPI, I2S, SDIO, PWM, CAN, RMT, Camera, LCD peripherals.
+- RTC - IO  that can hold output during deep-sleep; or be used as a wake source from deep-sleep.
+- Touch - IO  that can be used as capacitive touch input.
+- Analog Input - IO that can read analog signals; `X`, `Y` denotes the ADC number and channel respectively in `ADCX_Y`
+- JTAG - IO used for JTAG debugging.
 
 #### User-Managed Fixed IO
 
-GPIO connected to a component on-board, but user maintains control for configuration and use within its capabilities
+IO signals connected to a component on-board, limiting its use. For example, it does not  make sense to use `BTN` as UART TX due to being connected to a button, even though it is technically capable of doing so. User code is still in control in terms of configuring and using these IO.
 
 | Pin | Description | Digital | RTC |
 |-|-|-|-|
-|ALARM| Fuel Gauge Alarm Input | | |
-|INT| Battery Charger Interrupt Input | | |
-|BTN| User Button Input | | |
-|LED| Green User LED Output | | |
-|EN| Board Enable Input | | | |
+|ALARM| Fuel Gauge Alarm Input | GPIO21 | RTCIO21 |
+|INT| Battery Charger Interrupt Input | GPIO5 | RTCIO5 |
+|BTN| User Button Input | GPIO0 | RTCIO0 |
+|LED| Green User LED Output | GPIO46 | RTCIO7 | |
 
 #### SDK-Managed Fixed IO
 
-GPIO connected to a component on-board, and whose configuration and use is managed by the SDK; a user configuring/using these pins will cause faulty functionality.
+IO signals connected to a component on-board, whose configuration and use is managed by the SDK. User code should not configure and use these IO, as doing so can cause faulty behavior.
 
 | Pin | Description |
 |-|-|
@@ -160,7 +157,7 @@ GPIO connected to a component on-board, and whose configuration and use is manag
 
 ### Special Function
 
-Signals not routed to the ESP32-S3 GPIO pins, or to the other integrated circuits on-board such as the charger and fuel gauge, which serves a special function.
+Signals not routed to the ESP32-S3 GPIO pins, or are routed to other integrated circuits on-board such as the charger and fuel gauge.
 
 | Name | Description |
 |-|-|
@@ -170,7 +167,8 @@ Signals not routed to the ESP32-S3 GPIO pins, or to the other integrated circuit
 |TS| Battery 10k NTC Thermistor Input|
 
 ### Power Input
-Pins used for connecting input power supplies.
+
+Powers the components on-board.
 
 | Name | Description
 |-|-|
@@ -180,14 +178,15 @@ Pins used for connecting input power supplies.
 |VDC| 3.8 V - 18 V DC Power Supply
 
 ### Power Output
-Pins used for connecting loads that get power from one of the board power output rails.
+
+Powers loads connected to the board.
 
 | Name | Description
 |-|-|
-|VBAT| 3.7 V - 4.2 V Battery output
-|VS| 3.8 V - 18 V Power Supply; higher of `VDC` and `VUSB`
-|3V3| Header 3.3V | Digital/RTC Input
-|VSQT| STEMMA QT 3.3V | Digital Output
+|VBAT| 3.7 V - 4.2 V Battery Output
+|VS| 3.8 V - 18 V Supply Voltage; Higher of `VDC` and `VUSB`
+|3V3| Header 3.3V |
+|VSQT| STEMMA QT 3.3V |
 
 ### Ground
 
@@ -197,13 +196,37 @@ Pins used for connecting loads that get power from one of the board power output
 |-|-|
 |GND| Ground Pin |
 
-## Feather Deviations
 
-- QON pin on AREF
-- EN pin does not automatically disable the board
-- VS instead of 5V
+## Feather Differences
 
-## Comparison
+ESP32-S3 PowerFeather has a few differences from standard Feather mainboards.
+
+### `EN` Behavior
+
+On other Feather boards, the `EN` pin is connected to the enable pin of the on-board 3.3 V regulator. Pulling `EN` low means disabling the 3.3 V regulator and everything powered from it.
+
+On PowerFeather, `EN` is connected to an ESP32-S3 GPIO pin. User code can read the state of this pin and act accordingly, i.e. it can disable the `3V3` and `VSQT` load switches and put itself to deep-sleep to emulate behavior on standard boards; or it might do something completely different.
+
+Furthermore, the ESP32-S3 itself can pull `EN` low via `EN0` if user code needs to disable connected FeatherWings.
+
+### `QON` Pull-Up
+
+`QON` replaces `AREF` on ESP32-S3 PowerFeather, and is normally pulled high to 3.3 V. Make sure when connecting FeatherWings that it is able to handle this voltage on its `AREF` pin, or the FeatherWing does not use `AREF` at all.
+
+If this is an issue, `QON` can be removed by breaking a solder bridge.
+
+### `VS` Up to 18 V
+
+On standard Feather boards, the pin occupied by `VS` is the `5V` output (there is no on-board 5 V regulator, the 5 V comes from the USB supply). On PowerFeather, `VS` outputs either `VUSB` or `VDC`, whichever has a higher voltage. Since `VDC` can be up to 18 V, this means that `VS` can also be up to 18 V.
+
+Keep this in mind if using a power supply with voltage higher than 5 V on `VDC`, as it might destroy FeatherWings that only expects 5 V on its `5V`/`VS` pin.
+
+
+
+## Misc
+
+
+<!-- ## Comparison
 | Detail | ESP32-S3 PowerFeather | Unexpected Maker FeatherS3 | DFRobot ESP32 Firebeetle (DFR0654) |
 |-|-|-|-|
 | Module | ESP32-S3-WROOM-N16R8 | N/A<sup>1</sup> | ESP32-WROOM-32E-N4 |
@@ -246,19 +269,18 @@ Pins used for connecting loads that get power from one of the board power output
 5. On *FeatherS3* and *ESP32 Firebeetle*, a resistor on the board has to be replaced to change max charging current.
 6. Estimation of state-of-charge using battery voltage on *FeatherS3* and *ESP32 Firebeetle* [may not be sufficient](https://www.analog.com/jp/technical-articles/how-to-achieve-greater-accuracy-in-battery-capacity-readings-for-portable-designs.html).
 7. *ESP32-S3 PowerFeather* battery charger chip has integrated power path management, which enables these features.
-8. The 18-pin FPC on the *ESP32 Firebeetle* shares some GPIO pins with header; so pins used as part of the display interface can't be used on the header.
+8. The 18-pin FPC on the *ESP32 Firebeetle* shares some GPIO pins with header; so pins used as part of the display interface can't be used on the header. -->
 
 
-## Links
+### Related Links
 
-### Datasheets
+#### Datasheets
 
-- Module: ESP32-S3-WROOM-1-N16R8
-- Battery Charger: BQ25628E
-- Battery Fuel Gauge: LC709204F
-- 3.3V Regulator: TPS62840
+- [ESP32-S3-WROOM-1-N16R8](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+- [BQ25628E](https://www.ti.com/lit/ds/symlink/bq25628e.pdf?ts=1697957319709&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FBQ25628E)
+- [LC709204F](https://www.ti.com/lit/ds/symlink/tps62840.pdf?ts=1697940153313&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTPS62840)
+- [TPS62840](https://www.ti.com/lit/ds/symlink/tps62840.pdf?ts=1697940153313&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTPS62840)
 
-
-### Hardware Files
+#### GitHub Repository
 
 https://github.com/PowerFeather/esp32s3-powerfeather
