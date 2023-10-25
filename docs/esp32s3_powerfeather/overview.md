@@ -225,6 +225,16 @@ Keep this in mind if using a power supply with voltage higher than 5 V on `VDC`,
 
 ## Misc
 
+### FAQ
+
+#### Can the USB and DC adapter be plugged in at the same time?
+
+Yes, but the supply with the higher voltage will be used. If they are roughly the same, the current load will be shared between the two supplies. There is also circuitry to ensure that one supply does not backfeed into the other.
+
+#### Can USB/DC adapter be used to power the system and charge the battery at the same time?
+
+Yes. PowerFeather uses a charger chip with an integrated power path. This means that when a USB/DC power is provided, it is used to power the board even with the battery in a depleted state, charging it along the way. The battery is disconected once full to avoid overcharging. If the USB/DC power is removed, the battery automatically takes over powering the board. Furthermore, the battery can also supplement the USB/DC supply in case of load spikes.
+
 
 
 ### Related Links
