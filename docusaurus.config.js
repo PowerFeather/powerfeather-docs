@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'PowerFeather',
+  title: 'PowerFeather Docs',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -14,11 +14,6 @@ const config = {
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -68,13 +63,13 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'defaultSidebar',
             position: 'left',
-            label: 'Hardware',
+            label: 'DOCS',
           },
         ],
       },
       footer: {
         style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} PowerFeather. All rights reserved.`,
+        copyright: `Copyright © ${new Date().getFullYear()} PowerFeather`,
       },
       prism: {
         theme: lightCodeTheme,

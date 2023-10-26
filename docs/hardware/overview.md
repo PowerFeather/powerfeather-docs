@@ -3,7 +3,7 @@ sidebar_position: 0
 slug: /
 ---
 
-# Overview
+# ESP32-S3 PowerFeather
 
 ## Features & Specifications
 
@@ -67,12 +67,19 @@ slug: /
 
 #### Consumption
 
-| State | Conditions | Current
-|-|-|-|
-|Active| External DC Supply (up to 18V) | Digital Output
-|Deep-Sleep| External DC Supply (up to 18V) | Digital Output
-|Ship Mode| External DC Supply (up to 18V) | Digital Output
-|Shut Down| External DC Supply (up to 18V) | Digital Output
+- Wi-Fi and Bluetooth off
+- `3V3` and `VSQT` disabled, no load
+- No external load connected on `VBAT`, `VS`
+- Measured from battery input
+
+| State | Current |
+|-|-|
+|Active| 30 mA |
+|Light Sleep| 200 uA | 
+|Deep-Sleep| 12 uA |
+|Deep-Sleep, Fuel Gauge off | 12 uA |
+|Ship Mode| 2 uA | Fuel guage in sleep mode
+|Shut Down| 2 uA |
 
 #### Battery
 
