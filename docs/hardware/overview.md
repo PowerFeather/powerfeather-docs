@@ -25,7 +25,9 @@ slug: /
     - On-board PCB antenna
 -  Operating temperature range: -40 °C - 85 °C
 
-### Processing
+### Capabilities
+
+#### Compute Resources
 
 - 240 Mhz Dual-Core Xtensa LX7 Processor
 - RISC-V / FSM Ultra Low Power Coprocessor
@@ -34,11 +36,20 @@ slug: /
 - 512 KB SRAM
 - 16 KB RTC SRAM
 
-### Data Interface
+#### Power Management
+
+- Supply current monitoring
+- Battery Monitoring
+    - Temperature
+    - State-of-Charge
+    - State-of-Health
+    - Charge/discharge current
+
+### Interface
 
 #### Radio
-- 150 Mbps 2.4 GHz Wi-Fi 802.11b/g/n on PCB antenna
-- 2 Mbps Bluetooth 5 LE + Mesh on PCB antenna
+- 2.4 GHz Wi-Fi 802.11b/g/n on PCB antenna
+- Bluetooth 5 LE + Mesh on PCB antenna
 
 #### Connectors
 - USB Full-Speed OTG on USB-C connector
