@@ -7,19 +7,23 @@ slug: /
 
 ## Features & Specifications
 
-### Form Factor
+### Physical
 
-- Board Dimensions
-    - L: 57 mm
-    - W: 23 mm
-    - H: 6 mm
-- [Feather-compatible](https://learn.adafruit.com/adafruit-feather/feather-specification)
+- Board Dimensions: 65 mm L x 23 mm W  x 6 mm H
+- Feather-compatible form factor
+- Board Features
     - 2 D=2.5mm mounting holes
-    - 2 1x16 2.54 mm headers
-- Connectors
-    - 1 Battery JST PH
-    - 1 USB-C
-    - 1 STEMMA QT
+    - 2 1x16 2.54 mm pitch header pins
+    - Thermistor pin
+    - 2-pin JST PH battery connector
+    - USB-C connector
+    - 4-pin JST SH STEMMA QT connector
+    - Red charger status LED
+    - Reset button
+    - Green user LED
+    - User button
+    - On-board PCB antenna
+-  Operating temperature range: -40 °C - 85 °C
 
 ### Processing
 
@@ -30,67 +34,55 @@ slug: /
 - 512 KB SRAM
 - 16 KB RTC SRAM
 
-
-### Connectivity
+### Interface
 
 #### Radio
-- 150 Mbps 2.4 GHz Wi-Fi 802.11b/g/n with on-board PCB antenna
-- 2 Mbps Bluetooth 5 LE + Mesh with on-board PCB antenna
+- 150 Mbps 2.4 GHz Wi-Fi 802.11b/g/n on PCB antenna
+- 2 Mbps Bluetooth 5 LE + Mesh on PCB antenna
 
-#### Input/Output
-- USB OTG Full-Speed on USB-C connector
+#### Pins
+- USB Full-Speed OTG on USB-C connector
 - 23 digital I/O pins on 2.54 mm headers
-    - 6 analog output capable pin
-    - 5 touch capable pin
-    - 12 RTC capable pin
-    - 3 UART, 2 SPI, 1 I2C, 1 I2S, 2 SDIO, 1 CAN on any pin
-- 1 I2C via STEMMA QT connector
-- 1 Red Charger Status LED
-- 1 Reset Button
-- 1 Green User LED
-- 1 User Button
-
+    - 6 analog input capable pins
+    - 5 touch capable pins
+    - 12 RTC capable pins
+    - UART, I2C, SPI, I2S, SDIO, PWM, CAN, RMT, Camera, LCD on any pin
+- I2C via STEMMA QT connector
+- 103AT input on thermistor pin
 
 ### Power
 
 #### Input
 
 - 5 V, 2 A `VUSB` via USB-C connector
-- 3.9 V - 18 V, 2A via `VDC` pin
-- 4.2 V, 2 A via battery JST PH connector
+- 3.9 V - 18 V, 2A via `VDC` header pin
+- 4.2 V, 2 A via battery connector
+    - Li-Ion/Li-Poly
+    - 3.7 V nominal, 4.2 V max
+    - 2 A max charging current, user-code configurable
+    - Protections:
+        - Undervoltage Detect @2.2 V, Release @2.4 V
+        - Overvoltage Detect @4.37 V, Release @4.28 V
+        - Discharge overcurrent @1.5 A
+        - Trickle charging safety timer @1 hr
+        - Temperature cutoff at 0 °C and 60 °C using 103AT thermistor
+
 
 #### Output
 
-- 3.3 V, 500 mA shared between `3V3` pin and `VSQT` on STEMMA QT connector
-- 3.3 V - 4.2 V, 3 A via `VBAT` pin
-- 5 V - 18 V, 2 A max via `VS` pin
+- 3.3 V, 750 mA shared between board, `3V3` header pin and `VSQT` on STEMMA QT connector
+- 3.3 V - 4.2 V, 3 A via `VBAT` header pin
+- 5 V - 18 V, 2 A max via `VS` header pin
 
 #### Consumption
 
-- Wi-Fi and Bluetooth off
-- `3V3` and `VSQT` disabled, no load
-- No external load connected on `VBAT`, `VS`
-- Measured from battery input
-
-| State | Current |
+| Power State | Current Consumption |
 |-|-|
-|Active| 30 mA |
-|Light Sleep| 200 uA | 
-|Deep-Sleep| 12 uA |
-|Deep-Sleep, Fuel Gauge off | 12 uA |
-|Ship Mode| 2 uA | Fuel guage in sleep mode
-|Shut Down| 2 uA |
-
-#### Battery
-
-- Support Li-Ion/Li-Poly batteries with 3.7 V nominal, 4.2 V max voltage
-- 2 A max charging current, configurable from firmware
-- Battery Protections
-    - Undervoltage Detect @2.2 V, Release @2.4 V
-    - Overvoltage Detect @4.37 V, Release @4.28 V
-    - Discharge overcurrent @1.5 A
-    - Trickle charging safety timer @1 hr
-    - Temperature cutoff @0 °C and @60 °C (needs 10k NTC thermistor on battery)
+|Deep-Sleep, Fuel Gauge Active w/ 1 s sampling | 12 μA |
+|Deep-Sleep, Fuel Gauge Active w/ 2 s sampling | 12 μA |
+|Deep-Sleep, Fuel Gauge Sleep | 12 μA |
+|Ship Mode, Fuel Gauge Sleep | 2 μA |
+|Shut Down, Fuel Gauge Sleep | 2 μA |
 
 ## Pins & Signals
 
@@ -175,7 +167,7 @@ Signals not routed to the ESP32-S3 GPIO pins, or are routed to other integrated 
 
 ### Power Input
 
-Powers the components on-board.
+Powers the components on-board. Loads directly connected to these are excluded in the board current measurement.
 
 | Name | Description
 |-|-|
@@ -186,7 +178,7 @@ Powers the components on-board.
 
 ### Power Output
 
-Powers loads connected to the board.
+Powers loads connected to the board. These are exclusively output, don't connect input supplies to them.
 
 | Name | Description
 |-|-|
@@ -230,18 +222,30 @@ Keep this in mind if using a power supply with voltage higher than 5 V on `VDC`,
 
 
 
-## Misc
-
-### FAQ
+## FAQ
 
 #### Can the USB and DC adapter be plugged in at the same time?
 
-Yes, but the supply with the higher voltage will be used. If they are roughly the same, the current load will be shared between the two supplies. There is also circuitry to ensure that one supply does not backfeed into the other.
+Yes, but the supply with the higher voltage will be used. If they are roughly the same, the current load will be shared between the two supplies. The circuitry also ensures that one supply does not backfeed into the other.
 
 #### Can USB/DC adapter be used to power the system and charge the battery at the same time?
 
-Yes. PowerFeather uses a charger chip with an integrated power path. This means that when a USB/DC power is provided, it is used to power the board even with the battery in a depleted state, charging it along the way. The battery is disconected once full to avoid overcharging. If the USB/DC power is removed, the battery automatically takes over powering the board. Furthermore, the battery can also supplement the USB/DC supply in case of load spikes.
+Yes. PowerFeather uses a charger chip with an integrated power path. This means that when USB/DC power is provided, it is used to power the board even with the battery in a depleted state, charging it along the way. The battery is disconected once full to avoid overcharging. If the USB/DC power is removed, the battery automatically takes over powering the board. Furthermore, the battery can also supplement the USB/DC supply in case of load spikes.
 
+#### When should I prefer A0-A5, D8 for analog inputs, even if there are other capable pins?
+
+A0-A5, D8 uses ADC1 on the ESP32-S3, the others use ADC2. ADC2 is shared with Wi-Fi, and so may occasionally fail to read when Wi-Fi is active. When Wi-Fi is not used, you can use any of the analog-input capable pins.
+
+## Appendix
+
+### Power Measurement
+
+Conditions:
+
+- Power Profiler Kit II, simulating a battery, connected to BATN and BATP.
+- No load connected to `VSQT`, `3V3`, `VS`.
+- No external load connected to `VBAT`.
+- No power supply connected to `VBUS` and `VDC`
 
 
 ### Related Links
