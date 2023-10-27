@@ -44,11 +44,22 @@ Preliminary document. Future versions might have changes and corrections.
 #### Power Management
 
 - Supply current monitoring
+- Supply voltage monitoring
+- Supply maintained minimum voltage (maximum power point)
+- `3V3` enable/disable
+- `VSQT` enable/disable
+- Set max charging current
+- Power States
+    - Ship mode
+    - Shutdown mode
+    - Power cycle
 - Battery Monitoring
+    - Voltage
     - Temperature
     - State-of-Charge
     - State-of-Health
     - Charge/discharge current
+    - Time-to-Empty/Time-to-Full
 
 ### Interfaces
 
