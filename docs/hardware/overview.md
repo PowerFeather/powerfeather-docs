@@ -45,7 +45,7 @@ slug: /
     - State-of-Health
     - Charge/discharge current
 
-### Interface
+### Interfaces
 
 #### Radio
 - 2.4 GHz Wi-Fi 802.11b/g/n on PCB antenna
@@ -88,15 +88,15 @@ slug: /
 - 3.3 V - 4.2 V, 3 A via `VBAT` header pin
 - 5 V - 18 V, 2 A max via `VS` header pin
 
-#### Consumption
+#### Power Consumption
 
 | Power State | Current Consumption |
 |-|-|
-|Deep-Sleep, Fuel Gauge Active w/ 1 s sampling | 12 μA |
-|Deep-Sleep, Fuel Gauge Active w/ 2 s sampling | 12 μA |
-|Deep-Sleep, Fuel Gauge Sleep | 12 μA |
-|Ship Mode, Fuel Gauge Sleep | 2 μA |
-|Shut Down, Fuel Gauge Sleep | 2 μA |
+|Deep-Sleep, Fuel Gauge Active (1 s sampling) | 18 μA |
+|Deep-Sleep, Fuel Gauge Active (2 s sampling) | 12 μA |
+|Deep-Sleep, Fuel Gauge Sleep | 11.5 μA |
+|Ship Mode, Fuel Gauge Sleep | 1.5 μA |
+|Shut Down, Fuel Gauge Sleep | 1.4 μA |
 
 ## Pins & Signals
 
@@ -178,6 +178,7 @@ Signals not routed to the ESP32-S3 GPIO pins, or are routed to other integrated 
 |RST| ESP32-S3 Module Reset |
 |QON| Ship Mode Exit|
 |TS| Battery 10k NTC Thermistor Input|
+|EN| Open-drain board enable|
 
 ### Power Input
 
@@ -252,14 +253,36 @@ A0-A5, D8 uses ADC1 on the ESP32-S3, the others use ADC2. ADC2 is shared with Wi
 
 ## Appendix
 
-### Power Measurement
+### Power Measurements
 
-Conditions:
+The following measurements are done under the following conditions:
 
-- Power Profiler Kit II, simulating a battery, connected to BATN and BATP.
+- Measurements are done with Nordic Semiconductor Power Profiler Kit II (PPK2) connected to battery connector.
+- PPK2 is set as current source, set to 3.7V.
 - No load connected to `VSQT`, `3V3`, `VS`.
+- `VSQT` and `3V3` rails are enabled, `EN` is high.
 - No external load connected to `VBAT`.
-- No power supply connected to `VBUS` and `VDC`
+- No power supply connected to `VBUS` and `VDC`.
+
+#### Deep-Sleep, Fuel Gauge Enabled (1 s sampling)
+
+![ESP32-S3 PowerFeather Deep-Sleep, Fuel Gauge Enabled (1 s sampling)](assets/1s_sample.png)
+
+#### Deep-Sleep, Fuel Gauge Enabled (2 s sampling)
+
+![ESP32-S3 PowerFeather Deep-Sleep, Fuel Gauge Enabled (2 s sampling)](assets/2s_sample.png)
+
+#### Deep-Sleep, Fuel Gauge Disabled
+
+![ESP32-S3 PowerFeather Deep-Sleep, Fuel Gauge Disabled](assets/disabled.png)
+
+#### Ship Mode, Fuel Gauge Disabled
+
+![ESP32-S3 PowerFeather Ship Mode, Fuel Gauge Disabled](assets/ship.png)
+
+#### Shut Down, Fuel Gauge Disabled
+
+![ESP32-S3 PowerFeather Shutdown, Fuel Gauge Disabled](assets/shutdown.png)
 
 
 ### Related Links
