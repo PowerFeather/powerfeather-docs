@@ -92,11 +92,11 @@ slug: /
 
 | Power State | Current Consumption |
 |-|-|
-|Deep-Sleep, Fuel Gauge Active (1 s sampling) | 18 μA |
-|Deep-Sleep, Fuel Gauge Active (2 s sampling) | 12 μA |
-|Deep-Sleep, Fuel Gauge Sleep | 11.5 μA |
-|Ship Mode, Fuel Gauge Sleep | 1.5 μA |
-|Shut Down, Fuel Gauge Sleep | 1.4 μA |
+|Deep-Sleep, Fuel Gauge Enabled (1 s sampling) | 18 μA |
+|Deep-Sleep, Fuel Gauge Enabled (2 s sampling) | 12 μA |
+|Deep-Sleep, Fuel Gauge Disabled | 11.5 μA |
+|Ship Mode, Fuel Gauge Disabled | 1.5 μA |
+|Shut Down, Fuel Gauge Disabled | 1.4 μA |
 
 ## Pins & Signals
 
