@@ -40,15 +40,18 @@ slug: /
 - 150 Mbps 2.4 GHz Wi-Fi 802.11b/g/n on PCB antenna
 - 2 Mbps Bluetooth 5 LE + Mesh on PCB antenna
 
-#### Pins
+#### Connectors
 - USB Full-Speed OTG on USB-C connector
-- 23 digital I/O pins on 2.54 mm headers
+- I2C on STEMMA QT connector
+
+#### Pins
+- 23 digital I/O pins on header pins
     - 6 analog input capable pins
     - 5 touch capable pins
     - 12 RTC capable pins
     - UART, I2C, SPI, I2S, SDIO, PWM, CAN, RMT, Camera, LCD on any pin
-- I2C via STEMMA QT connector
 - 103AT input on thermistor pin
+
 
 ### Power
 
