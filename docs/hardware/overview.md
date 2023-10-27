@@ -23,14 +23,14 @@ slug: /
     - Green user LED
     - User button
     - On-board PCB antenna
--  Operating temperature range: -40 °C - 65 °C
+-  Operating temperature range: -40 °C - 85 °C
 
 ### Processing
 
 - 240 Mhz Dual-Core Xtensa LX7 Processor
 - RISC-V / FSM Ultra Low Power Coprocessor
 - 16 MB Quad-SPI Flash
-- 8 MB Quad-SPI PSRAM
+- 2 MB Quad-SPI PSRAM
 - 512 KB SRAM
 - 16 KB RTC SRAM
 
@@ -252,7 +252,7 @@ Conditions:
 
 #### Datasheets
 
-- [ESP32-S3-WROOM-1-N16R8](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+- [ESP32-S3-WROOM-1-N16R2](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
 - [BQ25628E](https://www.ti.com/lit/ds/symlink/bq25628e.pdf?ts=1697957319709&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FBQ25628E)
 - [LC709204F](https://www.ti.com/lit/ds/symlink/tps62840.pdf?ts=1697940153313&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTPS62840)
 - [TPS62840](https://www.ti.com/lit/ds/symlink/tps62840.pdf?ts=1697940153313&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTPS62840)
