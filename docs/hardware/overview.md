@@ -23,7 +23,7 @@ slug: /
     - Green user LED
     - User button
     - On-board PCB antenna
--  Operating temperature range: -40 °C - 85 °C
+-  Operating temperature range: -40 °C - 65 °C
 
 ### Processing
 
@@ -34,7 +34,7 @@ slug: /
 - 512 KB SRAM
 - 16 KB RTC SRAM
 
-### Interface
+### Data Interface
 
 #### Radio
 - 150 Mbps 2.4 GHz Wi-Fi 802.11b/g/n on PCB antenna
