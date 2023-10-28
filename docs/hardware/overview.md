@@ -87,8 +87,7 @@ Preliminary document. Future versions might have changes and corrections.
 - 5 V, 2 A `VUSB` via USB-C connector
 - 3.9 V - 18 V, 2A via `VDC` header pin
 - 4.2 V, 2 A via battery connector
-    - Li-Ion/Li-Poly
-    - 3.7 V nominal, 4.2 V max
+    - Li-Ion/Li-Poly, 3.7 V nominal and 4.2 V max voltage
     - 2 A max charging current, user-code configurable
     - Protections:
         - Undervoltage Detect @2.2 V, Release @2.4 V
