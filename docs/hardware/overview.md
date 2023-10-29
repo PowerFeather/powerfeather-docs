@@ -87,7 +87,7 @@ Preliminary document. Future versions might have changes and corrections.
 - 5 V, 2 A `VUSB` via USB-C connector
 - 3.9 V - 18 V, 2A via `VDC` header pin
 - 4.2 V, 2 A via battery connector
-    - Li-Ion/Li-Poly, 3.7 V nominal and 4.2 V max voltage
+    - Li-ion/LiPo, 3.7 V nominal and 4.2 V max voltage
     - 2 A max charging current, user-code configurable
     - Protections:
         - Undervoltage Detect @2.2 V, Release @2.4 V
@@ -201,8 +201,8 @@ Powers the components on-board. Loads directly connected to these are excluded i
 
 | Name | Description
 |-|-|
-|BATN| Li-Ion/Li-Poly Negative Terminal
-|BATP| Li-Ion/Li-Poly Positive Terminal
+|BATN| Li-ion/LiPo Negative Terminal
+|BATP| Li-ion/LiPo Positive Terminal
 |VUSB| 5V USB Power Supply |
 |VDC| 3.8 V - 18 V DC Power Supply
 
