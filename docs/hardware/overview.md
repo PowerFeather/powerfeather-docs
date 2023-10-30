@@ -99,7 +99,7 @@ Preliminary document. Future versions might have changes and corrections.
 
 #### Output
 
-- 3.3 V, 750 mA shared between board, `3V3` header pin and `VSQT` on STEMMA QT connector
+- 3.3 V, 1 A shared between board, `3V3` header pin and `VSQT` on STEMMA QT connector
 - 3.3 V - 4.2 V, 3 A via `VBAT` header pin
 - 5 V - 18 V, 2 A max via `VS` header pin
 
@@ -107,9 +107,9 @@ Preliminary document. Future versions might have changes and corrections.
 
 | Power State | Current Consumption |
 |-|-|
-|Deep-Sleep, Fuel Gauge Enabled (1 s sampling) | 18 μA |
-|Deep-Sleep, Fuel Gauge Enabled (2 s sampling) | 12 μA |
-|Deep-Sleep, Fuel Gauge Disabled | 11.5 μA |
+|Deep-Sleep, Fuel Gauge Enabled (1 s sampling) | 26 μA |
+|Deep-Sleep, Fuel Gauge Enabled (2 s sampling) | 20 μA |
+|Deep-Sleep, Fuel Gauge Disabled | 19.5 μA |
 |Ship Mode, Fuel Gauge Disabled | 1.5 μA |
 |Shut Down, Fuel Gauge Disabled | 1.4 μA |
 
@@ -268,7 +268,7 @@ A0-A5, D8 uses ADC1 on the ESP32-S3, the others use ADC2. ADC2 is shared with Wi
 
 ## Appendix
 
-### Power Measurements
+<!-- ### Power Measurements
 
 The following measurements are done under the following conditions:
 
@@ -297,7 +297,7 @@ The following measurements are done under the following conditions:
 
 #### Shut Down, Fuel Gauge Disabled
 
-![ESP32-S3 PowerFeather Shutdown, Fuel Gauge Disabled](assets/shutdown.png)
+![ESP32-S3 PowerFeather Shutdown, Fuel Gauge Disabled](assets/shutdown.png) -->
 
 
 ### Related Links
@@ -307,7 +307,7 @@ The following measurements are done under the following conditions:
 - [ESP32-S3-WROOM-1-N8R2](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
 - [BQ25628E](https://www.ti.com/lit/ds/symlink/bq25628e.pdf?ts=1697957319709&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FBQ25628E)
 - [LC709204F](https://www.ti.com/lit/ds/symlink/tps62840.pdf?ts=1697940153313&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTPS62840)
-- [TPS62840](https://www.ti.com/lit/ds/symlink/tps62840.pdf?ts=1697940153313&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTPS62840)
+- [XC6220](https://www.mouser.com/datasheet/2/760/TOSL_S_A0010556302_1-2575005.pdf)
 
 #### GitHub Repository
 
