@@ -5,6 +5,10 @@ sidebar_position: 2
 
 # Result
 
+:::info
+Work in progress.
+:::
+
 ## enum class Result
 
 ### Ok = 0
