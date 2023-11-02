@@ -239,6 +239,6 @@ Measure the charge/discharge current to/from the battery.
 current[out] Battery current in mA.
 
 
-## [Mainboard&](class-mainboard) Board
+## [Mainboard&](#class-mainboard) Board
 
 Singleton instance of Mainboard. 
