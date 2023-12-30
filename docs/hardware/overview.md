@@ -145,7 +145,7 @@ IO signals not connected to anything on-board and user code is free to configure
 |MOSI| SPI MOSI | GPIO40 | | | | MTDO |
 |MISO| SPI MISO | GPIO41 | | | | MTDI |
 |SCK| SPI SCK | GPIO39 | | | | MTCK |
-|RX| UART RX | GPIO32 | | | | MTMS |
+|RX| UART RX | GPIO42 | | | | MTMS |
 |TX| UART TX | GPIO44 | | | | |
 |TX0| Serial Log Output | GPIO43 | | | | |
 |SCL| I2C SCL | GPIO36 | | | | |
