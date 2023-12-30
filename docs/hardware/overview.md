@@ -226,7 +226,7 @@ Powers loads connected to the board. These are exclusively output, don't connect
 |GND| Ground Pin |
 
 
-## Feather Deviations
+## Warnings
 
 ESP32-S3 PowerFeather has a few differences from standard Feather mainboards.
 
@@ -240,9 +240,9 @@ Furthermore, the ESP32-S3 itself can pull `EN` low via `EN0` if user code needs 
 
 ### `QON` Pull-Up
 
-`QON` replaces `AREF` on ESP32-S3 PowerFeather, and is normally pulled high to 3.3 V. Make sure when connecting FeatherWings that it is able to handle this voltage on its `AREF` pin, or the FeatherWing does not use `AREF` at all.
+`QON` replaces `AREF` on ESP32-S3 PowerFeather, and is normally pulled high up to 5 V. Make sure when connecting FeatherWings that it is able to handle this voltage on its `AREF` pin, or the FeatherWing does not use `AREF` at all.
 
-If this is an issue, `QON` can be removed by breaking a solder bridge.
+If this is an issue, `QON` can be removed by breaking a solder bridge labeled `B2`.
 
 ### `VS` Up to 18 V
 
