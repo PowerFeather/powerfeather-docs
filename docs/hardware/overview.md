@@ -105,13 +105,13 @@ Work in progress.
 
 #### Power Consumption
 
-| Power State | Current Consumption |
-|-|-|
-|Deep-Sleep, Fuel Gauge Enabled (1 s sampling) | 26 μA |
-|Deep-Sleep, Fuel Gauge Enabled (2 s sampling) | 20 μA |
-|Deep-Sleep, Fuel Gauge Disabled | 19.5 μA |
-|Ship Mode, Fuel Gauge Disabled | 1.5 μA |
-|Shut Down, Fuel Gauge Disabled | 1.4 μA |
+| Power State | Current Consumption @3.7V | Current Consumption @4.2V |
+|-|-|-|
+|Deep-Sleep, Fuel Gauge Enabled (1 s sampling) | 26 μA | |
+|Deep-Sleep, Fuel Gauge Enabled (2 s sampling) | 20 μA | |
+|Deep-Sleep, Fuel Gauge Disabled | 19.5 μA | |
+|Ship Mode, Fuel Gauge Disabled | 1.5 μA | |
+|Shut Down, Fuel Gauge Disabled | 1.4 μA | |
 
 ## Pins & Signals
 
