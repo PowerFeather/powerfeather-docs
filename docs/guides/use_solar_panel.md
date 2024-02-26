@@ -44,7 +44,7 @@ If you are using a solar panel with a center-positive barrel jack (like the Powe
 
 :::danger
 There is no reverse polarity protection on `VDC` and `GND`, so ensure that solar panel terminals are connected
-with correct polarity. Not doing so can cause permanent damage to PowerFeather and/or the solar panel.
+with correct polarity. Incorrect polarity can cause permanent damage to PowerFeather and/or the solar panel.
 :::
 
 
@@ -56,5 +56,7 @@ In order to maximize power from the solar panel, the MPP voltage should be set. 
 For example, for PowerFeather Solar Panel, it would be:
 
 ```cpp
+Board.init(500); // Assuming a 500 mAh battery
+// ...
 Board.setSupplyMinVoltage(12000); // PowerFeather Solar Panel MPP voltage = 12000 mV
 ```
