@@ -7,3 +7,50 @@ sidebar_position: 3
 :::info
 Work in progress.
 :::
+
+## Selection
+
+Choose a solar panel that has an open-circuit voltage not exceeding 18 V, and an MPP voltage from 5 V to 16.8 V.
+
+:::caution
+Pay close attention to solar panels advertised as 12 V, as most of them actually have a much higher
+open-circuit voltage of around 21 V. While such panels should not cause damage to PowerFeather, it might
+not function properly for supply voltages beyond 18 V.
+:::
+
+A 10 W panel in ideal conditions should be able to charge the battery at 2 A.
+However, if you don't need charging current that high, you may opt for a smaller wattage, and consequently
+physically smaller, solar panel.
+
+The following are solar panels we have tested first-hand to work well with PowerFeather:
+
+| Name | Wattage | MPP voltage | Open-circuit voltage | Purchase Link
+|-|-|-|-|-|
+| PowerFeather Solar Panel | 10 W | 12 V | 13.9 V |
+| NETCOMLAB COV-35105  | 10 W | 15 V | 16.5 V | https://www.kobetradingusa.com/products/cov-35105-solar-panel-15v-10w
+
+
+
+## Connection
+
+![Solar Panel Connection](assets/solar_panel_connection.jpg)
+
+Simply connect the solar panel's positive and negative terminal to the PowerFeather's `VDC` and `GND`
+pin, respectively.
+
+:::danger
+There is no reverse polarity protection on `VDC` and `GND`, so ensure that solar panel terminals are connected
+with correct polarity. Not doing so can cause permanent damage to PowerFeather and/or the solar panel.
+:::
+
+
+## Code
+
+In order to maximize power from the solar panel, the MPP voltage should be set. It can be done by calling
+`setSupplyMinVoltage` in your code with the panel's MPP voltage in mV as argument.
+
+For example, for *PowerFeather Solar Panel*, it would be:
+
+```cpp
+Board.setSupplyMinVoltage(12000); // PowerFeather Solar Panel MPP voltage = 12000 mV
+```
