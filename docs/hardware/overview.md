@@ -262,9 +262,16 @@ Yes, but the supply with the higher voltage will be used. If they are roughly th
 
 Yes. PowerFeather uses a charger chip with an integrated power path. This means that when USB/DC power is provided, it is used to power the board even with the battery in a depleted state, charging it along the way. The battery is disconected once full to avoid overcharging. If the USB/DC power is removed, the battery automatically takes over powering the board. Furthermore, the battery can also supplement the USB/DC supply in case of load spikes.
 
-#### When should I prefer A0-A5, D8 for analog inputs, even if there are other capable pins?
+#### Does this board support LiFePO4 batteries?
 
-A0-A5, D8 uses ADC1 on the ESP32-S3, the others use ADC2. ADC2 is shared with Wi-Fi, and so may occasionally fail to read when Wi-Fi is active. When Wi-Fi is not used, you can use any of the analog-input capable pins.
+No, the board as a whole does not support LiFePO4 batteries. While the charger IC supports LiFePO4, the fuel gauge IC does not. Furthermore,
+PowerFeather uses a linear regulator to provide the 3.3 V power rail, which won't function properly under a LiFePO4 battery with nominal voltage of 3.2 V.
+
+#### Does this board support MPPT for solar panels?
+
+No, this board does not support 'true' MPPT in the sense that it does not do full tracking of the panel's I-V curve. However, the panel MPP voltage can be set, and the charger IC will dynamically regulate charging current to prevent the panel voltage from collapsing below it. This provides near/pseudo-MPPT performance, since the MPP voltage for a typical panel remains roughly the same across varying illumination levels.
+
+For more details, please read [this Adafruit design note](https://learn.adafruit.com/adafruit-bq24074-universal-usb-dc-solar-charger-breakout/design-notes) for one of their solar chargers that uses the same dynamic charging current regulation technology. However, the advantage of PowerFeather compared to their solar charger is that their solar charger has a fixed MPP voltage at 4.5 V, while for PowerFeather it can be adjusted in firmware up to 16.8 V.
 
 ## Appendix
 
