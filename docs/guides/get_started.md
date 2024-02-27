@@ -8,28 +8,27 @@ sidebar_position: 1
 Work in progress.
 :::
 
-##
+## First Use
 
-## Platforms
+PowerFeather comes pre-loaded with a simple program that blinks the green `USR` LED. Use this to quickly check
+if your board is OK. Simply connect your PowerFeather to a host computer using the USB-C connector:
 
-Connect the PowerFeather to a host PC.
+![LED Blink](assets/led_blink.gif)
+
+As illustrated above, the red `CHG` LED should flash momentarily, after which the green `USR` LED will blink.
+
+## Run Demo
+
+The demo application showcases some of the things you can do with PowerFeather. To run the it, ESP-IDF or Arduino
+with the *PowerFeather SDK* must be installed on your system. If you have not done this yet,
+please follow the instructions on the [PowerFeather SDK installation guide](/sdk/install.md).
 
 ### Arduino
 
-1. [Install Arduino IDE 2](https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing/).
-2. [Install Arduino-ESP32 support](https://espressif-docs.readthedocs-hosted.com/projects/arduino-esp32/en/latest/installing.html#installing-using-arduino-ide).
-- Use the stable release link.
-- Make sure `v3.0.0` or newer is installed.
-3. Install the `PowerFeather` library.
-4. Select the `hello_powerfeather` example. Build and flash.
-5. Open the serial monitor, the serial should display details about the supply and battery.
+
+
 
 ### ESP-IDF
-
-1. [Install ESP-IDF v5 or newer](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/#installation).
-2. Create project from example (https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/tools/idf-component-manager.html#creating-a-project-from-an-example).
-3. Run `idf.py flash monitor`. The serial monitor should display about the supply and battery.
-
 
 
 
@@ -45,6 +44,6 @@ Every new PowerFeather comes pre-programmed with ... It's it's way of saying hel
 
 ## Development
 
-The PowerFeather can be used with either Arduino or ESP-IDF. 
+The PowerFeather can be used with either Arduino or ESP-IDF.
 
 ### Arduino -->
