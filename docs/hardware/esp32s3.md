@@ -115,7 +115,7 @@ Work in progress.
 |Deep-Sleep, Fuel Gauge Enabled (Settled) | 18.5 μA |
 |Deep-Sleep, Fuel Gauge Disabled | 18 μA |
 |Ship Mode, Fuel Gauge Disabled | 1.5 μA |
-|Shut Down, Fuel Gauge Disabled | 1.4 μA |
+|Shutdown Mode, Fuel Gauge Disabled | 1.4 μA |
 
 ## Pins & Signals
 
