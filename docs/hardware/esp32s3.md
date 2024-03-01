@@ -282,17 +282,21 @@ For more details, please read [this Adafruit design note](https://learn.adafruit
 
 ### Current Measurements
 
-These are measurements for the figures in [Current Consumption](#current-consumption).
+These are measurements for the figures in [Current Consumption](#current-consumption). These were measured using Nordic Power Profiler Kit II (a.k.a PPK2) acting as a battery @3.7 V plugged into `BATP` and `BATN`; and with no external supply (`VBUS` or `VDC`).
 
 | Deep Sleep, Fuel Gauge Enabled (Initial) | Deep Sleep, Fuel Gauge Enabled (Settled) |
 |-|-|
-| [![](assets/fg_initial.png)](assets/fg_initial.png) | [![](assets/fg_settled.png)](assets/fg_settled.png) |
+| [![](assets/fg_initial.png)](assets/fg_initial.png) <br/> The fuel gauge *initially* samples around every ~1 s, with each sample registering a current spike to up ~5 mA. | [![](assets/fg_settled.png)](assets/fg_settled.png) <br/> The fuel gauge samples *settles* down to around every ~2 s, with each sample registering a current spike up to ~50 μA. |
 
-[Trace for Deep Sleep with Fuel Gauge Enabled - Initial and Settled](assets/trace_initial-settled.ppk)
 
 | Deep Sleep, Fuel Gauge Disabled | Ship Mode, Fuel Gauge Disabled | Shutdown Mode, Fuel Gauge Disabled |
 |-|-|-|
 | [![](assets/nofg.png)](assets/nofg.png) | [![](assets/ship.png)](assets/ship.png) | [![](assets/shutdown.png)](assets/shutdown.png) |
 
-[Trace for Deep Sleep with Fuel Gauge Disabled, Ship Mode and Shutdown Mode](assets/trace_nofg-ship-shutdown.ppk)
+You can download the raw traces obtained from PPK2 using the links below, and open them with your nRF Connect Power Profiler Software.
+
+- [Trace for Deep Sleep with Fuel Gauge Enabled - Initial and Settled](assets/trace_initial-settled.ppk)
+- [Trace for Deep Sleep with Fuel Gauge Disabled, Ship Mode and Shutdown Mode](assets/trace_nofg-ship-shutdown.ppk)
+
+
 
