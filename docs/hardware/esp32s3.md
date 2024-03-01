@@ -72,8 +72,7 @@ Work in progress.
         - Overvoltage Detect @4.37 V, Release @4.28 V
         - Discharge overcurrent @1.5 A
         - Trickle charging safety timer @1 hr
-        - Temperature-based charging current reduction based on JEITA guideline,
-            cutoff at 0 °C and 60 °C.
+        - Temperature-based charging current reduction based on JEITA, cutoff at 0 °C and 60 °C.
 
 ### Interfaces
 
@@ -110,10 +109,10 @@ Work in progress.
 
 #### Current Consumption
 
-| Power State | Current Consumption @3.7V |
+| Power State | `BATP` input current<br/>(No supply, measured with PPK2 acting as battery @ 3.7 V)|
 |-|-|
-|Deep-Sleep, Fuel Gauge Enabled (1 s sampling) | 26 μA |
-|Deep-Sleep, Fuel Gauge Enabled (2 s sampling) | 20 μA |
+|Deep-Sleep, Fuel Gauge Enabled (Initial) | 26 μA |
+|Deep-Sleep, Fuel Gauge Enabled (Settled) | 20 μA |
 |Deep-Sleep, Fuel Gauge Disabled | 19.5 μA |
 |Ship Mode, Fuel Gauge Disabled | 1.5 μA |
 |Shut Down, Fuel Gauge Disabled | 1.4 μA |
@@ -231,9 +230,9 @@ Powers loads connected to the board. These are exclusively output, don't connect
 |GND| Ground Pin |
 
 
-## Warnings
+## Feather Differences
 
-ESP32-S3 PowerFeather has a few differences from standard Feather mainboards.
+While ESP32-S3 PowerFeather is in a Feather format and is largely compatible with that ecosystem, it has has a few differences from the [Feather specification](https://learn.adafruit.com/adafruit-feather/feather-specification).
 
 ### `EN` Behavior
 
@@ -254,8 +253,6 @@ If this is an issue, `QON` can be removed by breaking a solder bridge labeled `B
 On standard Feather boards, the pin occupied by `VS` is the `5V` output (there is no on-board 5 V regulator, the 5 V comes from the USB supply). On PowerFeather, `VS` outputs either `VUSB` or `VDC`, whichever has a higher voltage. Since `VDC` can be up to 18 V, this means that `VS` can also be up to 18 V.
 
 Keep this in mind if using a power supply with voltage higher than 5 V on `VDC`, as it might destroy FeatherWings that only expects 5 V on its `5V`/`VS` pin.
-
-
 
 ## FAQ
 
@@ -279,6 +276,10 @@ No, this board does not support 'true' MPPT in the sense that it does not do ful
 For more details, please read [this Adafruit design note](https://learn.adafruit.com/adafruit-bq24074-universal-usb-dc-solar-charger-breakout/design-notes) for one of their solar chargers that uses the same dynamic charging current regulation technology. However, the advantage of PowerFeather compared to their solar charger is that their solar charger has a fixed MPP voltage at 4.5 V, while for PowerFeather it can be adjusted in firmware up to 16.8 V.
 
 ## Appendix
+
+### Current Measurements
+
+These are measurements for the figures in [Current Consumption](#current-consumption).
 
 <!-- ### Power Measurements
 
@@ -311,16 +312,4 @@ The following measurements are done under the following conditions:
 
 ![ESP32-S3 PowerFeather Shutdown, Fuel Gauge Disabled](assets/shutdown.png) -->
 
-
-### Related Links
-
-#### Datasheets
-
-- [ESP32-S3-WROOM-1-N8R2](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-- [BQ25628E](https://www.ti.com/lit/ds/symlink/bq25628e.pdf?ts=1697957319709&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FBQ25628E)
-- [LC709204F](https://www.onsemi.com/pdf/datasheet/lc709204f-d.pdf)
-- [XC6220](https://www.mouser.com/datasheet/2/760/TOSL_S_A0010556302_1-2575005.pdf)
-
-#### GitHub Repository
-
-https://github.com/PowerFeather/esp32s3-powerfeather
+### Product Photos
