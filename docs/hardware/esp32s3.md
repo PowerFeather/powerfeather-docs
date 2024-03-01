@@ -14,21 +14,20 @@ Work in progress.
 
 ### Physical
 
-- Board Dimensions: 65 mm L x 23 mm W  x 6 mm H
-- Feather-compatible form factor
+- Board Dimensions: 65 mm L x 23 mm W  x 7 mm H
+- Feather format, FeatherWing support
 - Board Features
-    - 2 D=2.5mm mounting holes
-    - 2 1x16 2.54 mm pitch header pins
-    - Thermistor pin
-    - 2-pin JST PH battery connector
     - USB-C connector
+    - Two 2.5 mm mounting holes
+    - Two 1x16 2.54 mm header pin holes
+    - Thermistor pin hole
+    - 2-pin JST PH Li-ion/LiPo battery connector
     - 4-pin JST SH STEMMA QT connector
-    - Red charger status LED
-    - Reset button
     - Green user LED
+    - Red charger status LED
     - User button
+    - Reset button
     - On-board PCB antenna
--  Operating temperature range: -40 °C - 85 °C
 
 ### Capabilities
 
@@ -43,23 +42,38 @@ Work in progress.
 
 #### Power Management
 
-- Supply current monitoring
-- Supply voltage monitoring
-- Supply maintained minimum voltage (maximum power point)
-- `3V3` enable/disable
-- `VSQT` enable/disable
-- Set max charging current
-- Power States
-    - Ship mode
-    - Shutdown mode
-    - Power cycle
+- Supply Monitoring
+    - Current measurement
+    - Voltage measurement
+    - Good supply detection
+- Supply Management
+    - Set maintained supply voltage (can be used to set MPP voltage)
 - Battery Monitoring
-    - Voltage
-    - Temperature
-    - State-of-Charge
-    - State-of-Health
-    - Charge/discharge current
-    - Time-to-Empty/Time-to-Full
+    - Voltage measurement
+    - Temperature measurement
+    - Current measurement (charge/discharge)
+    - Charge estimation
+    - Health & cycle count estimation
+    - Time-to-empty and time-to-full estimation
+    - Low charge, high/low voltage alarm
+- Battery Management
+    - Enable/disable charging
+    - Set max charging current
+- Others
+    - `3V3` enable/disable
+    - `VSQT` enable/disable
+    - FeatherWing enable/disable via `EN` pin
+    - Power States
+        - Ship mode
+        - Shutdown mode
+        - Power cycle
+    - Battery Protections
+        - Undervoltage Detect @2.2 V, Release @2.4 V
+        - Overvoltage Detect @4.37 V, Release @4.28 V
+        - Discharge overcurrent @1.5 A
+        - Trickle charging safety timer @1 hr
+        - Temperature-based charging current reduction based on JEITA guideline,
+            cutoff at 0 °C and 60 °C.
 
 ### Interfaces
 
@@ -68,50 +82,41 @@ Work in progress.
 - Bluetooth 5 LE + Mesh on PCB antenna
 
 #### Connectors
-- USB Full-Speed OTG on USB-C connector
+- USB 1.1 Full-Speed OTG on USB-C connector
 - I2C on STEMMA QT connector
 
-#### Pins
-- 23 digital I/O pins on header pins
-    - 6 analog input capable pins
-    - 5 touch capable pins
-    - 12 RTC capable pins
-    - UART, I2C, SPI, I2S, SDIO, PWM, CAN, RMT, Camera, LCD on any pin
-- 103AT input on thermistor pin
-
+#### Pin Holes
+- 23 I/O on the two 1x16 2.54 mm pitch header pin holes
+    - All digital input and output capable
+    - All UART, I2C, SPI, I2S, SDIO, PWM, CAN, RMT, Camera, LCD capable
+    - 6 analog input capable
+    - 5 touch input capable
+    - 12 RTC capable (deep sleep pin hold, wake-up source)
+- 103AT input on thermistor pin hole
 
 ### Power
 
 #### Input
 
-- 5 V, 2 A `VUSB` via USB-C connector
-- 3.9 V - 18 V, 2A via `VDC` header pin
-- 4.2 V, 2 A via battery connector
-    - Li-ion/LiPo, 3.7 V nominal and 4.2 V max voltage
-    - 2 A max charging current, user-code configurable
-    - Protections:
-        - Undervoltage Detect @2.2 V, Release @2.4 V
-        - Overvoltage Detect @4.37 V, Release @4.28 V
-        - Discharge overcurrent @1.5 A
-        - Trickle charging safety timer @1 hr
-        - Temperature cutoff at 0 °C and 60 °C using 103AT thermistor
-
+- 5 V, 2 A max on `VUSB` USB-C connector
+- 5 V - 18 V, 2A max on `VDC` header pin
+- 4.2 V max, 2 A max on `BATP` and `BATN` JST PH Li-ion/LiPo battery connector
 
 #### Output
 
-- 3.3 V, 1 A shared between board, `3V3` header pin and `VSQT` on STEMMA QT connector
-- 3.3 V - 4.2 V, 3 A via `VBAT` header pin
-- 5 V - 18 V, 2 A max via `VS` header pin
+- 3.3 V, 1 A max shared between board, `3V3` header pin and `VSQT` STEMMA QT connector
+- 3.3 V - 4.2 V, 3 A max shared between board and `VBAT` header pin
+- 5 V - 18 V, 2 A max shared between board and `VS` header pin
 
-#### Power Consumption
+#### Current Consumption
 
-| Power State | Current Consumption @3.7V | Current Consumption @4.2V |
-|-|-|-|
-|Deep-Sleep, Fuel Gauge Enabled (1 s sampling) | 26 μA | |
-|Deep-Sleep, Fuel Gauge Enabled (2 s sampling) | 20 μA | |
-|Deep-Sleep, Fuel Gauge Disabled | 19.5 μA | |
-|Ship Mode, Fuel Gauge Disabled | 1.5 μA | |
-|Shut Down, Fuel Gauge Disabled | 1.4 μA | |
+| Power State | Current Consumption @3.7V |
+|-|-|
+|Deep-Sleep, Fuel Gauge Enabled (1 s sampling) | 26 μA |
+|Deep-Sleep, Fuel Gauge Enabled (2 s sampling) | 20 μA |
+|Deep-Sleep, Fuel Gauge Disabled | 19.5 μA |
+|Ship Mode, Fuel Gauge Disabled | 1.5 μA |
+|Shut Down, Fuel Gauge Disabled | 1.4 μA |
 
 ## Pins & Signals
 
