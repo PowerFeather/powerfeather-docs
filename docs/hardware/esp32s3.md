@@ -109,11 +109,11 @@ Work in progress.
 
 #### Current Consumption
 
-| Power State | `BATP` input current<br/>(No supply, measured with PPK2 acting as battery @ 3.7 V)|
+| Power State | `BATP` Current |
 |-|-|
 |Deep-Sleep, Fuel Gauge Enabled (Initial) | 26 μA |
-|Deep-Sleep, Fuel Gauge Enabled (Settled) | 20 μA |
-|Deep-Sleep, Fuel Gauge Disabled | 19.5 μA |
+|Deep-Sleep, Fuel Gauge Enabled (Settled) | 18.5 μA |
+|Deep-Sleep, Fuel Gauge Disabled | 18 μA |
 |Ship Mode, Fuel Gauge Disabled | 1.5 μA |
 |Shut Down, Fuel Gauge Disabled | 1.4 μA |
 
@@ -284,35 +284,15 @@ For more details, please read [this Adafruit design note](https://learn.adafruit
 
 These are measurements for the figures in [Current Consumption](#current-consumption).
 
-<!-- ### Power Measurements
+| Deep Sleep, Fuel Gauge Enabled (Initial) | Deep Sleep, Fuel Gauge Enabled (Settled) |
+|-|-|
+| [![](assets/fg_initial.png)](assets/fg_initial.png) | [![](assets/fg_settled.png)](assets/fg_settled.png) |
 
-The following measurements are done under the following conditions:
+[Trace for Deep Sleep with Fuel Gauge Enabled - Initial and Settled](assets/trace_initial-settled.ppk)
 
-- Measurements are done with Nordic Semiconductor Power Profiler Kit II (PPK2) connected to battery connector.
-- PPK2 is set as current source, set to 3.7V.
-- No load connected to `VSQT`, `3V3`, `VS`.
-- `VSQT` and `3V3` rails are enabled, `EN` is high.
-- No external load connected to `VBAT`.
-- No power supply connected to `VBUS` and `VDC`.
+| Deep Sleep, Fuel Gauge Disabled | Ship Mode, Fuel Gauge Disabled | Shutdown Mode, Fuel Gauge Disabled |
+|-|-|-|
+| [![](assets/nofg.png)](assets/nofg.png) | [![](assets/ship.png)](assets/ship.png) | [![](assets/shutdown.png)](assets/shutdown.png) |
 
-#### Deep-Sleep, Fuel Gauge Enabled (1 s sampling)
+[Trace for Deep Sleep with Fuel Gauge Disabled, Ship Mode and Shutdown Mode](assets/trace_nofg-ship-shutdown.ppk)
 
-![ESP32-S3 PowerFeather Deep-Sleep, Fuel Gauge Enabled (1 s sampling)](assets/1s_sample.png)
-
-#### Deep-Sleep, Fuel Gauge Enabled (2 s sampling)
-
-![ESP32-S3 PowerFeather Deep-Sleep, Fuel Gauge Enabled (2 s sampling)](assets/2s_sample.png)
-
-#### Deep-Sleep, Fuel Gauge Disabled
-
-![ESP32-S3 PowerFeather Deep-Sleep, Fuel Gauge Disabled](assets/disabled.png)
-
-#### Ship Mode, Fuel Gauge Disabled
-
-![ESP32-S3 PowerFeather Ship Mode, Fuel Gauge Disabled](assets/ship.png)
-
-#### Shut Down, Fuel Gauge Disabled
-
-![ESP32-S3 PowerFeather Shutdown, Fuel Gauge Disabled](assets/shutdown.png) -->
-
-### Product Photos
