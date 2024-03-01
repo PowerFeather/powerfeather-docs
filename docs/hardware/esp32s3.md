@@ -119,7 +119,7 @@ Work in progress.
 
 ## Pins & Signals
 
-![ESP32-S3 PowerFeather Pins](assets/pinout.jpg)
+[![Pins and Signals](assets/pinout.jpg)](assets/pinout.jpg)
 
 ### IO
 
