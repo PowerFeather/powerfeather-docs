@@ -9,7 +9,7 @@ sidebar_position: 0
 Arduino IDE needs to be [installed]((https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing/)) first. Arduino IDE v2 or newer is recommended. Once done, Arduino ESP32 also needs to be [installed](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html). 
 
 :::info
-As of the time of this writing, Arduino ESP32 v3.0.0 is not yet released and is only in beta. In order to setup PowerFeather-SDK, use the development release link while following the Arduino ESP32 installation instructions.
+As of the time of this writing, Arduino ESP32 v3.0.0 stable has not yet been released. In order to setup PowerFeather-SDK, use the development release link while following the Arduino ESP32 installation instructions.
 
 ```
 https://espressif.github.io/arduino-esp32/package_esp32_dev_index.json
