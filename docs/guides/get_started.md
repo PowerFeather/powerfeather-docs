@@ -21,7 +21,7 @@ As illustrated above, the red `CHG` LED should flash momentarily, after which th
 
 The demo application showcases some of the things you can do with PowerFeather. To run the it, ESP-IDF or Arduino
 with the *PowerFeather SDK* must be installed on your system. If you have not done this yet,
-please follow the instructions first on the [PowerFeather SDK setup guide](/sdk/install.md).
+please take a look first at the [PowerFeather SDK setup guide](/sdk/setup.md).
 
 ### Arduino
 
