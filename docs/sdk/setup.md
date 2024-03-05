@@ -10,9 +10,18 @@ Arduino IDE needs to be [installed](https://docs.arduino.cc/software/ide-v2/tuto
 
 ![Install Arduino-ESP32](assets/install_arduino_esp32.png)
 
+:::info
+ESP32-S3 PowerFeather support appears first on Arduino Core `2.0.15`. However, installing the latest version is recommended for features and bugfixes.
+:::
+
 After Arduino ESP32 has been installed, PowerFeather-SDK can now be installed. Follow the [instructions for installing a library](https://docs.arduino.cc/software/ide-v2/tutorials/ide-v2-installing-a-library/), with the name of the library being `PowerFeather-SDK`.
 
 ![Install PowerFeather-SDK](assets/install_powerfeather.png)
+
+:::info
+PowerFeather-SDK `1.0.0` is the first stable release. However, installing the latest version is recommended for features
+and bugfixes.
+:::
 
 To test whether the setup has been done successfuly, we'll create the minimal Arduino sketch for PowerFeather:
 
