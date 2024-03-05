@@ -6,8 +6,12 @@ sidebar_position: 0
 
 ## Arduino
 
-Arduino IDE needs to be [installed](https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing/) first. Arduino IDE v2 or newer is recommended. Once done, Arduino ESP32 also needs to be [installed](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html).
+Arduino IDE needs to be [installed](https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing/) first. Arduino IDE v2 or newer is recommended.
 
+
+Once done, Arduino ESP32 also needs to be [installed](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html).
+
+![Add Board Manager](assets/add_board_manager.png)
 ![Install Arduino-ESP32](assets/install_arduino_esp32.png)
 
 :::info
