@@ -14,8 +14,7 @@ After Arduino ESP32 has been installed, PowerFeather-SDK can now be installed. F
 
 ![Install PowerFeather-SDK](assets/install_powerfeather.png)
 
-
-To test whether the setup has been done successfuly, we'll create a sample Arduino sketch, with the contents:
+To test whether the setup has been done successfuly, we'll create the minimal Arduino sketch for PowerFeather:
 
 ```cpp
 #include <PowerFeather.h>
@@ -32,7 +31,10 @@ void loop()
 }
 ```
 
-Build the sample sketch, it should proceed without any compilation errors.
+The most important thing is for the sketch to call [Mainboard::init](api/mainboard.md#result-inituint16_t-capacity--0) (`Base.init()` above). Build the sketch, it should proceed without any errors.
+
+
+![Build Arduino](assets/build_arduino.png)
 
 ## ESP-IDF
 
