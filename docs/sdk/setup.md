@@ -81,7 +81,7 @@ extern "C" void app_main()
 
 Enter the command:
 ```bash
-idf.py add-dependency "powerfeatherdev/powerfeather-sdk^0.9.3"
+idf.py add-dependency "powerfeather/powerfeather-sdk^1.0.0"
 ```
 
 Build the sample project by issuing the command:
