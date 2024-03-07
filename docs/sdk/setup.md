@@ -61,11 +61,17 @@ Open a terminal with the ESP-IDF environment set up on [Windows](https://docs.es
 idf.py create-project "powerfeather_project"
 ```
 
-Navigate into the created sample ESP-IDF project directory.
+![Create ESP-IDF Project](assets/create_idf_project.png)
 
-Rename `main/powerfeather_project.c` to `main/powerfeather_project.cpp`. Also, edit `main/CMakeLists.txt`.
-Edit the `main.cpp` file inside the `main` directory to include.
+Navigate into the created sample ESP-IDF project directory. Rename `main/powerfeather_project.c` to `main/powerfeather_project.cpp`. Your project tree should look like this:
 
+![Rename main c file](assets/rename_to_cpp.png)
+
+Edit `main/CMakeLists.txt` and change `powerfeather_project.c` to `powerfeather_project.cpp`, reflecting the rename.
+
+![Edit CmakeLists.txt](assets/edit_cmakelists.png)
+
+Edit the `main.cpp` file inside the `main` directory to the minimal content.
 
 ```cpp
 #include <PowerFeather.h>
@@ -78,16 +84,24 @@ extern "C" void app_main()
 }
 ```
 
+![Edit main file](assets/edit_main_cpp.png)
+
+
 
 Enter the command:
 ```bash
 idf.py add-dependency "powerfeather/powerfeather-sdk^1.0.0"
 ```
 
-Build the sample project by issuing the command:
+![Add dependency](assets/add_dependency.png)
 
-```
+Build the sample project by issuing the commands:
+
+```bash
+idf.py set-target esp32s3
 idf.py build
 ```
 
 If everything was set up correctly, the build should proceed without any compilation errors.
+
+![Build IDF](assets/build_idf.png)
