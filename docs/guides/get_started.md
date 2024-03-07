@@ -79,6 +79,7 @@ idf.py flash monitor
 ```
 
 ![Set target](assets/set_target_esp32s3.png)
+![Build](assets/idf_build.png)
 
 On *idf.py monitor*, the supply and battery voltage and current are reported; as well as the
 battery charge estimated by the fuel gauge. Notice that the battery current is zero, while the supply current is not.
