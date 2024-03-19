@@ -15,7 +15,7 @@ Work in progress.
 ### Physical
 
 - Board Dimensions: 65 mm L x 23 mm W  x 7 mm H
-- Feather format, FeatherWing support
+- Feather-compatible format, FeatherWing support
 - Board Features
     - USB-C connector
     - Two 2.5 mm mounting holes
@@ -234,7 +234,7 @@ Powers loads connected to the board. These are exclusively output, don't connect
 
 ### Feather Differences
 
-While ESP32-S3 PowerFeather comes is largely compatible with the Feather ecosystem, it has has a few deviations from the [Feather specification](https://learn.adafruit.com/adafruit-feather/feather-specification).
+While ESP32-S3 PowerFeather is largely compatible with the Adafruit Feather ecosystem, it has has a few deviations from the [Feather specification](https://learn.adafruit.com/adafruit-feather/feather-specification).
 
 - `EN` Behavior
 
@@ -256,7 +256,8 @@ While ESP32-S3 PowerFeather comes is largely compatible with the Feather ecosyst
 
     Keep this in mind if using a power supply with voltage higher than 5 V on `VDC`, as it might destroy FeatherWings that only expects 5 V on its "`VS`" pin.
 
-### On Soldering Headers
+
+### Soldering Headers
 
 Due to the ESP32-S3 module's size, some of the header holes are awfully close its pads. This means that in these areas, there is a risk of shorting a hole with a pad when soldering headers.
 
@@ -265,7 +266,14 @@ Due to the ESP32-S3 module's size, some of the header holes are awfully close it
 This is especially dangerous with VDC, since it is a high voltage power input (up to 18 V) that would most likely fry the ESP32-S3 if it comes in contact with one of its pads.
 It would be wise to check for shorts using a multimeter after soldering headers, just to be safe.
 
-### FAQ
+### Battery Polarity
+
+The wiring polarity for batteries with JST-PH connectors is not standardized. Please make sure the batteries you use are wired with the correct polarity - it is printed
+on the silkscreen!
+
+![Battery Polarity](assets/batter_polarity.jpg)
+
+### Miscelleanous Questions
 
 - Can `VUSB` and `VDC` be plugged in at the same time?
 
