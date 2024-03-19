@@ -230,55 +230,66 @@ Powers loads connected to the board. These are exclusively output, don't connect
 |GND| Ground Pin |
 
 
-## Feather Differences
+## Notes
 
-While ESP32-S3 PowerFeather comes in a Feather format and is largely compatible with that ecosystem, it has has a few deviations from the [Feather specification](https://learn.adafruit.com/adafruit-feather/feather-specification).
+### Feather Differences
 
-### `EN` Behavior
+While ESP32-S3 PowerFeather comes is largely compatible with the Feather ecosystem, it has has a few deviations from the [Feather specification](https://learn.adafruit.com/adafruit-feather/feather-specification).
 
-On standard Feather boards, the `EN` pin is connected to the enable pin of the on-board 3.3 V regulator. Pulling `EN` low means disabling the 3.3 V regulator and everything powered from it.
+- `EN` Behavior
 
-On PowerFeather, `EN` is connected to an ESP32-S3 IO pin. User code can read the state of this pin and act accordingly, i.e. it can disable the `3V3` and `VSQT` load switches and put itself to deep-sleep to emulate behavior on standard boards; or it might do something completely different.
+    On standard Feather boards, the `EN` pin is connected to the enable pin of the on-board 3.3 V regulator. Pulling `EN` low means disabling the 3.3 V regulator and everything powered from it.
 
-Furthermore, the ESP32-S3 itself can pull `EN` low if user code needs to disable connected FeatherWings.
+    On PowerFeather, `EN` is connected to an ESP32-S3 IO pin. User code can read the state of this pin and act accordingly, i.e. it can disable the `3V3` and `VSQT` load switches and put itself to deep-sleep to emulate behavior on standard boards; or it might do something completely different.
 
-### `QON` Pull-Up
+    Furthermore, the ESP32-S3 itself can pull `EN` low if user code needs to disable connected FeatherWings.
 
-`QON` replaces `AREF` on ESP32-S3 PowerFeather, and is normally pulled high up to 5 V. Make sure when connecting FeatherWings that it is able to handle this voltage on its `AREF` pin, or the FeatherWing does not use `AREF` at all.
+- `QON` Pull-Up
 
-If this is an issue, `QON` can be removed by breaking a solder bridge labeled `B2`.
+    `QON` replaces `AREF` on ESP32-S3 PowerFeather, and is normally pulled high up to 5 V. Make sure when connecting FeatherWings that it is able to handle this voltage on its `AREF` pin, or the FeatherWing does not use `AREF` at all.
 
-### `VS` Up to 18 V
+    If this is an issue, `QON` can be removed by breaking a solder bridge labeled `B2`.
 
-On standard Feather boards, the pin at the same position as `VS` is the 5 V output (there is no on-board 5 V regulator, the 5 V comes from the USB supply). On PowerFeather, `VS` outputs either `VUSB` or `VDC`, whichever has a higher voltage. Since `VDC` can be up to 18 V, this means that `VS` can also be up to 18 V.
+- `VS` Up to 18 V
 
-Keep this in mind if using a power supply with voltage higher than 5 V on `VDC`, as it might destroy FeatherWings that only expects 5 V on its "`VS`" pin.
+    On standard Feather boards, the pin at the same position as `VS` is the 5 V output (there is no on-board 5 V regulator, the 5 V comes from the USB supply). On PowerFeather, `VS` outputs either `VUSB` or `VDC`, whichever has a higher voltage. Since `VDC` can be up to 18 V, this means that `VS` can also be up to 18 V.
 
-## Miscellaneous Notes
+    Keep this in mind if using a power supply with voltage higher than 5 V on `VDC`, as it might destroy FeatherWings that only expects 5 V on its "`VS`" pin.
 
-### `VUSB` and `VDC` plugged in at the same time
+### On Soldering Headers
 
-`VUSB` and `VDC` are or'ed with schottky diodes, so it's safe to have them plugged in at the same time. The schottky diodes ensure
-that current does not flow from `VDC` to `VUSB` or vice versa depending on which is higher. The higher voltage of the two
-supplies PowerFeather; if they are around the same voltage, they share the current load for PowerFeather
-and all connected devices.
+Due to the ESP32-S3 module's size, some of the header holes are awfully close its pads. This means that in these areas, there is a risk of shorting a hole with a pad when soldering headers.
 
-### Draw power while charging battery
+![Proximity Male Header](assets/male_header_close.jpg)
 
-PowerFeather uses a charger IC that implements a power path, so it is safe to have PowerFeather and connected devices draw power while
-charging the battery. Furthermore, the power path allows the battery to supplement `VUSB` or `VDC` during load power spikes to prevent brownouts.
-Also, if there is `VDC` or `VUSB`, but there is no battery or the battery is fully depleted, `VBAT` is still regulated to 3.7 V.
+This is especially dangerous with VDC, since it is a high voltage power input (up to 18 V) that would most likely fry the ESP32-S3 if it comes in contact with one of its pads.
+It would be wise to check for shorts using a multimeter after soldering headers, just to be safe.
 
-### Lack of LiFePO4/LFP support
+### FAQ
 
-The board as a whole does not support LiFePO4 batteries. While the charger IC supports LiFePO4, the fuel gauge IC does not. Furthermore,
-PowerFeather uses a linear regulator to provide the 3.3 V power rail, which won't function properly under a LiFePO4 battery with nominal voltage of 3.2 V.
+- Can `VUSB` and `VDC` be plugged in at the same time?
 
-### Meaning of near/pseudo-MPPT
+    `VUSB` and `VDC` are or'ed with schottky diodes, so it's safe to have them plugged in at the same time. The schottky diodes ensure
+    that current does not flow from `VDC` to `VUSB` or vice versa depending on which is higher. The higher voltage of the two
+    supplies PowerFeather; if they are around the same voltage, they share the current load for PowerFeather
+    and all connected devices.
 
-PowerFeather does not support 'true' MPPT in the sense that it does not do full tracking of the panel's I-V curve. However, the panel MPP voltage can be set, and the charger IC will dynamically regulate charging current to prevent the panel voltage from collapsing below it. This provides near/pseudo-MPPT performance, since the MPP voltage for a typical panel remains roughly the same across various illumination levels.
+- Can power be drawn by the board or connected loads while charging?
 
-For more details, please read [this Adafruit design note](https://learn.adafruit.com/adafruit-bq24074-universal-usb-dc-solar-charger-breakout/design-notes) for one of their solar chargers that uses the same dynamic charging current regulation technology. However, the advantage of PowerFeather compared to their solar charger is that their solar charger has a fixed MPP voltage at 4.5 V, while for PowerFeather it can be adjusted in firmware up to 16.8 V.
+    PowerFeather uses a charger IC that implements a power path, so it is safe to have PowerFeather and connected devices draw power while
+    charging the battery. Furthermore, the power path allows the battery to supplement `VUSB` or `VDC` during load power spikes to prevent brownouts.
+    Also, if there is `VDC` or `VUSB`, but there is no battery or the battery is fully depleted, `VBAT` is still regulated to 3.7 V.
+
+- Does ESP32-S3 PowerFeather support LiFePO4/LFP?
+
+    The board as a whole does not support LiFePO4 batteries. While the charger IC supports LiFePO4, the fuel gauge IC does not. Furthermore,
+    PowerFeather uses a linear regulator to provide the 3.3 V power rail, which won't function properly under a LiFePO4 battery with nominal voltage of 3.2 V.
+
+- What do you mean by near/pseudo-MPPT?
+
+    PowerFeather does not support 'true' MPPT in the sense that it does not do full tracking of the panel's I-V curve. However, the panel MPP voltage can be set, and the charger IC will dynamically regulate charging current to prevent the panel voltage from collapsing below it. This provides near/pseudo-MPPT performance, since the MPP voltage for a typical panel remains roughly the same across various illumination levels.
+
+    For more details, please read [this Adafruit design note](https://learn.adafruit.com/adafruit-bq24074-universal-usb-dc-solar-charger-breakout/design-notes) for one of their solar chargers that uses the same dynamic charging current regulation technology. However, the advantage of PowerFeather compared to their solar charger is that their solar charger has a fixed MPP voltage at 4.5 V, while for PowerFeather it can be adjusted in firmware up to 16.8 V.
 
 ## Appendix
 
