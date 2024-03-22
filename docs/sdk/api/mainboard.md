@@ -216,7 +216,7 @@ Ship mode can be exited by either (1) pulling `QON` header pin low for around 80
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-This function can block for 20 ms if it fails to enter ship mode.
+This function can block for 30 ms if it fails to enter ship mode.
 
 #### Return
 
@@ -241,7 +241,7 @@ Shutdown mode can only be exited by connecting a power supply which the battery 
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-This function can block for 20 ms if it fails to enter shutdown mode.
+This function can block for 30 ms if it fails to enter shutdown mode.
 
 #### Return
 
