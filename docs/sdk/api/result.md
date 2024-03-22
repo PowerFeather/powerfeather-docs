@@ -11,7 +11,7 @@ Work in progress.
 
 ## enum class Result
 
-- `Ok` Operation succeeded. [asd](#enum-class-result)
+- `Ok` Operation succeeded.
 - `Failure` Operation unspecified failure.
 - `InvalidState` Operation is not allowed given current internal state.
 - `Timeout` Operation took longer than expected.
