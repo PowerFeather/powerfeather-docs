@@ -9,7 +9,7 @@ sidebar_position: 1
 
 ### enum class BatteryType
 
-- `Generic_3V7` Generic Li-ion/LiPo battery with nominal voltage of 3.7 V
+- `Generic_3V7` Generic Li-ion/LiPo, 3.7 V nominal and 4.2 V max
 - `ICR18650` Samsung IC18650
 - `UR18650ZY` Sanyo UR18650ZY
 
