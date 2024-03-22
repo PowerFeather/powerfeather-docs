@@ -46,451 +46,590 @@ only the capacity for one cell. Non-zero value is ignored when **type** is [Batt
 
 Returns [Result](result.md)::`Ok` if initialization succeeded; returns a value other than [Result](result.md)::`Ok` if not.
 
-### Result setEN(bool high)
+### [Result](result.md) setEN(bool high)
 
-        /**
-         * @brief Set \a EN pin high or low.
-         *
-         * This is useful for enabling or disabling connected Feather Wings to reduce power consumption.
-         *
-         * @param[in] high If \c true, EN is set high; if \c false, EN is set low.
-         * @return Result Returns \c Result::Ok if \a EN was set high or low successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+#### Brief
 
-### Result enable3V3(bool enable)
+Set `EN` pin high or low.
 
-        /**
-         * @brief Enable or disable \a VSQT.
-         *
-         * Enables or disables \a VSQT, the 3.3 V STEMMA QT power output. When disabled, power to the
-         * connected STEMMA QT modules is cut, reducing power consumption.
-         *
-         * A side effect of disabling \a VSQT is that communications to the battery charger and fuel gauge is also disabled.
-         * This means that some of the other \c [Mainboard](#class-mainboard) functions will return \c Result::InvalidState when
-         * \a VSQT is disabled. Make sure to enable \a VSQT prior to calling these functions.
-         *
-         * @param[in] enable If \c true, \a VSQT is enabled; if \c false, \a VSQT is disabled.
-         * @return Result Returns \c Result::Ok if \a VSQT was enabled or disabled successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+#### Description
 
-### Result enableVSQT(bool enable)
+This is useful for enabling or disabling connected Feather Wings to reduce power consumption.
 
-        /**
-         * @brief Enable or disable \a VSQT.
-         *
-         * Enables or disables \a VSQT, the 3.3 V STEMMA QT power output. When disabled, power to the
-         * connected STEMMA QT modules is cut, reducing power consumption.
-         *
-         * A side effect of disabling \a VSQT is that communications to the battery charger and fuel gauge is also disabled.
-         * This means that some of the other \c [Mainboard](#class-mainboard) functions will return \c Result::InvalidState when
-         * \a VSQT is disabled. Make sure to enable \a VSQT prior to calling these functions.
-         *
-         * @param[in] enable If \c true, \a VSQT is enabled; if \c false, \a VSQT is disabled.
-         * @return Result Returns \c Result::Ok if \a VSQT was enabled or disabled successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+#### Parameters
 
-### Result getSupplyVoltage(uint16_t &voltage)
+- **high** [in] If `true`, EN is set high; if `false`, EN is set low.
 
-        /**
-         * @brief Measure the supply voltage.
-         *
-         * Measures the \a VUSB or \a VDC voltage. \a VUSB is the power input from the USB-C connector,
-         * while \a VDC is the power input from the header pin.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * This function can block for 100 ms.
-         *
-         * @param[out] voltage The measured voltage in millivolts (mV).
-         * @return Result Returns \c Result::Ok if the supply voltage was measured successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+#### Return
 
-### Result getSupplyCurrent(int16_t &current)
+Returns [Result](result.md)::Ok if `EN` was set high or low successfully; returns a value other than [Result](result.md)::Ok if not.
 
-        /**
-         * @brief Measure the supply current.
-         *
-         * Measures the current drawn from \a VUSB or \a VDC. \a VUSB is the power input from the USB-C connector,
-         * while \a VDC is the power input from the header pin.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * This function can block for 100 ms.
-         *
-         * @param[out] voltage The measured current draw in milliamperes (mA).
-         * @return Result Returns \c Result::Ok if the supply current was measured successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+### [Result](result.md) enable3V3(bool enable)
 
-### Result checkSupplyGood(bool &good)
+#### Brief
 
-        /**
-         * @brief Check if the supply is good.
-         *
-         * Checks if the supply, whether \a VUSB or \a VDC is good as determined by the battery charger. A good supply
-         * means that it powers the board and connected loads, not the battery.
-         *
-         * @param[out] good If \c true, the charger has determined the supply to be good; \c false if not.
-         * @return Result Returns \c Result::Ok if the supply was checked successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+Enable or disable `VSQT`.
 
-### Result setSupplyMaintainVoltage(uint16_t voltage)
+#### Description
 
-        /**
-         * @brief Set the supply voltage to maintain.
-         *
-         * The battery charger dynamically regulates the current drawn from the supply to prevent it from collapsing under
-         * the set voltage to maintain. This is useful for specifying the maximum power point (MPP) voltage if using a
-         * solar panel; allowing the battery charger to extract power from the panel at near-MPPT effectiveness.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * @param[in] voltage The supply voltage to maintain, up to 16800 mV.
-         * @return Result Returns \c Result::Ok if the supply voltage to maintain was set successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+Enables or disables `VSQT`, the 3.3 V STEMMA QT power output. When disabled, power to the
+connected STEMMA QT modules is cut, reducing power consumption.
 
-### Result enterShipMode()
+A side effect of disabling `VSQT` is that communications to the battery charger and fuel gauge is also disabled.
+This means that some of the other [Mainboard](#class-mainboard) functions will return [Result](result.md)::InvalidState when
+`VSQT` is disabled. Make sure to enable `VSQT` prior to calling these functions.
 
-        /**
-         * @brief Enter ship mode.
-         *
-         * Ship mode is a power state that only consumes around 1.5 μA. Only the battery charger and
-         * the battery fuel gauge is powered.
-         *
-         * This mode can only be entered into if the battery is powering the board and connected loads;
-         * that is, if \c checkSupplyGood output parameter \p good is \c false.
-         *
-         * Ship mode can be exited by either (1) pulling \a QON header pin low for around 800 ms or
-         * (2) connecting a power supply which the battery charger determines to be good.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * This function can block for 20 ms if it fails to enter ship mode.
-         *
-         * @return Result Does not return if ship mode was successfully entered into;
-         * returns a value other than \c Result::Ok if not.
-         */
+#### Parameters
 
-### Result enterShutdownMode()
+- **enable** [in] If `true`, `VSQT` is enabled; if `false`, `VSQT` is disabled.
 
-        /**
-         * @brief Enter shutdown mode.
-         *
-         * Shutdown mode is a power state that only consumes around 1.4 μA. Only the battery charger and
-         * the battery fuel gauge is powered.
-         *
-         * This mode can only be entered into if the battery is powering the board and connected loads;
-         * that is, if \c checkSupplyGood output parameter \p good is \c false.
-         *
-         * Shutdown mode can only be exited by connecting a power supply which the battery charger determines to be good.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * This function can block for 20 ms if it fails to enter shutdown mode.
-         *
-         * @return Result Does not return if shutdown mode was successfully entered into;
-         * returns a value other than \c Result::Ok if not.
-         */
+#### Return
 
-### Result doPowerCycle()
+Returns [Result](result.md)::Ok if `VSQT` was enabled or disabled successfully; returns a value other than [Result](result.md)::Ok if not.
 
-        /**
-         * @brief Perform a power cycle.
-         *
-         * For all components on the board and connected loads, except the battery fuel gauge
-         * and loads connected to \a VS (supply output header pin, whichever of \a VUSB and \a VDC),
-         * the power cycle provides complete reset by removing power and re-applying it after a short delay.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * @return Result Does not return if a power cycle was performed successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+### [Result](result.md) enableVSQT(bool enable)
 
-### Result enableBatteryCharging(bool enable)
+#### Brief
 
-        /**
-         * @brief Enable or disable battery charging.
-         *
-         * This is useful when opting to not fully charge a battery in order to prolong its lifespan.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * @param[in] enable If \c true, battery charging is enabled; if \c false, battery charging is disabled.
-         * @return Result Returns \c Result::Ok if battery charging was enabled or disabled successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+Enable or disable `VSQT`.
 
-### Result setBatteryChargingMaxCurrent(uint16_t current)
+#### Description
 
-        /**
-         * @brief Set maximum battery charging current.
-         *
-         * Ensures that the battery is not charged with a current more than the amount specified using this function.
-         * This is useful for batteries with small capacities, since it is not recommended to charge a battery at
-         * more than 1C. For example, when charging a 550 mAh battery, a current of no more than 550 mA is
-         * recommended. That current limit of 550 mA can be specified using this function.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * @param[in] current The maximum charging current, up to 2000 mA.
-         * @return Result Returns \c Result::Ok if the maximum battery charging current was set successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+Enables or disables `VSQT`, the 3.3 V STEMMA QT power output. When disabled, power to the
+connected STEMMA QT modules is cut, reducing power consumption.
 
-### Result enableBatteryTempSense(bool enable)
+A side effect of disabling `VSQT` is that communications to the battery charger and fuel gauge is also disabled.
+This means that some of the other [Mainboard](#class-mainboard) functions will return [Result](result.md)::InvalidState when
+`VSQT` is disabled. Make sure to enable `VSQT` prior to calling these functions.
 
-        /**
-         * @brief Enable or disable battery temperature measurement.
-         *
-         * Enables or disables battery temperature measurement using the thermistor connected to the \a TS pin.
-         * If enabled, aside from measurement, the battery charger performs temperature-based battery charging current
-         * reduction or cutoff.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * @param[in] enable If \c true, battery temperature measurement is enabled; if \c false, battery
-         * temperature measurement is disabled.
-         * @return Result Returns \c Result::Ok if the battery temperature measurement was enabled or
-         * disabled successfully; returns a value other than \c Result::Ok if not.
-         */
+#### Parameters
 
-### Result enableBatteryFuelGauge(bool enable)
+- **enable** [in] If `true`, `VSQT` is enabled; if `false`, `VSQT` is disabled.
 
-        /**
-         * @brief Enable or disable the battery fuel guage.
-         *
-         * Disabling the battery fuel guage can save around 0.5 μA. However, once disabled, it
-         * cannot keep track of battery information such as voltage, charge, health, cycle count, etc.
-         * Nonetheless, this is useful when trying to reduce power as much as possible, such as when going
-         * into ship mode or shutdown mode for a long time.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * @param[in] enable If \c true, the battery fuel gauge is enabled; if \c false, the battery fuel gauge is disabled.
-         * @return Result Returns \c Result::Ok if the battery fuel gauge was enabled or disabled successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+#### Return
 
-### Result getBatteryVoltage(uint16_t &voltage)
+Returns [Result](result.md)::Ok if `VSQT` was enabled or disabled successfully; returns a value other than [Result](result.md)::Ok if not.
 
-        /**
-         * @brief Measure battery voltage.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * This function can block for 100 ms.
-         *
-         * @param[out] voltage Measured battery voltage in millivolts (mV).
-         * @return Result Returns \c Result::Ok if the battery voltage was measured successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+### [Result](result.md) getSupplyVoltage(uint16_t &voltage)
 
-### Result getBatteryCurrent(int16_t &current)
+#### Brief
 
-        /**
-         * @brief Measure battery current.
-         *
-         * Measures the current to or from the battery during charging and discharging, respectively.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * This function can block for 100 ms.
-         *
-         * @param[out] current Measured battery voltage in milliamps (mA). If battery is discharging,
-         * this value is negative; positive if battery is charging.
-         * @return Result Returns \c Result::Ok if the battery current was measured successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+Measure the supply voltage.
 
-### Result getBatteryCharge(uint8_t &percent)
+#### Description
 
-        /**
-         * @brief Estimate battery charge.
-         *
-         * Gives an estimate of battery state-of-charge from 0% to 100%. This is useful to get a sense
-         * if the battery still has much charge or is nearly empty.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * The battery The battery fuel gauge must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * @param[out] percent Estimated battery charge, from 0% to 100%.
-         * @return Result Returns \c Result::Ok if the battery charge was estimated successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+Measures the `VUSB` or `VDC` voltage. `VUSB` is the power input from the USB-C connector,
+while `VDC` is the power input from the header pin.
 
-### Result getBatteryHealth(uint8_t &percent)
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
 
-        /**
-         * @brief Estimate battery health.
-         *
-         * Gives an estimate of battery state-of-health from 0% to 100%. This is useful to get a
-         * sense of how much the battery has degraded over time.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * The battery The battery fuel gauge must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * @param[out] percent Estimated battery health, from 0% to 100%.
-         * @return Result Returns \c Result::Ok if the battery health was estimated successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+This function can block for 100 ms.
 
-### Result getBatteryCycles(uint16_t &cycles)
+#### Parameters
 
-        /**
-         * @brief Estimate battery cycle count.
-         *
-         * Gives an estimate of the battery cycle count. This is useful to compare against the number of
-         * cycle counts the battery is rated for.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * The battery fuel gauge must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * @param[out] cycles Estimated battery cycle count.
-         * @return Result Returns \c Result::Ok if the battery cycle count was estimated successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+- **voltage** [out] The measured voltage in millivolts (mV).
 
-### Result getBatteryTimeLeft(int &minutes)
+#### Return
 
-        /**
-         * @brief Estimate time left for battery to charge or discharge.
-         *
-         * Gives an estimate of the battery time-to-empty or time-to-full in minutes. The battery charge must have
-         * previously dropped and/or risen by 10% to be able to estimate time-to-empty or time-to-full, respectively;
-         * else \c Result::NotReady is returned.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * The battery fuel gauge must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * @param[out] minutes Estimated time left for battery to charge or discharge in minutes. If battery is discharging,
-         * this value is negative; if battery is charging, this value is positive.
-         * @return Result Returns \c Result::Ok if the time left for battery to charge or discharge was estimated
-         * successfully; returns a value other than \c Result::Ok if not.
-         */
+Returns [Result](result.md)::Ok if the supply voltage was measured successfully; returns a value other than [Result](result.md)::Ok if not.
 
-### Result getBatteryTemperature(float &celsius)
+### [Result](result.md) getSupplyCurrent(int16_t &current)
 
-        /**
-         * @brief Measure battery temperature.
-         *
-         * Requires a Semitec 103AT thermistor to be connected to the \a TS pin and attached to the battery
-         * for the measurement to be accurate.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * Battery temperature measurement must be enabled prior calling this function, else \c Result::InvalidState
-         * is returned.
-         *
-         * This function can block for 100 ms.
-         *
-         * @param[out] celsius Measured battery temperature in celsius.
-         * @return Result Returns \c Result::Ok if the battery temperature was measured successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+#### Brief
 
-### Result setBatteryLowVoltageAlarm(uint16_t voltage)
+Measure the supply current.
 
-        /**
-         * @brief Set an alarm for battery low voltage.
-         *
-         * If battery voltage is less than the set voltage, the \a ALARM pin is pulled low.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * The battery fuel gauge must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * @param[in] voltage The voltage at which the low voltage alarm will trigger, from 2500 mV to 5000 mV.
-         * If 0 mV, triggering of the alarm is disabled and any existing low voltage alarm is cleared.
-         * @return Result Returns \c Result::Ok if the battery low voltage alarm was set successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+#### Description
 
-### Result setBatteryHighVoltageAlarm(uint16_t voltage)
+Measures the current drawn from `VUSB` or `VDC`. `VUSB` is the power input from the USB-C connector,
+while `VDC` is the power input from the header pin.
 
-        /**
-         * @brief Set an alarm for battery high voltage.
-         *
-         * If battery voltage is more than the set voltage, the \a ALARM pin is pulled low.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * The battery fuel gauge must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * @param[in] voltage The voltage at which the high voltage alarm will trigger, from 2500 mV to 5000 mV.
-         * If 0 mV, triggering of the alarm is disabled and any existing high voltage alarm is cleared.
-         * @return Result Returns \c Result::Ok if the battery high voltage alarm was set successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
 
-### Result setBatteryLowChargeAlarm(uint8_t percent)
+This function can block for 100 ms.
 
-        /**
-         * @brief Set an alarm for battery low charge.
-         *
-         * If battery charge is less than the set percentage, the \a ALARM pin is pulled low.
-         *
-         * \a VSQT must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * A non-zero \p capacity should have been specified when \c [Mainboard](#class-mainboard)::init was called, else
-         *  \c Result::InvalidState is returned.
-         *
-         * The battery fuel gauge must be enabled prior to calling this function, else \c Result::InvalidState is returned.
-         *
-         * @param[in] percent The percentage at which the low charge alarm will trigger, from 1% to 100%.
-         * If 0%, triggering of the alarm is disabled and any existing low charge alarm is cleared.
-         * @return Result Returns \c Result::Ok if the battery low charge alarm was set successfully;
-         * returns a value other than \c Result::Ok if not.
-         */
+#### Parameters
+
+- **voltage** [out] The measured current draw in milliamperes (mA).
+
+#### Return
+
+Returns [Result](result.md)::Ok if the supply current was measured successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) checkSupplyGood(bool &good)
+
+#### Brief
+
+Check if the supply is good.
+
+#### Description
+
+Checks if the supply, whether `VUSB` or `VDC` is good as determined by the battery charger. A good supply
+means that it powers the board and connected loads, not the battery.
+
+#### Parameters
+
+- **good** [out] If `true`, the charger has determined the supply to be good; `false` if not.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the supply was checked successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) setSupplyMaintainVoltage(uint16_t voltage)
+
+#### Brief
+
+Set the supply voltage to maintain.
+
+#### Description
+
+The battery charger dynamically regulates the current drawn from the supply to prevent it from collapsing under
+the set voltage to maintain. This is useful for specifying the maximum power point (MPP) voltage if using a
+solar panel; allowing the battery charger to extract power from the panel at near-MPPT effectiveness.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **voltage** [in] The supply voltage to maintain, up to 16800 mV.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the supply voltage to maintain was set successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) enterShipMode()
+
+#### Brief
+
+Enter ship mode.
+
+#### Description
+
+Ship mode is a power state that only consumes around 1.5 μA. Only the battery charger and
+the battery fuel gauge is powered.
+
+This mode can only be entered into if the battery is powering the board and connected loads;
+that is, if [Mainboard](#result-checksupplygoodbool-good)::`checkSupplyGood` output parameter \p good is `false`.
+
+Ship mode can be exited by either (1) pulling `QON` header pin low for around 800 ms or
+(2) connecting a power supply which the battery charger determines to be good.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+This function can block for 20 ms if it fails to enter ship mode.
+
+#### Return
+
+Does not return if ship mode was successfully entered into;
+returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) enterShutdownMode()
+
+#### Brief
+
+Enter shutdown mode.
+
+#### Description
+
+Shutdown mode is a power state that only consumes around 1.4 μA. Only the battery charger and
+the battery fuel gauge is powered.
+
+This mode can only be entered into if the battery is powering the board and connected loads;
+that is, if [Mainboard](#result-checksupplygoodbool-good)::`checkSupplyGood` output parameter \p good is `false`.
+
+Shutdown mode can only be exited by connecting a power supply which the battery charger determines to be good.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+This function can block for 20 ms if it fails to enter shutdown mode.
+
+#### Return
+
+Does not return if shutdown mode was successfully entered into;
+returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) doPowerCycle()
+
+#### Brief
+
+Perform a power cycle.
+
+#### Description
+
+For all components on the board and connected loads, except the battery fuel gauge
+and loads connected to `VS` (supply output header pin, whichever of `VUSB` and `VDC`),
+the power cycle provides complete reset by removing power and re-applying it after a short delay.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+#### Return
+
+Does not return if a power cycle was performed successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) enableBatteryCharging(bool enable)
+
+#### Brief
+
+Enable or disable battery charging.
+
+#### Description
+
+This is useful when opting to not fully charge a battery in order to prolong its lifespan.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **enable** [in] If `true`, battery charging is enabled; if `false`, battery charging is disabled.
+
+#### Return
+
+Returns [Result](result.md)::Ok if battery charging was enabled or disabled successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) setBatteryChargingMaxCurrent(uint16_t current)
+
+#### Brief
+
+Set maximum battery charging current.
+
+#### Description
+
+Ensures that the battery is not charged with a current more than the amount specified using this function.
+This is useful for batteries with small capacities, since it is not recommended to charge a battery at
+more than 1C. For example, when charging a 550 mAh battery, a current of no more than 550 mA is
+recommended. That current limit of 550 mA can be specified using this function.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **current** [in] The maximum charging current, up to 2000 mA.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the maximum battery charging current was set successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) enableBatteryTempSense(bool enable)
+
+#### Brief
+
+Enable or disable battery temperature measurement.
+
+#### Description
+
+Enables or disables battery temperature measurement using the thermistor connected to the `TS` pin.
+If enabled, aside from measurement, the battery charger performs temperature-based battery charging current
+reduction or cutoff.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **enable** [in] If `true`, battery temperature measurement is enabled; if `false`, battery
+temperature measurement is disabled.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the battery temperature measurement was enabled or
+disabled successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) enableBatteryFuelGauge(bool enable)
+
+#### Brief
+
+Enable or disable the battery fuel guage.
+
+#### Description
+
+Disabling the battery fuel guage can save around 0.5 μA. However, once disabled, it
+cannot keep track of battery information such as voltage, charge, health, cycle count, etc.
+Nonetheless, this is useful when trying to reduce power as much as possible, such as when going
+into ship mode or shutdown mode for a long time.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **enable** [in] If `true`, the battery fuel gauge is enabled; if `false`, the battery fuel gauge is disabled.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the battery fuel gauge was enabled or disabled successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) getBatteryVoltage(uint16_t &voltage)
+
+#### Brief
+
+Measure battery voltage.
+
+#### Description
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+This function can block for 100 ms.
+
+#### Parameters
+
+- **voltage** [out] Measured battery voltage in millivolts (mV).
+
+#### Return
+
+Returns [Result](result.md)::Ok if the battery voltage was measured successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) getBatteryCurrent(int16_t &current)
+
+#### Brief
+
+Measure battery current.
+
+#### Description
+
+Measures the current to or from the battery during charging and discharging, respectively.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+This function can block for 100 ms.
+
+#### Parameters
+
+- **current** [out] Measured battery voltage in milliamps (mA). If battery is discharging,
+this value is negative; positive if battery is charging.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the battery current was measured successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) getBatteryCharge(uint8_t &percent)
+
+#### Brief
+
+Estimate battery charge.
+
+#### Description
+
+Gives an estimate of battery state-of-charge from 0% to 100%. This is useful to get a sense
+if the battery still has much charge or is nearly empty.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+The battery The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **percent** [out] Estimated battery charge, from 0% to 100%.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the battery charge was estimated successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) getBatteryHealth(uint8_t &percent)
+
+#### Brief
+
+Estimate battery health.
+
+#### Description
+
+Gives an estimate of battery state-of-health from 0% to 100%. This is useful to get a
+sense of how much the battery has degraded over time.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+The battery The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **percent** [out] Estimated battery health, from 0% to 100%.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the battery health was estimated successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) getBatteryCycles(uint16_t &cycles)
+
+#### Brief
+
+Estimate battery cycle count.
+
+#### Description
+
+Gives an estimate of the battery cycle count. This is useful to compare against the number of
+cycle counts the battery is rated for.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **cycles** [out] Estimated battery cycle count.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the battery cycle count was estimated successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) getBatteryTimeLeft(int &minutes)
+
+#### Brief
+
+Estimate time left for battery to charge or discharge.
+
+#### Description
+
+Gives an estimate of the battery time-to-empty or time-to-full in minutes. The battery charge must have
+previously dropped and/or risen by 10% to be able to estimate time-to-empty or time-to-full, respectively;
+else [Result](result.md)::NotReady is returned.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **minutes** [out] Estimated time left for battery to charge or discharge in minutes. If battery is discharging,
+this value is negative; if battery is charging, this value is positive.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the time left for battery to charge or discharge was estimated
+successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) getBatteryTemperature(float &celsius)
+
+#### Brief
+
+Measure battery temperature.
+
+#### Description
+
+Requires a Semitec 103AT thermistor to be connected to the `TS` pin and attached to the battery
+for the measurement to be accurate.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+Battery temperature measurement must be enabled prior calling this function, else [Result](result.md)::InvalidState
+is returned.
+
+This function can block for 100 ms.
+
+#### Parameters
+
+- **celsius** [out] Measured battery temperature in celsius.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the battery temperature was measured successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) setBatteryLowVoltageAlarm(uint16_t voltage)
+
+#### Brief
+
+Set an alarm for battery low voltage.
+
+#### Description
+
+If battery voltage is less than the set voltage, the `ALARM` pin is pulled low.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **voltage** [in] The voltage at which the low voltage alarm will trigger, from 2500 mV to 5000 mV.
+If 0 mV, triggering of the alarm is disabled and any existing low voltage alarm is cleared.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the battery low voltage alarm was set successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) setBatteryHighVoltageAlarm(uint16_t voltage)
+
+#### Brief
+
+Set an alarm for battery high voltage.
+
+#### Description
+
+If battery voltage is more than the set voltage, the `ALARM` pin is pulled low.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **voltage** [in] The voltage at which the high voltage alarm will trigger, from 2500 mV to 5000 mV.
+If 0 mV, triggering of the alarm is disabled and any existing high voltage alarm is cleared.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the battery high voltage alarm was set successfully; returns a value other than [Result](result.md)::Ok if not.
+
+### [Result](result.md) setBatteryLowChargeAlarm(uint8_t percent)
+
+#### Brief
+
+Set an alarm for battery low charge.
+
+#### Description
+
+If battery charge is less than the set percentage, the `ALARM` pin is pulled low.
+
+`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](result.md)::InvalidState is returned.
+
+The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+
+#### Parameters
+
+- **percent** [in] The percentage at which the low charge alarm will trigger, from 1% to 100%.
+If 0%, triggering of the alarm is disabled and any existing low charge alarm is cleared.
+
+#### Return
+
+Returns [Result](result.md)::Ok if the battery low charge alarm was set successfully; returns a value other than [Result](result.md)::Ok if not.
 
 ## extern [Mainboard](#class-mainboard) &Board 
 
