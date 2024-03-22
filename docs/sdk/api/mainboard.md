@@ -13,7 +13,7 @@ sidebar_position: 1
 - `ICR18650` Samsung IC18650
 - `UR18650ZY` Sanyo UR18650ZY
 
-### [Result](./result) init(uint16_t capacity = 0, [BatteryType](#enum-class-batterytype) type = [BatteryType](#enum-class-batterytype)::`Generic_3V7`)
+### [Result](./result.md#enum-class-result) init(uint16_t capacity = 0, [BatteryType](#enum-class-batterytype) type = [BatteryType](#enum-class-batterytype)::`Generic_3V7`)
 
 #### Brief
 Initialize the board power management and monitoring features.
@@ -38,15 +38,15 @@ This function should be called once, before calls to all other [Mainboard](#clas
 
 - **capacity** [in] The capacity of the connected Li-ion/LiPo battery in milliamp-hours (mAh), from 50 mAh to 6000 mAh.
 A value of zero indicates that no battery is connected, and therefore some of the other [Mainboard](#class-mainboard) functions
-will return [Result](result.md)::`InvalidState`. If using multiple batteries connected in parallel, specify
+will return [Result](./result.md#enum-class-result)::`InvalidState`. If using multiple batteries connected in parallel, specify
 only the capacity for one cell. Non-zero value is ignored when **type** is [BatteryType](#enum-class-batterytype)::`ICR18650` or [BatteryType](#enum-class-batterytype)::`UR18650ZY`.
 - **type** [in] Type of Li-ion/LiPo battery; ignored when **capacity** is zero.
 
 #### Return
 
-Returns [Result](result.md)::`Ok` if initialization succeeded; returns a value other than [Result](result.md)::`Ok` if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if initialization succeeded; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) setEN(bool high)
+### [Result](./result.md#enum-class-result) setEN(bool high)
 
 #### Brief
 
@@ -62,32 +62,9 @@ This is useful for enabling or disabling connected Feather Wings to reduce power
 
 #### Return
 
-Returns [Result](result.md)::Ok if `EN` was set high or low successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if `EN` was set high or low successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) enable3V3(bool enable)
-
-#### Brief
-
-Enable or disable `VSQT`.
-
-#### Description
-
-Enables or disables `VSQT`, the 3.3 V STEMMA QT power output. When disabled, power to the
-connected STEMMA QT modules is cut, reducing power consumption.
-
-A side effect of disabling `VSQT` is that communications to the battery charger and fuel gauge is also disabled.
-This means that some of the other [Mainboard](#class-mainboard) functions will return [Result](result.md)::InvalidState when
-`VSQT` is disabled. Make sure to enable `VSQT` prior to calling these functions.
-
-#### Parameters
-
-- **enable** [in] If `true`, `VSQT` is enabled; if `false`, `VSQT` is disabled.
-
-#### Return
-
-Returns [Result](result.md)::Ok if `VSQT` was enabled or disabled successfully; returns a value other than [Result](result.md)::Ok if not.
-
-### [Result](result.md) enableVSQT(bool enable)
+### [Result](./result.md#enum-class-result) enable3V3(bool enable)
 
 #### Brief
 
@@ -99,7 +76,7 @@ Enables or disables `VSQT`, the 3.3 V STEMMA QT power output. When disabled, pow
 connected STEMMA QT modules is cut, reducing power consumption.
 
 A side effect of disabling `VSQT` is that communications to the battery charger and fuel gauge is also disabled.
-This means that some of the other [Mainboard](#class-mainboard) functions will return [Result](result.md)::InvalidState when
+This means that some of the other [Mainboard](#class-mainboard) functions will return [Result](./result.md#enum-class-result)::`InvalidState` when
 `VSQT` is disabled. Make sure to enable `VSQT` prior to calling these functions.
 
 #### Parameters
@@ -108,9 +85,32 @@ This means that some of the other [Mainboard](#class-mainboard) functions will r
 
 #### Return
 
-Returns [Result](result.md)::Ok if `VSQT` was enabled or disabled successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if `VSQT` was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) getSupplyVoltage(uint16_t &voltage)
+### [Result](./result.md#enum-class-result) enableVSQT(bool enable)
+
+#### Brief
+
+Enable or disable `VSQT`.
+
+#### Description
+
+Enables or disables `VSQT`, the 3.3 V STEMMA QT power output. When disabled, power to the
+connected STEMMA QT modules is cut, reducing power consumption.
+
+A side effect of disabling `VSQT` is that communications to the battery charger and fuel gauge is also disabled.
+This means that some of the other [Mainboard](#class-mainboard) functions will return [Result](./result.md#enum-class-result)::`InvalidState` when
+`VSQT` is disabled. Make sure to enable `VSQT` prior to calling these functions.
+
+#### Parameters
+
+- **enable** [in] If `true`, `VSQT` is enabled; if `false`, `VSQT` is disabled.
+
+#### Return
+
+Returns [Result](./result.md#enum-class-result)::`Ok` if `VSQT` was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
+
+### [Result](./result.md#enum-class-result) getSupplyVoltage(uint16_t &voltage)
 
 #### Brief
 
@@ -121,7 +121,7 @@ Measure the supply voltage.
 Measures the `VUSB` or `VDC` voltage. `VUSB` is the power input from the USB-C connector,
 while `VDC` is the power input from the header pin.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for 100 ms.
 
@@ -131,9 +131,9 @@ This function can block for 100 ms.
 
 #### Return
 
-Returns [Result](result.md)::Ok if the supply voltage was measured successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the supply voltage was measured successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) getSupplyCurrent(int16_t &current)
+### [Result](./result.md#enum-class-result) getSupplyCurrent(int16_t &current)
 
 #### Brief
 
@@ -144,7 +144,7 @@ Measure the supply current.
 Measures the current drawn from `VUSB` or `VDC`. `VUSB` is the power input from the USB-C connector,
 while `VDC` is the power input from the header pin.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for 100 ms.
 
@@ -154,9 +154,9 @@ This function can block for 100 ms.
 
 #### Return
 
-Returns [Result](result.md)::Ok if the supply current was measured successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the supply current was measured successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) checkSupplyGood(bool &good)
+### [Result](./result.md#enum-class-result) checkSupplyGood(bool &good)
 
 #### Brief
 
@@ -173,9 +173,9 @@ means that it powers the board and connected loads, not the battery.
 
 #### Return
 
-Returns [Result](result.md)::Ok if the supply was checked successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the supply was checked successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) setSupplyMaintainVoltage(uint16_t voltage)
+### [Result](./result.md#enum-class-result) setSupplyMaintainVoltage(uint16_t voltage)
 
 #### Brief
 
@@ -187,7 +187,7 @@ The battery charger dynamically regulates the current drawn from the supply to p
 the set voltage to maintain. This is useful for specifying the maximum power point (MPP) voltage if using a
 solar panel; allowing the battery charger to extract power from the panel at near-MPPT effectiveness.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -195,9 +195,9 @@ solar panel; allowing the battery charger to extract power from the panel at nea
 
 #### Return
 
-Returns [Result](result.md)::Ok if the supply voltage to maintain was set successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the supply voltage to maintain was set successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) enterShipMode()
+### [Result](./result.md#enum-class-result) enterShipMode()
 
 #### Brief
 
@@ -214,16 +214,16 @@ that is, if [Mainboard](#result-checksupplygoodbool-good)::`checkSupplyGood` out
 Ship mode can be exited by either (1) pulling `QON` header pin low for around 800 ms or
 (2) connecting a power supply which the battery charger determines to be good.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for 20 ms if it fails to enter ship mode.
 
 #### Return
 
 Does not return if ship mode was successfully entered into;
-returns a value other than [Result](result.md)::Ok if not.
+returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) enterShutdownMode()
+### [Result](./result.md#enum-class-result) enterShutdownMode()
 
 #### Brief
 
@@ -239,16 +239,16 @@ that is, if [Mainboard](#result-checksupplygoodbool-good)::`checkSupplyGood` out
 
 Shutdown mode can only be exited by connecting a power supply which the battery charger determines to be good.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for 20 ms if it fails to enter shutdown mode.
 
 #### Return
 
 Does not return if shutdown mode was successfully entered into;
-returns a value other than [Result](result.md)::Ok if not.
+returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) doPowerCycle()
+### [Result](./result.md#enum-class-result) doPowerCycle()
 
 #### Brief
 
@@ -260,13 +260,13 @@ For all components on the board and connected loads, except the battery fuel gau
 and loads connected to `VS` (supply output header pin, whichever of `VUSB` and `VDC`),
 the power cycle provides complete reset by removing power and re-applying it after a short delay.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Return
 
-Does not return if a power cycle was performed successfully; returns a value other than [Result](result.md)::Ok if not.
+Does not return if a power cycle was performed successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) enableBatteryCharging(bool enable)
+### [Result](./result.md#enum-class-result) enableBatteryCharging(bool enable)
 
 #### Brief
 
@@ -276,10 +276,10 @@ Enable or disable battery charging.
 
 This is useful when opting to not fully charge a battery in order to prolong its lifespan.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -287,9 +287,9 @@ A non-zero \p capacity should have been specified when [Mainboard](#class-mainbo
 
 #### Return
 
-Returns [Result](result.md)::Ok if battery charging was enabled or disabled successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if battery charging was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) setBatteryChargingMaxCurrent(uint16_t current)
+### [Result](./result.md#enum-class-result) setBatteryChargingMaxCurrent(uint16_t current)
 
 #### Brief
 
@@ -302,10 +302,10 @@ This is useful for batteries with small capacities, since it is not recommended 
 more than 1C. For example, when charging a 550 mAh battery, a current of no more than 550 mA is
 recommended. That current limit of 550 mA can be specified using this function.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -313,9 +313,9 @@ A non-zero \p capacity should have been specified when [Mainboard](#class-mainbo
 
 #### Return
 
-Returns [Result](result.md)::Ok if the maximum battery charging current was set successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the maximum battery charging current was set successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) enableBatteryTempSense(bool enable)
+### [Result](./result.md#enum-class-result) enableBatteryTempSense(bool enable)
 
 #### Brief
 
@@ -327,10 +327,10 @@ Enables or disables battery temperature measurement using the thermistor connect
 If enabled, aside from measurement, the battery charger performs temperature-based battery charging current
 reduction or cutoff.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -339,10 +339,10 @@ temperature measurement is disabled.
 
 #### Return
 
-Returns [Result](result.md)::Ok if the battery temperature measurement was enabled or
-disabled successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the battery temperature measurement was enabled or
+disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) enableBatteryFuelGauge(bool enable)
+### [Result](./result.md#enum-class-result) enableBatteryFuelGauge(bool enable)
 
 #### Brief
 
@@ -355,10 +355,10 @@ cannot keep track of battery information such as voltage, charge, health, cycle 
 Nonetheless, this is useful when trying to reduce power as much as possible, such as when going
 into ship mode or shutdown mode for a long time.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -366,9 +366,9 @@ A non-zero \p capacity should have been specified when [Mainboard](#class-mainbo
 
 #### Return
 
-Returns [Result](result.md)::Ok if the battery fuel gauge was enabled or disabled successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the battery fuel gauge was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) getBatteryVoltage(uint16_t &voltage)
+### [Result](./result.md#enum-class-result) getBatteryVoltage(uint16_t &voltage)
 
 #### Brief
 
@@ -376,10 +376,10 @@ Measure battery voltage.
 
 #### Description
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for 100 ms.
 
@@ -389,9 +389,9 @@ This function can block for 100 ms.
 
 #### Return
 
-Returns [Result](result.md)::Ok if the battery voltage was measured successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the battery voltage was measured successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) getBatteryCurrent(int16_t &current)
+### [Result](./result.md#enum-class-result) getBatteryCurrent(int16_t &current)
 
 #### Brief
 
@@ -401,10 +401,10 @@ Measure battery current.
 
 Measures the current to or from the battery during charging and discharging, respectively.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for 100 ms.
 
@@ -415,9 +415,9 @@ this value is negative; positive if battery is charging.
 
 #### Return
 
-Returns [Result](result.md)::Ok if the battery current was measured successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the battery current was measured successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) getBatteryCharge(uint8_t &percent)
+### [Result](./result.md#enum-class-result) getBatteryCharge(uint8_t &percent)
 
 #### Brief
 
@@ -428,12 +428,12 @@ Estimate battery charge.
 Gives an estimate of battery state-of-charge from 0% to 100%. This is useful to get a sense
 if the battery still has much charge or is nearly empty.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-The battery The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+The battery The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -441,9 +441,9 @@ The battery The battery fuel gauge must be enabled prior to calling this functio
 
 #### Return
 
-Returns [Result](result.md)::Ok if the battery charge was estimated successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the battery charge was estimated successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) getBatteryHealth(uint8_t &percent)
+### [Result](./result.md#enum-class-result) getBatteryHealth(uint8_t &percent)
 
 #### Brief
 
@@ -454,12 +454,12 @@ Estimate battery health.
 Gives an estimate of battery state-of-health from 0% to 100%. This is useful to get a
 sense of how much the battery has degraded over time.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-The battery The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+The battery The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -467,9 +467,9 @@ The battery The battery fuel gauge must be enabled prior to calling this functio
 
 #### Return
 
-Returns [Result](result.md)::Ok if the battery health was estimated successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the battery health was estimated successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) getBatteryCycles(uint16_t &cycles)
+### [Result](./result.md#enum-class-result) getBatteryCycles(uint16_t &cycles)
 
 #### Brief
 
@@ -480,12 +480,12 @@ Estimate battery cycle count.
 Gives an estimate of the battery cycle count. This is useful to compare against the number of
 cycle counts the battery is rated for.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -493,9 +493,9 @@ The battery fuel gauge must be enabled prior to calling this function, else [Res
 
 #### Return
 
-Returns [Result](result.md)::Ok if the battery cycle count was estimated successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the battery cycle count was estimated successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) getBatteryTimeLeft(int &minutes)
+### [Result](./result.md#enum-class-result) getBatteryTimeLeft(int &minutes)
 
 #### Brief
 
@@ -505,14 +505,14 @@ Estimate time left for battery to charge or discharge.
 
 Gives an estimate of the battery time-to-empty or time-to-full in minutes. The battery charge must have
 previously dropped and/or risen by 10% to be able to estimate time-to-empty or time-to-full, respectively;
-else [Result](result.md)::NotReady is returned.
+else [Result](./result.md#enum-class-result)::`NotReady` is returned.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -521,10 +521,10 @@ this value is negative; if battery is charging, this value is positive.
 
 #### Return
 
-Returns [Result](result.md)::Ok if the time left for battery to charge or discharge was estimated
-successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the time left for battery to charge or discharge was estimated
+successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) getBatteryTemperature(float &celsius)
+### [Result](./result.md#enum-class-result) getBatteryTemperature(float &celsius)
 
 #### Brief
 
@@ -535,12 +535,12 @@ Measure battery temperature.
 Requires a Semitec 103AT thermistor to be connected to the `TS` pin and attached to the battery
 for the measurement to be accurate.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-Battery temperature measurement must be enabled prior calling this function, else [Result](result.md)::InvalidState
+Battery temperature measurement must be enabled prior calling this function, else [Result](./result.md#enum-class-result)::`InvalidState`
 is returned.
 
 This function can block for 100 ms.
@@ -551,9 +551,9 @@ This function can block for 100 ms.
 
 #### Return
 
-Returns [Result](result.md)::Ok if the battery temperature was measured successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the battery temperature was measured successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) setBatteryLowVoltageAlarm(uint16_t voltage)
+### [Result](./result.md#enum-class-result) setBatteryLowVoltageAlarm(uint16_t voltage)
 
 #### Brief
 
@@ -563,12 +563,12 @@ Set an alarm for battery low voltage.
 
 If battery voltage is less than the set voltage, the `ALARM` pin is pulled low.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -577,9 +577,9 @@ If 0 mV, triggering of the alarm is disabled and any existing low voltage alarm 
 
 #### Return
 
-Returns [Result](result.md)::Ok if the battery low voltage alarm was set successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the battery low voltage alarm was set successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) setBatteryHighVoltageAlarm(uint16_t voltage)
+### [Result](./result.md#enum-class-result) setBatteryHighVoltageAlarm(uint16_t voltage)
 
 #### Brief
 
@@ -589,12 +589,12 @@ Set an alarm for battery high voltage.
 
 If battery voltage is more than the set voltage, the `ALARM` pin is pulled low.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -603,9 +603,9 @@ If 0 mV, triggering of the alarm is disabled and any existing high voltage alarm
 
 #### Return
 
-Returns [Result](result.md)::Ok if the battery high voltage alarm was set successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the battery high voltage alarm was set successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](result.md) setBatteryLowChargeAlarm(uint8_t percent)
+### [Result](./result.md#enum-class-result) setBatteryLowChargeAlarm(uint8_t percent)
 
 #### Brief
 
@@ -615,12 +615,12 @@ Set an alarm for battery low charge.
 
 If battery charge is less than the set percentage, the `ALARM` pin is pulled low.
 
-`VSQT` must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
- [Result](result.md)::InvalidState is returned.
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-The battery fuel gauge must be enabled prior to calling this function, else [Result](result.md)::InvalidState is returned.
+The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -629,7 +629,7 @@ If 0%, triggering of the alarm is disabled and any existing low charge alarm is 
 
 #### Return
 
-Returns [Result](result.md)::Ok if the battery low charge alarm was set successfully; returns a value other than [Result](result.md)::Ok if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the battery low charge alarm was set successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
 ## extern [Mainboard](#class-mainboard) &Board 
 
