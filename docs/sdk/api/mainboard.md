@@ -209,7 +209,7 @@ Ship mode is a power state that only consumes around 1.5 μA. Only the battery c
 the battery fuel gauge is powered.
 
 This mode can only be entered into if the battery is powering the board and connected loads;
-that is, if [Mainboard](#result-checksupplygoodbool-good)::`checkSupplyGood` output parameter \p good is `false`.
+that is, if [Mainboard](#result-checksupplygoodbool-good)::`checkSupplyGood` output parameter **good** is `false`.
 
 Ship mode can be exited by either (1) pulling `QON` header pin low for around 800 ms or
 (2) connecting a power supply which the battery charger determines to be good.
@@ -235,7 +235,7 @@ Shutdown mode is a power state that only consumes around 1.4 μA. Only the batte
 the battery fuel gauge is powered.
 
 This mode can only be entered into if the battery is powering the board and connected loads;
-that is, if [Mainboard](#result-checksupplygoodbool-good)::`checkSupplyGood` output parameter \p good is `false`.
+that is, if [Mainboard](#result-checksupplygoodbool-good)::`checkSupplyGood` output parameter **good** is `false`.
 
 Shutdown mode can only be exited by connecting a power supply which the battery charger determines to be good.
 
@@ -278,7 +278,7 @@ This is useful when opting to not fully charge a battery in order to prolong its
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
@@ -304,7 +304,7 @@ recommended. That current limit of 550 mA can be specified using this function.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
@@ -329,7 +329,7 @@ reduction or cutoff.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
@@ -357,7 +357,7 @@ into ship mode or shutdown mode for a long time.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
@@ -378,7 +378,7 @@ Measure battery voltage.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for 100 ms.
@@ -403,7 +403,7 @@ Measures the current to or from the battery during charging and discharging, res
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for 100 ms.
@@ -430,7 +430,7 @@ if the battery still has much charge or is nearly empty.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -456,7 +456,7 @@ sense of how much the battery has degraded over time.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -482,7 +482,7 @@ cycle counts the battery is rated for.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -509,7 +509,7 @@ else [Result](./result.md#enum-class-result)::`NotReady` is returned.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -537,7 +537,7 @@ for the measurement to be accurate.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 Battery temperature measurement must be enabled prior calling this function, else [Result](./result.md#enum-class-result)::`InvalidState`
@@ -565,7 +565,7 @@ If battery voltage is less than the set voltage, the `ALARM` pin is pulled low.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -591,7 +591,7 @@ If battery voltage is more than the set voltage, the `ALARM` pin is pulled low.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -617,7 +617,7 @@ If battery charge is less than the set percentage, the `ALARM` pin is pulled low
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero \p capacity should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
