@@ -11,20 +11,48 @@ Work in progress.
 
 ## class Mainboard
 
-### [Result](./result) init(uint16_t capacity = 0)
+### enum class BatteryType
 
-Initialize and set defaults.
+- `Generic_3V7` Generic Li-ion/LiPo battery with nominal voltage of 3.7 V
+- `ICR18650` Samsung IC18650
+- `UR18650ZY` Sanyo UR18650ZY
 
-- Max charging current: 100 mA
-- Max input current: 500 mA
-- Charging: disabled
-- 3V3: enabled
-- VSQT: enabled
-- EN: high
+
+### [Result](./result) init(uint16_t capacity = 0, [BatteryType](#enum-class-batterytype) type = [BatteryType](#enum-class-batterytype)::`Generic_3V7`)
+
+#### Brief
+Initialize the board power management and monitoring features.
+
+#### Description
+Initializes the battery charger, battery fuel gauge and other hardware related to power management and monitoring.
+
+Sets the following defaults:
+ - `EN`: high
+ - `3V3`: enabled
+ - `VSQT`: enabled
+ - Charging: disabled
+ - Maximum battery charging current: 50 mA
+ - Maintain supply voltage: 4600 mV
+ - Fuel gauge: enabled if **capacity** is non-zero; disabled if **capacity** is zero
+ - Battery temperature sense: disabled
+ - Battery alarms (low charge, high/low voltage): disabled
+
+This function should be called once, before calls to all other [Mainboard](#class-mainboard) functions.
 
 #### Parameters
 
-capacity[in] Battery capacity in mAh.
+- **capacity** [in] The capacity of the connected Li-ion/LiPo battery in milliamp-hours (mAh), from 50 mAh to 6000 mAh.
+A value of zero indicates that no battery is connected, and therefore some of the other [Mainboard](#class-mainboard) functions
+will return [Result](result.md)::`InvalidState`. If using multiple batteries connected in parallel, specify
+only the capacity for one cell. Non-zero value is ignored when **type** is [BatteryType](#enum-class-batterytype)::`ICR18650` or [BatteryType](#enum-class-batterytype)::`UR18650ZY`.
+- **type** [in] Type of Li-ion/LiPo battery; ignored when **capacity** is zero.
+
+#### Return
+
+Returns [Result](result.md)::`Ok` if initialization succeeded; returns a value other than [Result](result.md)::`Ok` if not.
+
+
+
 
 
 ### [Result](./result) setEN(bool high)
