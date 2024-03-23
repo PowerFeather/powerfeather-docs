@@ -11,7 +11,7 @@ if your board is OK. Simply connect your PowerFeather to a host computer using t
 
 ![LED Blink](assets/led_blink.gif)
 
-The red `CHG` LED should flash momentarily, after which the green user `LED` blinks continuously.
+The red `CHG` LED should flash momentarily, after which then the green user `LED` blinks continuously.
 
 ## Run Example
 
@@ -55,8 +55,7 @@ In this case, the measured battery current is negative.
 
 ### ESP-IDF
 
-
-On Mac OS and Linux, open a terminal with [ESP-IDF environment set up](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html#step-4-set-up-the-environment-variables). On Windows you can just open the [ESP-IDF x.y CMD or ESP-IDF x.y PowerShell](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/windows-setup.html#launching-esp-idf-environment), where `x.y` is the specific version of ESP-IDF you installed.
+On Mac OS and Linux, open a terminal with the [ESP-IDF environment loaded](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html#step-4-set-up-the-environment-variables). On Windows open the [ESP-IDF Command Prompt or ESP-IDF PowerShell](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/windows-setup.html#launching-esp-idf-environment).
 
 Navigate to a directory where the example project can be downloaded to and run the following command:
 
@@ -65,8 +64,8 @@ idf.py create-project-from-example "powerfeather/powerfeather-sdk^1.0.0:supply_a
 ```
 ![Download example](assets/download_example.png)
 
-If you have a battery, detach the USB-C cable first. Attach your battery, only then reconnect the USB-C cable.
-Go into the `supply_and_battery_info` directory where the example project was downloaded to.  Then build and flash the project.
+[Connect the battery](../hardware/esp32s3.md#battery-polarity) first if you have one, before connecting PowerFeather to the host computer.
+Once connected `cd` into the just downloaded *supply_and_battery_info* directory, then build and flash the example using the commands:
 
 ```bash
 idf.py set-target esp32s3
@@ -76,22 +75,20 @@ idf.py flash monitor
 ![Set target](assets/set_target_esp32s3.png)
 ![Build](assets/idf_build.png)
 
-On *idf.py monitor*, the supply and battery voltage and current are reported; as well as the
-battery charge estimated by the fuel gauge. Notice that the battery current is zero, while the supply current is not.
+Run `idf.py monitor`. You should see the supply and battery voltage and current reported; as well as the
+estimated battery charge percentage by the fuel gauge. Notice that the battery current is zero, while the supply current is not.
 This indicates that:
-- The board is being supplied by the external power source, in this case by `VUSB`.
+- The board is being powered by the USB supply and not the battery.
 - The battery is not charging.
 
 ![Monitor not charging](assets/monitor_no_charge.png)
 
-
-Press `BTN` on PowerFeather to enable charging. When charging is enabled, notice the battery current
-is no longer zero; and supply current also increases.
+Press and hold `BTN` on PowerFeather to enable charging. Notice the battery current is no longer zero, and supply current is
+more than before.
 
 ![Monitor charging](assets/monitor_charging.png)
 
-If you have one, you can try using a data-only (no power) USB-C cable, to see that in the absence of an external
-supply, the battery supplies the board. In this case, the battery current is negative, indicating
-discharging.
+If you have or can make one, try using a data-only USB cable. With the USB supply absent, the battery powers the board and discharges.
+In this case, the measured battery current is negative.
 
 ![Monitor discharge](assets/monitor_discharge.png)
