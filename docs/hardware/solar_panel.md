@@ -20,3 +20,11 @@ sidebar_position: 2
 | Frame | Aluminum |
 | Front Sheet | Tempered Glass |
 | Back Sheet | White |
+
+
+## Appendix
+
+### Photos
+
+| [![Solar Panel (1)](assets/sp1.jpg)](assets/sp1.jpg) | [![Solar Panel (2)](assets/sp2.jpg)](assets/sp2.jpg) | [![Solar Panel (3)](assets/sp3.jpg)](assets/sp3.jpg) | [![Solar Panel (4)](assets/sp4.jpg)](assets/sp4.jpg) | [![Solar Panel (5)](assets/sp5.jpg)](assets/sp5.jpg) | [![Solar Panel (6)](assets/sp6.jpg)](assets/sp6.jpg) | [![Solar Panel (7)](assets/sp7.jpg)](assets/sp7.jpg) 
+|-|-|-|-|-|-|-|
