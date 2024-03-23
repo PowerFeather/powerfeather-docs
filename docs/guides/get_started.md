@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Getting Started
 
-## First Use
+## Quick Check
 
 PowerFeather comes pre-loaded with a program that blinks the green user `LED`. Use this to quickly check
 if your board is OK. Simply connect your PowerFeather to a host computer using the USB-C connector:
