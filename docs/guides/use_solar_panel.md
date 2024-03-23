@@ -26,7 +26,7 @@ The following are solar panels we have tested first-hand to work well with Power
 
 | Name | Wattage | MPP voltage | Open-circuit voltage | Purchase Link
 |-|-|-|-|-|
-| [PowerFeather Solar Panel](/hardware/solar_panel) | 10 W | 12 V | 13.9 V | |
+| [PowerFeather Solar Panel](/hardware/solar_panel) | 10 W | 12 V | 13.9 V | https://www.elecrow.com/powerfeather-solar-panel.html |
 | NETCOMLAB COV-35105  | 10 W | 15 V | 16.5 V | https://www.kobetradingusa.com/products/cov-35105-solar-panel-15v-10w |
 
 ## Connection
