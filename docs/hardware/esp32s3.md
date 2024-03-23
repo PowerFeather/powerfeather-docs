@@ -182,6 +182,8 @@ IO signals connected to a component on-board, whose configuration and use is man
 |3V3_EN| 3V3 Enable Output|
 |VSQT_EN| VSQT Enable Output |
 |EN0| Board Enable Output |
+|SCL1| STEMMA QT I2C SCL |
+|SDA1| STEMMA QT I2C SDA |
 
 ### Special Function
 
