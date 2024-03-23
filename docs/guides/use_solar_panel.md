@@ -51,12 +51,13 @@ with correct polarity. Incorrect polarity can cause permanent damage to PowerFea
 ## Code
 
 In order to maximize power from the solar panel, the MPP voltage should be set. It can be done by calling
-`setSupplyMinVoltage` in your code with the panel's MPP voltage in mV as argument.
+[Mainboard::setSupplyMaintainVoltage](../sdk/api/mainboard.md#result-setsupplymaintainvoltageuint16_t-voltage) in your code
+with the panel's MPP voltage as argument (in millivolts).
 
-For example, for PowerFeather Solar Panel, it would be:
+For example, for the PowerFeather Solar Panel, it would be:
 
 ```cpp
 Board.init(500); // Assuming a 500 mAh battery
 // ...
-Board.setSupplyMinVoltage(12000); // PowerFeather Solar Panel MPP voltage = 12000 mV
+Board.setSupplyMaintainVoltage(12000); // PowerFeather Solar Panel MPP voltage = 12000 mV
 ```

@@ -44,7 +44,7 @@ void loop()
 }
 ```
 
-The most important thing is for the sketch to call [Mainboard::init](api/mainboard.md#result-inituint16_t-capacity--0) (`Base.init()` above). Build the sketch, it should proceed without any errors.
+The most important thing is for the sketch to call [Mainboard::init](api/mainboard.md#result-inituint16_t-capacity--0-batterytype-type--batterytypegeneric_3v7). Build the sketch, it should proceed without any errors.
 
 
 ![Build Arduino](assets/build_arduino.png)
