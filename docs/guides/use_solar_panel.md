@@ -7,16 +7,15 @@ sidebar_position: 3
 
 ## Selection
 
-Choose a solar panel that has an open-circuit voltage not exceeding 18 V, and an MPP voltage from 5 V to 16.8 V.
+Choose a solar panel that has an open-circuit voltage not exceeding 18 V, and an MPP voltage from 4.6 V to 16.8 V.
 
 :::caution
 Pay close attention to solar panels advertised as 12 V, as most of them actually have a much higher
-open-circuit voltage of around 21 V. While such panels should not cause damage to PowerFeather, it might
-not function properly for supply voltages beyond 18 V.
+open-circuit voltage of around 21 V - which exceeds the 18 V limit for `VDC`.
 :::
 
-A 10 W panel in ideal conditions should be able to charge the battery at 2 A.
-However, if you don't need charging current that high, you may opt for a smaller wattage, and consequently
+A 10 W panel in ideal conditions should be able to saturate the maximum battery charging current of 2 A.
+However, if you don't need a charging current that high, you may opt for a smaller wattage, and consequently
 physically smaller, solar panel.
 
 The following are solar panels we have tested first-hand to work well with PowerFeather:
@@ -35,7 +34,7 @@ pin, respectively.
 
 
 :::info
-If you are using a solar panel with a center-positive barrel jack (like the PowerFeather Solar Panel), you might be interested in the 
+If you are using a solar panel with a center-positive barrel jack (like the PowerFeather Solar Panel), you might be interested in the
 [PowerFeather ProtoWing](/hardware/protowing) which has a barrel connector and can be connected to `VDC` and `GND` of PowerFeather.
 :::
 
