@@ -4,10 +4,6 @@ sidebar_position: 1
 
 # Getting Started
 
-:::info
-Work in progress.
-:::
-
 ## First Use
 
 PowerFeather comes pre-loaded with a simple program that blinks the green user `LED`. Use this to quickly check

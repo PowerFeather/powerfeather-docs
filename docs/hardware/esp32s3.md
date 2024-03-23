@@ -5,10 +5,6 @@ slug: /
 
 # ESP32-S3 PowerFeather
 
-:::info
-Work in progress.
-:::
-
 
 ## Features & Specifications
 

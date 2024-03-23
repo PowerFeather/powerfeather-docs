@@ -4,11 +4,6 @@ sidebar_position: 2
 
 # Reducing Power Usage
 
-:::info
-Work in progress.
-:::
-
-
 
 ## Use ESP32-S3 deep sleep
 
