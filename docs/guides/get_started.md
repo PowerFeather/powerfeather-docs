@@ -6,27 +6,27 @@ sidebar_position: 1
 
 ## First Use
 
-PowerFeather comes pre-loaded with a simple program that blinks the green user `LED`. Use this to quickly check
+PowerFeather comes pre-loaded with a program that blinks the green user `LED`. Use this to quickly check
 if your board is OK. Simply connect your PowerFeather to a host computer using the USB-C connector:
 
 ![LED Blink](assets/led_blink.gif)
 
-As illustrated above, the red `CHG` LED should flash momentarily, after which the green user `LED` will blink.
+The red `CHG` LED should flash momentarily, after which the green user `LED` blinks continuously.
 
 ## Run Example
 
-The demo application showcases some of the things you can do with PowerFeather. To run the it, ESP-IDF or Arduino
-with the *PowerFeather SDK* must be installed on your system. If you have not done this yet,
-please take a look first at the [PowerFeather SDK setup guide](/sdk/setup.md).
+The demo application showcases how to get basic information from the supply and battery. To build and flash the demo,
+ESP-IDF or Arduino with the *PowerFeather SDK* must be installed on your system. If you have not done this yet,
+please go through [PowerFeather SDK Setup](/sdk/setup.md) first.
 
 ### Arduino
 
-Open Arduino IDE, and select the *PowerFeather SDK* > *Supply_and_Battery_Info* example.
+On a host computer, open the Arduino IDE. Then open the example *PowerFeather-SDK* > *Supply_and_Battery_Info*.
 
 ![Open Example](assets/open_example.png)
 
-If you have a battery, detach the USB-C cable first. Attach your battery, only
-then reconnect the USB-C cable. Then, make sure *ESP32-S3 PowerFeather* is selected as the board.
+[Connect the battery](../hardware/esp32s3.md#battery-polarity) first if you have one, before connecting PowerFeather to the host computer.
+Once it is connected open the board selector drop-down, click *Select other board and port* and choose *ESP32-S3 PowerFeather*.
 
 ![Select Board](assets/select_board.png)
 
@@ -35,22 +35,21 @@ Upload the example, then open the *Serial Monitor* when done.
 ![Upload Example](assets/upload_example.png)
 ![Serial Monitor Hover](assets/serial_monitor_hover.png)
 
-On the *Serial Monitor*, the supply and battery voltage and current are reported; as well as the
-battery charge estimated by the fuel gauge. Notice that the battery current is zero, while the supply current is not.
+On the *Serial Monitor*, you should see the supply and battery voltage and current reported; as well as the
+estimated battery charge percentage by the fuel gauge. Notice that the battery current is zero, while the supply current is not.
 This indicates that:
-- The board is being supplied by the external power source, in this case by `VUSB`.
+- The board is being powered by the USB supply and not the battery.
 - The battery is not charging.
 
 ![Serial Monitor](assets/serial_monitor.png)
 
-Press `BTN` on PowerFeather to enable charging. When charging is enabled, notice the battery current
-is no longer zero; and supply current also increases.
+Press and hold `BTN` on PowerFeather to enable charging. Notice the battery current is no longer zero, and supply current is
+more than before.
 
 ![Charging](assets/charging.png)
 
-If you have one, you can try using a data-only (no power) USB-C cable, to see that in the absence of an external
-supply, the battery supplies the board. In this case, the battery current is negative, indicating
-discharging.
+If you have or can make one, try using a data-only USB cable. With the USB supply absent, the battery powers the board and discharges.
+In this case, the measured battery current is negative.
 
 ![Discharging](assets/discharging.png)
 
