@@ -16,9 +16,10 @@ sidebar_position: 2
 | Isc (Short Circuit Current) | 890 mA |
 | Dimensions | 355 mm x 180 mm x 18 mm |
 | Weight | 0.75 kg |
-| Cable | 30 cm, DC5521 connector |
+| Cable Length | 30 cm |
+| Connector | Center-positive DC5521 |
 | Frame | Aluminum |
-| Front Sheet | Tempered Glass |
+| Front Cover | Tempered Glass |
 | Back Sheet | White |
 
 
@@ -26,5 +27,5 @@ sidebar_position: 2
 
 ### Photos
 
-| [![Solar Panel (1)](assets/sp1.jpg)](assets/sp1.jpg) | [![Solar Panel (2)](assets/sp2.jpg)](assets/sp2.jpg) | [![Solar Panel (3)](assets/sp3.jpg)](assets/sp3.jpg) | [![Solar Panel (4)](assets/sp4.jpg)](assets/sp4.jpg) | [![Solar Panel (5)](assets/sp5.jpg)](assets/sp5.jpg) | [![Solar Panel (6)](assets/sp6.jpg)](assets/sp6.jpg) | [![Solar Panel (7)](assets/sp7.jpg)](assets/sp7.jpg) 
+| [![Solar Panel (1)](assets/sp1.jpg)](assets/sp1.jpg) | [![Solar Panel (2)](assets/sp2.jpg)](assets/sp2.jpg) | [![Solar Panel (3)](assets/sp3.jpg)](assets/sp3.jpg) | [![Solar Panel (4)](assets/sp4.jpg)](assets/sp4.jpg) | [![Solar Panel (5)](assets/sp5.jpg)](assets/sp5.jpg) | [![Solar Panel (6)](assets/sp6.jpg)](assets/sp6.jpg) | [![Solar Panel (7)](assets/sp7.jpg)](assets/sp7.jpg)
 |-|-|-|-|-|-|-|
