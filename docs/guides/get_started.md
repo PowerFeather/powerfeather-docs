@@ -11,7 +11,7 @@ if your board is OK. Simply connect your PowerFeather to a host computer using t
 
 ![LED Blink](assets/led_blink.gif)
 
-The red `CHG` LED should flash momentarily, after which then the green user `LED` blinks continuously.
+The red `CHG` LED should flash momentarily, after which the green user `LED` blinks continuously.
 
 ## Run Example
 
