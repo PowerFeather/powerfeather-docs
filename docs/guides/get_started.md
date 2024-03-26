@@ -21,7 +21,7 @@ please go through [PowerFeather SDK Setup](/sdk/setup.md) first.
 
 ### Arduino
 
-On a host computer, open the Arduino IDE. Then open the example *PowerFeather-SDK* > *Supply_and_Battery_Info*.
+On a host computer, open the Arduino IDE. Then open the example *PowerFeather-SDK* > *SupplyAndBatteryInfo*.
 
 ![Open Example](assets/open_example.png)
 
