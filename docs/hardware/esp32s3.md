@@ -322,6 +322,9 @@ You can download the raw traces obtained from PPK2 using the links below, and op
 - [Trace for Deep Sleep with Fuel Gauge Disabled, Ship Mode and Shutdown Mode](assets/trace_nofg-ship-shutdown.ppk)
 
 
+### Photos
 
+| [![PowerFeather (1)](assets/pf1.jpg)](assets/pf1.jpg) | [![PowerFeather (4)](assets/pf4.jpg)](assets/pf4.jpg) | [![PowerFeather (5)](assets/pf5.jpg)](assets/pf5.jpg) | [![PowerFeather (2)](assets/pf2.jpg)](assets/pf2.jpg) | [![PowerFeather (3)](assets/pf3.jpg)](assets/pf3.jpg) |
+|-|-|-|-|-|
 
 
