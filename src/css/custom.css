@@ -16,7 +16,6 @@
   --ifm-color-primary-light: #db5800;
   --ifm-color-primary-lighter: #e55c00;
   --ifm-color-primary-lightest: #ff6904;
-  --ifm-font-family-base: 'IBM Plex Sans';
 }
 
 nav .navbar__title {
@@ -24,9 +23,8 @@ nav .navbar__title {
   font-family: IBM Plex Sans Condensed, sans-serif;
 }
 
-nav .menu__link {
+nav .navbar__item {
   font-family: IBM Plex Sans, sans-serif;
-  font-weight: bold;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
