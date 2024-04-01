@@ -10,8 +10,8 @@ sidebar_position: 1
 ### enum class BatteryType
 
 - `Generic_3V7` Generic Li-ion/LiPo, 3.7 V nominal and 4.2 V max
-- `ICR18650` Samsung ICR18650
-- `UR18650ZY` Sanyo UR18650ZY
+- `ICR18650_26H` Samsung ICR18650-26H
+- `UR18650ZY` Panasonic UR18650ZY
 
 ### [Result](./result.md#enum-class-result) init(uint16_t capacity = 0, [BatteryType](#enum-class-batterytype) type = [BatteryType](#enum-class-batterytype)::`Generic_3V7`)
 
@@ -39,8 +39,8 @@ This function should be called once, before calling all other [Mainboard](#class
 - **capacity** [in] The capacity of the connected Li-ion/LiPo battery in milliamp-hours (mAh), from 50 mAh to 6000 mAh.
 A value of zero indicates that no battery is connected, and therefore some of the other [Mainboard](#class-mainboard) functions
 will return [Result](./result.md#enum-class-result)::`InvalidState`. If using multiple batteries connected in parallel, specify
-only the capacity for one cell. Ignored when **type** is [BatteryType](#enum-class-batterytype)::`ICR18650` or [BatteryType](#enum-class-batterytype)::`UR18650ZY`.
-- **type** [in] Type of Li-ion/LiPo battery; ignored when **capacity** is zero, except when value is [BatteryType](#enum-class-batterytype)::`ICR18650` or [BatteryType](#enum-class-batterytype)::`UR18650ZY`.
+only the capacity for one cell. Ignored when **type** is [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or [BatteryType](#enum-class-batterytype)::`UR18650ZY`.
+- **type** [in] Type of Li-ion/LiPo battery; ignored when **capacity** is zero, except when value is [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or [BatteryType](#enum-class-batterytype)::`UR18650ZY`.
 
 #### Return
 
@@ -114,7 +114,7 @@ Measure the supply voltage.
 #### Description
 
 Measures the `VUSB` or `VDC` voltage. `VUSB` is the power input from the USB-C connector,
-while `VDC` is the power input from the header pin.
+while `VDC` is the power input from the header pin. Resolution is 4 mV.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -137,7 +137,7 @@ Measure the supply current.
 #### Description
 
 Measures the current drawn from `VUSB` or `VDC`. `VUSB` is the power input from the USB-C connector,
-while `VDC` is the power input from the header pin.
+while `VDC` is the power input from the header pin. Resolution is 2 mA.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -273,7 +273,7 @@ This is useful when opting to not fully charge a battery in order to prolong its
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
@@ -299,7 +299,7 @@ recommended. That current limit of 550 mA can be specified using this function.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
@@ -324,7 +324,7 @@ reduction or cutoff.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
@@ -352,7 +352,7 @@ into ship mode or shutdown mode for a long time.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
@@ -371,9 +371,11 @@ Measure battery voltage.
 
 #### Description
 
+Resolution is 2 mV.
+
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for 100 ms.
@@ -394,11 +396,11 @@ Measure battery current.
 
 #### Description
 
-Measures the current to or from the battery during charging and discharging, respectively.
+Measures the current to or from the battery during charging and discharging, respectively. Resolution is 4 mA.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for 100 ms.
@@ -425,7 +427,7 @@ if the battery still has much charge or is nearly empty.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -451,7 +453,7 @@ sense of how much the battery has degraded over time.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -477,7 +479,7 @@ cycle counts the battery is rated for.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -504,7 +506,7 @@ else [Result](./result.md#enum-class-result)::`NotReady` is returned.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -532,7 +534,7 @@ for the measurement to be accurate.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 Battery temperature measurement must be enabled prior calling this function, else [Result](./result.md#enum-class-result)::`InvalidState`
@@ -560,7 +562,7 @@ If battery voltage is less than the set voltage, the `ALARM` pin is pulled low.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -586,7 +588,7 @@ If battery voltage is more than the set voltage, the `ALARM` pin is pulled low.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -612,7 +614,7 @@ If battery charge is less than the set percentage, the `ALARM` pin is pulled low
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
  [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
