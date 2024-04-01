@@ -501,7 +501,7 @@ Estimate time left for battery to charge or discharge.
 #### Description
 
 Gives an estimate of the battery time-to-empty or time-to-full in minutes. The battery charge must have
-previously dropped and/or risen by 10% to be able to estimate time-to-empty or time-to-full, respectively;
+previously dropped and/or risen by a certain percentage to be able to estimate time-to-empty or time-to-full, respectively;
 else [Result](./result.md#enum-class-result)::`NotReady` is returned.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
