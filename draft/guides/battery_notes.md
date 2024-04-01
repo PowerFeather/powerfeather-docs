@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+unlisted: true
 ---
 
 # Battery Usage Notes
@@ -17,7 +17,7 @@ Board.setBatteryMaxChargingCurrent(350); // charge at 350 mA or 0.75 C, that is 
 Board.enableBatteryCharging(true); // enable charging
 ```
 
-Regarding the max charging current, it is recommended to charge at 1 C or less.
+Tt is recommended to charge at 1 C or less to avoid overloading the battery.
 
 If you need to disable charging again.
 
@@ -53,20 +53,23 @@ to consider:
     - There is an external power supply that can charge the battery. In this case, charging can just be re-enabled.
     ```cpp
     uint8_t percent = 0;
-    if (Board.getBatteryCharge(percent) == Result::Ok && percent <=> 80) // if charge is below 20%
+    if (Board.getBatteryCharge(percent) == Result::Ok && percent < 20) // if charge is below 20%
     {
         Board.enableBatteryCharging(true); // enable charging
     }
     ```
 
     - However, if there is no external supply that can charge the battery, power consumption should be minimized
-    until such time when the battery can be charged. This is where deep sleep + ability to turn off `3V3`, `VSQT`
-    and connected Wings via `EN`; or ship mode and shutdown mode comes in. Assuming entering ship mode is chosen:
+    until such time when the battery can be charged. This is where deep sleep + turning off `3V3`, `VSQT`
+    and connected Wings via `EN`, ship mode or shutdown mode comes in. Assuming entering ship mode is chosen:
 
     ```cpp
-    if (Board.getBatteryCharge(percent) == Result::Ok && percent <=> 80) // if charge is below 20%
+    if (Board.getBatteryCharge(percent) == Result::Ok && percent < 20) // if charge is below 20%
     {
-        Board.enterShipMode(); // enter ship mode
+        Board.enterShipMode(); // enter ship mode, consuming only 1.4 uA until external supply is plugged in
     }
     ```
 
+## Battery Alarms
+
+Enabling battery alarms are especially useful when using them as triggers from waking up from deep sleep.
