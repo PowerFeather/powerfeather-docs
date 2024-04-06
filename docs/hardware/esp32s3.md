@@ -321,6 +321,14 @@ You can download the raw traces obtained from PPK2 using the links below, and op
 - [Current measurement trace for deep sleep with fuel gauge enabled - initial and settled](assets/esp32s3/current_measurements/ppk_trace_fg_on_initial_and_settled.ppk)
 - [Current measurement trace for deep dleep with duel gauge gisabled, ship mode and shutdown mode](assets/esp32s3/current_measurements/ppk_trace_fg_off_ship_and_shutdown.ppk)
 
+### Key Components
+
+| Component | Manufacturer | Part | Datasheet |
+|-|-|-|-|
+| Microcontroller & WiFi + Bluetooth LE SoC | Espressif | ESP32-S3-WROOM-1 | https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf |
+| Battery Charger | Texas Instruments | BQ25628E | https://www.ti.com/lit/ds/symlink/bq25628e.pdf?ts=1712390973163&ref_url=https%253A%252F%252Fwww.google.com%252F |
+| Battery Fuel Gauge | Onsemi | LC709204F | https://www.onsemi.com/pdf/datasheet/lc709204f-d.pdf |
+| 3.3 V Regulator | Torex | XC6220 | https://product.torexsemi.com/system/files/series/xc6220.pdf |
 
 ### Photos
 
