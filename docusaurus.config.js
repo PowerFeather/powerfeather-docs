@@ -72,7 +72,7 @@ const config = {
       },
       footer: {
         style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} PowerFeather`,
+        copyright: `Copyright © ${new Date().getFullYear()} PowerFeather. Licensed under CC BY-SA 4.0.`,
       },
       prism: {
         theme: lightCodeTheme,
