@@ -27,7 +27,7 @@ The following are solar panels we have tested first-hand to work well with Power
 
 ## Connection
 
-![Solar Panel Connection](assets/solar_panel_connection.jpg)
+![Solar Panel Connection](assets/use_solar_panel/solar_panel_connection.jpg)
 
 Simply connect the solar panel's positive and negative terminal to the PowerFeather's `VDC` and `GND`
 pin, respectively.
