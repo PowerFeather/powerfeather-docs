@@ -4,7 +4,7 @@ This repo contains the source for [PowerFeather Docs](https://docs.powerfeather.
 
 ### Preparation
 
-The site is built with Docusaurus. Go to the [installation guide](https://docusaurus.io/docs/installation)
+The site is built with Docusaurus. Follow [this guide](https://docusaurus.io/docs/installation)
 to install it on your system.
 
 ### Usage
