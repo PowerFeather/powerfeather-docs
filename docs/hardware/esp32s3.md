@@ -115,7 +115,7 @@ slug: /
 
 ## Pins & Signals
 
-[![Pins and Signals](assets/pinout.jpg)](assets/pinout.jpg)
+[![ESP32-S3 PowerFeather pinout](assets/esp32s3/pinout.jpg)](assets/esp32s3/pinout.jpg)
 
 ### IO
 
@@ -263,7 +263,7 @@ While ESP32-S3 PowerFeather is largely compatible with the Adafruit Feather ecos
 
 Due to the ESP32-S3 module's size, some of the header holes are awfully close its pads. This means that in these areas, there is a risk of shorting a hole with a pad when soldering headers.
 
-![Proximity Male Header](assets/male_header_close.jpg)
+![Header pins close to ESP32-S3 pads](assets/esp32s3/close_header_pins.jpg)
 
 This is especially dangerous with VDC, since it is a high voltage power input (up to 18 V) that would most likely fry the ESP32-S3 if it comes in contact with one of its pads.
 It would be wise to check for shorts using a multimeter after soldering headers, just to be safe.
@@ -273,7 +273,7 @@ It would be wise to check for shorts using a multimeter after soldering headers,
 The wiring polarity for batteries with JST-PH connectors is not standardized. Please make sure the batteries you use are wired with the correct polarity - it is printed
 on the silkscreen!
 
-![Battery Polarity](assets/batter_polarity.jpg)
+![Proper battery polarity](assets/esp32s3/battery_polarity.jpg)
 
 ### Miscelleanous Questions
 
@@ -309,22 +309,20 @@ These are measurements for the figures in [Current Consumption](#current-consump
 
 | Deep Sleep, Fuel Gauge Enabled (Initial) | Deep Sleep, Fuel Gauge Enabled (Settled) |
 |-|-|
-| [![](assets/fg_initial.png)](assets/fg_initial.png) <br/> The fuel gauge *initially* samples around every ~1 s, with each sample registering a current spike to up ~5 mA. | [![](assets/fg_settled.png)](assets/fg_settled.png) <br/> The fuel gauge samples *settles* down to around every ~2 s, with each sample registering a current spike up to ~50 μA. |
+| [![Fuel gauge enabled, initial current measurement trace](assets/esp32s3/current_measurements/fg_on_initial.png)](assets/esp32s3/current_measurements/fg_on_initial.png) <br/> The fuel gauge *initially* samples around every ~1 s, with each sample registering a current spike to up ~5 mA. | [![Fuel gauge enabled, settled current measurement trace](assets/esp32s3/current_measurements/fg_on_settled.png)](assets/esp32s3/current_measurements/fg_on_settled.png) <br/> The fuel gauge samples *settles* down to around every ~2 s, with each sample registering a current spike up to ~50 μA. |
 
 
 | Deep Sleep, Fuel Gauge Disabled | Ship Mode, Fuel Gauge Disabled | Shutdown Mode, Fuel Gauge Disabled |
 |-|-|-|
-| [![](assets/nofg.png)](assets/nofg.png) | [![](assets/ship.png)](assets/ship.png) | [![](assets/shutdown.png)](assets/shutdown.png) |
+| [![No fuel gauge current measurement trace](assets/esp32s3/current_measurements/fg_off.png)](assets/esp32s3/current_measurements/fg_off.png) | [![Ship mode current measurement trace](assets/esp32s3/current_measurements/fg_off_ship.png)](assets/esp32s3/current_measurements/fg_off_ship.png) | [![Shutdown mode current measurement trace](assets/esp32s3/current_measurements/fg_off_shutdown.png)](assets/esp32s3/current_measurements/fg_off_shutdown.png) |
 
 You can download the raw traces obtained from PPK2 using the links below, and open them with your [nRF Connect Power Profiler Software](https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop).
 
-- [Trace for Deep Sleep with Fuel Gauge Enabled - Initial and Settled](assets/trace_initial-settled.ppk)
-- [Trace for Deep Sleep with Fuel Gauge Disabled, Ship Mode and Shutdown Mode](assets/trace_nofg-ship-shutdown.ppk)
+- [Current measurement trace for deep sleep with fuel gauge enabled - initial and settled](assets/esp32s3/current_measurements/ppk_trace_fg_on_initial_and_settled.ppk)
+- [Current measurement trace for deep dleep with duel gauge gisabled, ship mode and shutdown mode](assets/esp32s3/current_measurements/ppk_trace_fg_off_ship_and_shutdown.ppk)
 
 
 ### Photos
 
-| [![PowerFeather (1)](assets/pf1.jpg)](assets/pf1.jpg) | [![PowerFeather (4)](assets/pf4.jpg)](assets/pf4.jpg) | [![PowerFeather (5)](assets/pf5.jpg)](assets/pf5.jpg) | [![PowerFeather (2)](assets/pf2.jpg)](assets/pf2.jpg) | [![PowerFeather (3)](assets/pf3.jpg)](assets/pf3.jpg) |
+| [![ESP32-S3 PowerFeather product photo 1](assets/esp32s3/photos/1.jpg)](assets/esp32s3/photos/1.jpg) | [![ESP32-S3 PowerFeather product photo 4](assets/esp32s3/photos/4.jpg)](assets/esp32s3/photos/4.jpg) | [![ESP32-S3 PowerFeather product photo 5](assets/esp32s3/photos/5.jpg)](assets/esp32s3/photos/5.jpg) | [![ESP32-S3 PowerFeather product photo 2](assets/esp32s3/photos/2.jpg)](assets/esp32s3/photos/2.jpg) | [![ESP32-S3 PowerFeather product photo 3](assets/esp32s3/photos/3.jpg)](assets/esp32s3/photos/3.jpg) |
 |-|-|-|-|-|
-
-
