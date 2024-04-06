@@ -27,5 +27,5 @@ sidebar_position: 2
 
 ### Photos
 
-| [![Solar Panel (2)](assets/sp2.jpg)](assets/sp2.jpg) | [![Solar Panel (3)](assets/sp3.jpg)](assets/sp3.jpg) | [![Solar Panel (4)](assets/sp4.jpg)](assets/sp4.jpg) | [![Solar Panel (5)](assets/sp5.jpg)](assets/sp5.jpg) | [![Solar Panel (6)](assets/sp6.jpg)](assets/sp6.jpg) 
+| [![PowerFeather Solar Panel product photo 2](assets/solar_panel/photos/2.jpg)](assets/solar_panel/photos/2.jpg) | [![PowerFeather Solar Panel product photo 3](assets/solar_panel/photos/3.jpg)](assets/solar_panel/photos/3.jpg) | [![PowerFeather Solar Panel product photo 4](assets/solar_panel/photos/4.jpg)](assets/solar_panel/photos/4.jpg) | [![PowerFeather Solar Panel product photo 5](assets/solar_panel/photos/5.jpg)](assets/solar_panel/photos/5.jpg) | [![PowerFeather Solar Panel product photo 6](assets/solar_panel/photos/6.jpg)](assets/solar_panel/photos/6.jpg) 
 |-|-|-|-|-|
