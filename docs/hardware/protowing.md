@@ -9,7 +9,7 @@ sidebar_position: 1
 
 
 
-![ProtoWing Features](assets/protowing_features.jpg)
+![PowerFeather ProtoWing features](assets/protowing/protowing_features.jpg)
 
 
 ### 🅐 Barrel connector breakout for `VDC` and `GND`
@@ -64,5 +64,5 @@ to PowerFeather header pins:
 
 ### Photos
 
-| [![ProtoWing (1)](assets/pw1.jpg)](assets/pw1.jpg) | [![ProtoWing (4)](assets/pw4.jpg)](assets/pw4.jpg) | [![ProtoWing (5)](assets/pw5.jpg)](assets/pw5.jpg) | [![ProtoWing (6)](assets/pw6.jpg)](assets/pw6.jpg) |
+| [![PowerFeather ProtoWing product photo 1](assets/protowing/photos/1.jpg)](assets/protowing/photos/1.jpg) | [![PowerFeather ProtoWing product photo 4](assets/protowing/photos/4.jpg)](assets/protowing/photos/4.jpg) | [![PowerFeather ProtoWing product photo 5](assets/protowing/photos/5.jpg)](assets/protowing/photos/5.jpg) | [![PowerFeather ProtoWing product photo 6](assets/protowing/photos/6.jpg)](assets/protowing/photos/6.jpg) |
 |-|-|-|-|
