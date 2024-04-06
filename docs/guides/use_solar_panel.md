@@ -1,4 +1,9 @@
 ---
+keywords:
+    - esp32
+    - powerfeather
+    - solar panel
+    - mppt
 sidebar_position: 3
 ---
 

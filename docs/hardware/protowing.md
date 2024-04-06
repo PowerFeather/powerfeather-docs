@@ -1,4 +1,10 @@
 ---
+keywords:
+    - esp32
+    - powerfeather
+    - prototyping
+    - microsd
+    - barrel jack
 sidebar_position: 1
 ---
 

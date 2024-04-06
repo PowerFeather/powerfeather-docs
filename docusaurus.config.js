@@ -50,7 +50,9 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
+      metadata: [
+        {name: 'keywords', content: 'esp32, powerfeather, low power, solar panel, mppt, lipo, li-ion, battery, feather, stemma-qt, off-grid, portable'}
+      ],
       navbar: {
         title: 'PowerFeather',
         logo: {

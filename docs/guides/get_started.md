@@ -1,4 +1,13 @@
 ---
+keywords:
+    - esp32
+    - powerfeather
+    - example
+    - demo
+    - sdk
+    - get started
+    - arduino
+    - esp-idf
 sidebar_position: 1
 ---
 

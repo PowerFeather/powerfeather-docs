@@ -1,4 +1,12 @@
 ---
+keywords:
+    - esp32
+    - powerfeather
+    - sdk
+    - setup
+    - install
+    - arduino
+    - esp-idf
 sidebar_position: 0
 ---
 

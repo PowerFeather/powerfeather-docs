@@ -1,4 +1,12 @@
 ---
+keywords:
+    - esp32
+    - powerfeather
+    - sdk
+    - api
+    - mainboard
+    - power management
+    - power monitoring
 sidebar_position: 2
 ---
 

@@ -1,4 +1,19 @@
 ---
+keywords:
+    - esp32
+    - powerfeather
+    - low power
+    - solar panel
+    - power management
+    - power monitoring
+    - lipo
+    - battery
+    - li-ion
+    - current measurement
+    - charger
+    - fuel gauge
+    - feather
+    - stemma qt
 sidebar_position: 0
 slug: /
 ---

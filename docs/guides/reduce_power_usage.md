@@ -1,4 +1,13 @@
 ---
+keywords:
+    - esp32
+    - powerfeather
+    - low power
+    - quiescent current
+    - load switch
+    - battery life
+    - ship mode
+    - shutdown mode
 sidebar_position: 2
 ---
 
