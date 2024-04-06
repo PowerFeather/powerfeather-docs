@@ -9,7 +9,7 @@ sidebar_position: 1
 PowerFeather comes pre-loaded with a program that blinks the green user `LED`. Use this to quickly check
 if your board is OK. Simply connect your PowerFeather to a host computer using the USB-C connector:
 
-![LED Blink](assets/led_blink.gif)
+![ESP32-S3 PowerFeather LED blinking](assets/get_started/led_blink.gif)
 
 The red `CHG` LED should flash momentarily, after which the green user `LED` blinks continuously.
 
@@ -23,17 +23,17 @@ please go through [PowerFeather SDK Setup](/sdk/setup.md) first.
 
 On a host computer, open the Arduino IDE. Then open the example *PowerFeather-SDK* > *SupplyAndBatteryInfo*.
 
-![Open Example](assets/open_example.png)
+![Opening PowerFeather-SDK Arduino example](assets/get_started/open_arduino_example.png)
 
 [Connect the battery](../hardware/esp32s3.md#battery-polarity) first if you have one, before connecting PowerFeather to the host computer.
 Once it is connected open the board selector drop-down, click *Select other board and port* and choose *ESP32-S3 PowerFeather*.
 
-![Select Board](assets/select_board.png)
+![Selecting ESP32-S3 PowerFeather as board](assets/get_started/select_board.png)
 
 Upload the example, then open the *Serial Monitor* when done.
 
-![Upload Example](assets/upload_example.png)
-![Serial Monitor Hover](assets/serial_monitor_hover.png)
+![Uploading Arduino example](assets/get_started/upload_arduino_example.png)
+![Hovering on Serial Monitor selection](assets/get_started/serial_monitor_hover.png)
 
 On the *Serial Monitor*, you should see the supply and battery voltage and current reported; as well as the
 estimated battery charge percentage by the fuel gauge. Notice that the battery current is zero, while the supply current is not.
@@ -41,17 +41,17 @@ This indicates that:
 - The board is being powered by the USB supply and not the battery.
 - The battery is not charging.
 
-![Serial Monitor](assets/serial_monitor.png)
+![Serial Monitor open](assets/get_started/arduino_not_charging_demo.png)
 
 Press and hold `BTN` on PowerFeather to enable charging. Notice the battery current is no longer zero, and supply current is
 more than before.
 
-![Charging](assets/charging.png)
+![Arduino charging demonstration](assets/get_started/arduino_charging_demo.png)
 
 If you have or can make one, try using a data-only USB cable. With the USB supply absent, the battery powers the board and discharges.
 In this case, the measured battery current is negative.
 
-![Discharging](assets/discharging.png)
+![Arduino discharging demonstration](assets/get_started/arduino_discharging_demo.png)
 
 ### ESP-IDF
 
@@ -62,7 +62,7 @@ Navigate to a directory where the example project can be downloaded to and run t
 ```bash
 idf.py create-project-from-example "powerfeather/powerfeather-sdk^1.0.0:supply_and_battery_info"
 ```
-![Download example](assets/download_example.png)
+![Downloading PowerFeather-SDk ESP-IDF example](assets/get_started/download_idf_example.png)
 
 [Connect the battery](../hardware/esp32s3.md#battery-polarity) first if you have one, before connecting PowerFeather to the host computer.
 Once connected `cd` into the just downloaded *supply_and_battery_info* directory, then build and flash the example using the commands:
@@ -72,8 +72,8 @@ idf.py set-target esp32s3
 idf.py flash monitor
 ```
 
-![Set target](assets/set_target_esp32s3.png)
-![Build](assets/idf_build.png)
+![Setting ESP32-S3 as example project target](assets/get_started/set_target_esp32s3.png)
+![Building example project](assets/get_started/idf_example_build.png)
 
 Run `idf.py monitor`. You should see the supply and battery voltage and current reported; as well as the
 estimated battery charge percentage by the fuel gauge. Notice that the battery current is zero, while the supply current is not.
@@ -81,14 +81,14 @@ This indicates that:
 - The board is being powered by the USB supply and not the battery.
 - The battery is not charging.
 
-![Monitor not charging](assets/monitor_no_charge.png)
+![ESP-IDF not charging demonstration](assets/get_started/idf_not_charging_demo.png)
 
 Press and hold `BTN` on PowerFeather to enable charging. Notice the battery current is no longer zero, and supply current is
 more than before.
 
-![Monitor charging](assets/monitor_charging.png)
+![ESP-IDF charging demonstration](assets/get_started/idf_charging_demo.png)
 
 If you have or can make one, try using a data-only USB cable. With the USB supply absent, the battery powers the board and discharges.
 In this case, the measured battery current is negative.
 
-![Monitor discharge](assets/monitor_discharge.png)
+![ESP-IDF discharging demonstration](assets/get_started/idf_discharging_demo.png)
