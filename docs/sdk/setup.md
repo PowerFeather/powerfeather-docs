@@ -18,14 +18,9 @@ Install the following:
 
 1. Arduino v2.x or newer. Please follow the [installation instructions for your OS](https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing/).
 
-2. Board support for ESP32-S3 PowerFeather. Follow the [instructions on adding third party platforms using the Board Manager](https://support.arduino.cc/hc/en-us/articles/360016466340-Add-third-party-platforms-to-the-Boards-Manager-in-Arduino-IDE). Please use the following for the *Additional Boards Manager URL*:
+2. Arduino ESP32 v2.0.15 or newer. Please follow the [installation guide from Espressif](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html).
 
-    ```
-    https://powerfeather.github.io/package_powerfeather_index.json
-    ```
     ![Adding Boards Manager URL](assets/setup/add_board_manager_url.png)
-
-    Install *esp32s3_powerfeather by PowerFeather*.
 
     ![Installing ESP32-S3 PowerFeather board support](assets/setup/install_board_support.png)
 
