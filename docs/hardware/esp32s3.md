@@ -83,7 +83,7 @@ slug: /
         - Overvoltage Detect @4.37 V, Release @4.28 V
         - Overcurrent protection @3A
         - Trickle charging safety timer @1 hr
-        - Temperature-based charging current reduction based on JEITA, cutoff at 0 °C and 60 °C.
+        - Temperature-based charging current reduction based on JEITA, cutoff at 0 °C and 50 °C.
 
 ### Interfaces
 
