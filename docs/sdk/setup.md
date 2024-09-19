@@ -50,6 +50,12 @@ Build the sketch, it should proceed without any errors.
 
 ![Building Arduino minimal sketch](assets/setup/build_arduino_min_sketch.png)
 
+
+:::info
+If you have trouble uploading future sketches, try putting the ESP32-S3 in download mode. This can be done by pressing and
+holding `BTN`, pressing `RST` momentarily, and then releasing `BTN`.
+:::
+
 ## ESP-IDF
 
 ESP-IDF needs to be installed first. PowerFeather-SDK requires ESP-IDF v4.4 or newer.
