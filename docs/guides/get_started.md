@@ -41,6 +41,12 @@ Once it is connected open the board selector drop-down, click *Select other boar
 
 Upload the example, then open the *Serial Monitor* when done.
 
+:::info
+If you have trouble uploading the example sketch, try putting the ESP32-S3 in download mode. This can be done by pressing and
+holding `BTN`, pressing `RST` momentarily, and then releasing `BTN`.
+:::
+
+
 ![Uploading Arduino example](assets/get_started/upload_arduino_example.png)
 ![Hovering on Serial Monitor selection](assets/get_started/serial_monitor_hover.png)
 
