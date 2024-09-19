@@ -50,8 +50,11 @@ Build the sketch, it should proceed without any errors.
 
 ![Building Arduino minimal sketch](assets/setup/build_arduino_min_sketch.png)
 
-> **_NOTE:_**  If you have trouble uploading future sketches, try putting the ESP32-S3 in download mode. This can be done by pressing and
-> holding the `BTN`, pressing the `RST` momentarily, and then releasing the `BTN`.
+
+:::info
+If you have trouble uploading future sketches, try putting the ESP32-S3 in download mode. This can be done by pressing and
+holding `BTN`, pressing `RST` momentarily, and then releasing `BTN`.
+:::
 
 ## ESP-IDF
 
