@@ -345,6 +345,40 @@ You can download the raw traces obtained from PPK2 using the links below, and op
 | Battery Fuel Gauge | Onsemi | LC709204F | https://www.onsemi.com/pdf/datasheet/lc709204f-d.pdf |
 | 3.3 V Regulator | Torex | XC6220 | https://product.torexsemi.com/system/files/series/xc6220.pdf |
 
+
+### Showcase
+
+#### Video
+
+A showcase video for the ESP32-S3 PowerFeather can be found on Youtube, which contains:
+
+- Hardware Tour
+- Power Features & Capabilities
+- Demonstrations
+    - Power Inputs
+    - Ship Mode & Deep Sleep Current
+    - Enable/Disable 3.3V Outputs
+    - Charging Controls
+    - Battery Temperature Sensing
+    - Setting MPP Voltage
+
+<iframe
+  width="100%" style={{"aspect-ratio": "16 / 9"}}
+  src="https://www.youtube.com/embed/VF9AFk1Hf88"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen>
+</iframe>
+
+#### Articles
+
+Parts of the showcase video can also be found in written format on:
+
+- [Hackaday](https://hackaday.io/project/196835-esp32-s3-powerfeather)
+- [Hackster](https://www.hackster.io/powerfeatherdev/esp32-s3-powerfeather-power-management-monitoring-3ed26f)
+- [Electromaker](https://www.electromaker.io/project/view/esp32-s3-powerfeather-demonstrations?srsltid=AfmBOorDdO7lgxecP5gK1wmrVW1ibI68bCeYyku7K_SxBEnhQZW07pZ4)
+
+
 ### Photos
 
 | [![ESP32-S3 PowerFeather product photo 1](assets/esp32s3/photos/1.jpg)](assets/esp32s3/photos/1.jpg) | [![ESP32-S3 PowerFeather product photo 4](assets/esp32s3/photos/4.jpg)](assets/esp32s3/photos/4.jpg) | [![ESP32-S3 PowerFeather product photo 5](assets/esp32s3/photos/5.jpg)](assets/esp32s3/photos/5.jpg) | [![ESP32-S3 PowerFeather product photo 2](assets/esp32s3/photos/2.jpg)](assets/esp32s3/photos/2.jpg) | [![ESP32-S3 PowerFeather product photo 3](assets/esp32s3/photos/3.jpg)](assets/esp32s3/photos/3.jpg) |
