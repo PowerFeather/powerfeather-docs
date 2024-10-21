@@ -378,6 +378,12 @@ Parts of the showcase video can also be found in written format on:
 - [Hackster](https://www.hackster.io/powerfeatherdev/esp32-s3-powerfeather-power-management-monitoring-3ed26f)
 - [Electromaker](https://www.electromaker.io/project/view/esp32-s3-powerfeather-demonstrations?srsltid=AfmBOorDdO7lgxecP5gK1wmrVW1ibI68bCeYyku7K_SxBEnhQZW07pZ4)
 
+### Hardware Design Files
+
+
+- [Schematic](assets/esp32s3/esp32-s3-powerfeather.pdf)
+- [3D Model](assets/esp32s3/esp32-s3-powerfeather.step)
+
 
 ### Photos
 
