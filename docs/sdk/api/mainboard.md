@@ -112,6 +112,30 @@ This means that some of the other [Mainboard](#class-mainboard) functions will r
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if `VSQT` was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
+### [Result](./result.md#enum-class-result) enableSTAT(bool enable)
+
+#### Brief
+
+Enable or disable the `STAT`  LED.
+
+#### Description
+
+Normally, the `STAT` LED turns on when charging, or blinks when there is an error preventing
+charging (when battery temperature exceeds the set threshold, for example).
+This function can enable/disable this LED from turning on in these cases.
+
+One instance where disabling this LED is desirable is during low-sunlight charging conditions,
+where the current extracted from the solar panel should be used to charge the battery as
+much as possible.
+
+#### Parameters
+
+- **enable** [in] If `true`, `STAT` LED is enabled; if `false`, `STAT` LED is disabled.
+
+#### Return
+
+Returns [Result](./result.md#enum-class-result)::`Ok` if `STAT` LED was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
+
 ### [Result](./result.md#enum-class-result) getSupplyVoltage(uint16_t &voltage)
 
 #### Brief
@@ -634,6 +658,32 @@ If zero, triggering of the alarm is disabled and any existing low charge alarm i
 #### Return
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the battery low charge alarm was set successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
+
+### [Result](./result.md#enum-class-result) updateBatteryFuelGaugeTemp(float temperature)
+
+#### Brief
+
+Update fuel guage with measured battery temperature.
+
+#### Description
+
+In order to increase fuel gauge accuracy, you can update the fuel gauge with the battery temperature obtained from `getBatteryTemperature()` or other sources.
+
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
+
+A non-zero **capacity** or **type** of  [BatteryType](#enum-class-batterytype)::`ICR18650_26H`/[BatteryType](#enum-class-batterytype)::`UR18650ZY` should have been specified when [Mainboard](#class-mainboard)::init was called, else
+ [Result](./result.md#enum-class-result)::`InvalidState` is returned.
+
+The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
+
+#### Parameters
+
+- **temperature** [in] The temperature of the battery cell.
+
+#### Return
+
+Returns [Result](./result.md#enum-class-result)::`Ok` if the fuel gauge's battery temperature has been update successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
+
 
 ## extern [Mainboard](#class-mainboard) &Board 
 
