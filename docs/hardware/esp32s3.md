@@ -28,7 +28,7 @@ import TabItem from '@theme/TabItem';
 
 # ESP32-S3 PowerFeather
 
-<Tabs groupId="rev" defaultValue="v2" values={[
+<Tabs className="pf-tabs-compact" groupId="rev" defaultValue="v2" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -130,7 +130,7 @@ V1 and V2 share the same pinout and form factor; tabs highlight the revision-spe
 
 #### Input
 
-<Tabs groupId="rev" values={[
+<Tabs className="pf-tabs-compact" groupId="rev" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -150,7 +150,7 @@ V1 and V2 share the same pinout and form factor; tabs highlight the revision-spe
 
 #### Output
 
-<Tabs groupId="rev" values={[
+<Tabs className="pf-tabs-compact" groupId="rev" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -172,7 +172,7 @@ V1 and V2 share the same pinout and form factor; tabs highlight the revision-spe
 
 #### Current Consumption
 
-<Tabs groupId="rev" values={[
+<Tabs className="pf-tabs-compact" groupId="rev" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -286,7 +286,7 @@ Signals not routed to the ESP32-S3 GPIO pins, or are routed to other integrated 
 
 Supplies power to the board.
 
-<Tabs groupId="rev" values={[
+<Tabs className="pf-tabs-compact" groupId="rev" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -314,7 +314,7 @@ Supplies power to the board.
 
 Powers loads connected to the board. Please don't connect power supplies to these.
 
-<Tabs groupId="rev" values={[
+<Tabs className="pf-tabs-compact" groupId="rev" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -407,7 +407,7 @@ on the silkscreen!
 
 - Does ESP32-S3 PowerFeather support LiFePO4/LFP?
 
-    <Tabs groupId="rev" values={[
+    <Tabs className="pf-tabs-compact" groupId="rev" values={[
       {label: 'V2', value: 'v2'},
       {label: 'V1', value: 'v1'},
     ]}>
@@ -430,7 +430,7 @@ on the silkscreen!
 
 ### Current Measurements
 
-<Tabs groupId="rev" values={[
+<Tabs className="pf-tabs-compact" groupId="rev" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -461,7 +461,7 @@ on the silkscreen!
 
 ### Key Components
 
-<Tabs groupId="rev" values={[
+<Tabs className="pf-tabs-compact" groupId="rev" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -519,7 +519,7 @@ Parts of the showcase video can also be found in written format on:
 
 ### Hardware Design Files
 
-<Tabs groupId="rev" values={[
+<Tabs className="pf-tabs-compact" groupId="rev" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -536,7 +536,7 @@ Parts of the showcase video can also be found in written format on:
 
 ### Photos
 
-<Tabs groupId="rev" values={[
+<Tabs className="pf-tabs-compact" groupId="rev" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>

@@ -37,3 +37,20 @@ nav .navbar__item {
   --ifm-color-primary-lighter: #ffa968;
   --ifm-color-primary-lightest: #ffc397;
 }
+
+.pf-tabs-compact {
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.pf-tabs-compact .tabs__item {
+  font-size: 0.78rem;
+  line-height: 1.2;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 999px;
+}
+
+.pf-tabs-compact .tabs__item--active {
+  border-color: var(--ifm-color-primary);
+}
