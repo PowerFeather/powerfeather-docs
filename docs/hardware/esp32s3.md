@@ -28,21 +28,6 @@ import TabItem from '@theme/TabItem';
 
 # ESP32-S3 PowerFeather
 
-<Tabs className="pf-tabs-compact" defaultValue="v2" values={[
-  {label: 'V2', value: 'v2'},
-  {label: 'V1', value: 'v1'},
-]}>
-  <TabItem value="v2">
-    You're viewing V2 specs (MAX17260 + TPS631013).
-  </TabItem>
-  <TabItem value="v1">
-    You're viewing V1 specs (LC709204F + XC6220).
-  </TabItem>
-</Tabs>
-
-V1 and V2 share the same pinout and form factor; tabs highlight the revision-specific details.
-
-
 ## Features & Specifications
 
 ### Physical
