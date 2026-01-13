@@ -40,17 +40,33 @@ nav .navbar__item {
 
 .pf-tabs-compact {
   gap: 0.25rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0 !important;
+  padding-left: 0;
 }
 
 .pf-tabs-compact .tabs__item {
   font-size: 0.78rem;
   line-height: 1.2;
-  padding: 0.2rem 0.55rem;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px 6px 0 0;
+  color: var(--ifm-color-content-secondary);
+  transition: all 0.2s ease;
+}
+
+.pf-tabs-compact .tabs__item:hover {
+  background-color: var(--ifm-color-emphasis-100);
 }
 
 .pf-tabs-compact .tabs__item--active {
-  border-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-primary);
+  font-weight: bold;
+}
+
+.pf-tabs-compact + div {
+  background-color: var(--ifm-color-emphasis-100);
+  border-radius: 0 6px 6px 6px;
+  padding: 1rem;
+  margin-top: 0 !important;
 }
