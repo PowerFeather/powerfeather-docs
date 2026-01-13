@@ -16,6 +16,7 @@
   --ifm-color-primary-light: #db5800;
   --ifm-color-primary-lighter: #e55c00;
   --ifm-color-primary-lightest: #ff6904;
+  --pf-tabs-background: rgba(0, 0, 0, 0.03);
 }
 
 nav .navbar__title {
@@ -36,6 +37,7 @@ nav .navbar__item {
   --ifm-color-primary-light: #ffa058;
   --ifm-color-primary-lighter: #ffa968;
   --ifm-color-primary-lightest: #ffc397;
+  --pf-tabs-background: rgba(255, 255, 255, 0.03);
 }
 
 .pf-tabs-compact {
@@ -54,18 +56,20 @@ nav .navbar__item {
   transition: all 0.2s ease;
 }
 
-.pf-tabs-compact .tabs__item:hover {
+.pf-tabs-compact .tabs__item:not(.tabs__item--active):hover {
   background-color: var(--ifm-color-emphasis-100);
 }
 
 .pf-tabs-compact .tabs__item--active {
-  background-color: var(--ifm-color-emphasis-100);
+  background-color: var(--pf-tabs-background);
   color: var(--ifm-color-primary);
   font-weight: bold;
+  pointer-events: none;
+  cursor: default;
 }
 
 .pf-tabs-compact + div {
-  background-color: var(--ifm-color-emphasis-100);
+  background-color: var(--pf-tabs-background);
   border-radius: 0 6px 6px 6px;
   padding: 1rem;
   margin-top: 0 !important;
