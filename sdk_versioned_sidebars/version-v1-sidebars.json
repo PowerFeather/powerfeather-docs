@@ -1,0 +1,17 @@
+{
+  "sdkSidebar": [
+    {
+      "type": "category",
+      "label": "SDK",
+      "link": {
+        "type": "doc",
+        "id": "index"
+      },
+      "items": [
+        "api/mainboard",
+        "api/result",
+        "setup"
+      ]
+    }
+  ]
+}
