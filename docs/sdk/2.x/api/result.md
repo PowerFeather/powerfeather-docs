@@ -8,14 +8,14 @@ keywords:
     - power management
     - power monitoring
 sidebar_position: 2
-slug: /sdk/api/result
+parse_number_prefixes: false
 ---
 
 import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
 
 # Result
 
-<SdkApiVersionDropdown page="result" current="v1" />
+<SdkApiVersionDropdown page="result" current="2.x" />
 
 ## enum class Result
 

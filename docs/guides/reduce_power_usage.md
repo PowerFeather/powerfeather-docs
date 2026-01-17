@@ -24,8 +24,8 @@ from a trigger signal on a pin - then going back to deep-sleep.
 ## Turn off 3.3V outputs
 
 PowerFeather has two 3.3 V outputs: `3V3` and `VSQT`. Each of them can be individually
-enabled or disabled using [Mainboard::enable3V3](../sdk/v1/api/mainboard.md#result-enable3v3bool-enable)
-and [Mainboard::enableVSQT](../sdk/v1/api/mainboard.md#result-enablevsqtbool-enable).
+enabled or disabled using [Mainboard::enable3V3](../sdk/1.x/api/mainboard.md#result-enable3v3bool-enable)
+and [Mainboard::enableVSQT](../sdk/1.x/api/mainboard.md#result-enablevsqtbool-enable).
 This is useful for turning off loads to save power, and only turning them on when necessary.
 
 ```cpp
@@ -47,7 +47,7 @@ prior to deep-sleep, it remains disabled during deep-sleep and after wake-up.
 ## Disable Feather Wings using `EN`
 
 Feather Wings connected to the board can be enabled or disabled by using the function
-[Mainboard::setEN](../sdk/v1/api/mainboard.md#result-setenbool-high). Much like the 3.3 V outputs `3V3` and
+[Mainboard::setEN](../sdk/1.x/api/mainboard.md#result-setenbool-high). Much like the 3.3 V outputs `3V3` and
 `VSQT`, the set `EN` state persists across deep sleep.
 
 ```cpp
@@ -59,8 +59,8 @@ Board.setEN(true); // enable connected Feather Wings
 ## Use ship or shutdown mode
 
 Ship and shutdown mode are special power modes in which the battery is as good as cut off
-from the board. Use [Mainboard::enterShipMode](../sdk/v1/api/mainboard.md#result-entershipmode)
-and [Mainboard::enterShutdownMode](../sdk/v1/api/mainboard.md#result-entershutdownmode) to enter these
+from the board. Use [Mainboard::enterShipMode](../sdk/1.x/api/mainboard.md#result-entershipmode)
+and [Mainboard::enterShutdownMode](../sdk/1.x/api/mainboard.md#result-entershutdownmode) to enter these
 modes.
 
 ```cpp
@@ -69,5 +69,5 @@ Board.enterShutdownMode(); // enter shutdown mode
 ```
 
 There are entry and exit conditions for these modes. Read about these conditions in the
-documentation for [Mainboard::enterShipMode](../sdk/v1/api/mainboard.md#result-entershipmode) and
-[Mainboard::enterShutdownMode](../sdk/v1/api/mainboard.md#result-entershutdownmode).
+documentation for [Mainboard::enterShipMode](../sdk/1.x/api/mainboard.md#result-entershipmode) and
+[Mainboard::enterShutdownMode](../sdk/1.x/api/mainboard.md#result-entershutdownmode).

@@ -8,14 +8,14 @@ keywords:
     - power management
     - power monitoring
 sidebar_position: 1
-slug: /sdk/api/mainboard
+parse_number_prefixes: false
 ---
 
 import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
 
 # Mainboard
 
-<SdkApiVersionDropdown page="mainboard" current="v1" />
+<SdkApiVersionDropdown page="mainboard" current="2.x" />
 
 ## class Mainboard
 

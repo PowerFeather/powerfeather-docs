@@ -5,14 +5,14 @@ import styles from './styles.module.css';
 
 const VERSION_OPTIONS = [
   {
-    id: 'v2',
-    label: 'SDK v2 (latest preview)',
-    basePath: '/sdk/v2',
+    id: '2.x',
+    label: '2.x',
+    basePath: '/sdk/2.x',
   },
   {
-    id: 'v1',
-    label: 'SDK v1 (stable)',
-    basePath: '/sdk',
+    id: '1.x',
+    label: '1.x',
+    basePath: '/sdk/1.x',
   },
 ];
 
@@ -22,7 +22,7 @@ const PAGE_PATHS = {
   result: '/api/result',
 };
 
-export default function SdkApiVersionDropdown({page = 'api', current = 'v1'}) {
+export default function SdkApiVersionDropdown({page = 'api', current = '1.x'}) {
   const history = useHistory();
   const pagePath = PAGE_PATHS[page] || '';
 
@@ -41,7 +41,7 @@ export default function SdkApiVersionDropdown({page = 'api', current = 'v1'}) {
   return (
     <div className={styles.wrapper}>
       <label className={styles.label} htmlFor={selectId}>
-        SDK version
+        SDK Version
       </label>
       <select
         id={selectId}

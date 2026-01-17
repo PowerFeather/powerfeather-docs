@@ -26,7 +26,7 @@ The red `CHG` LED should flash momentarily, after which the green user `LED` bli
 
 The demo application showcases how to get basic information from the supply and battery. To build and flash the demo,
 ESP-IDF or Arduino with the *PowerFeather SDK* must be installed on your system. If you have not done this yet,
-please go through [PowerFeather SDK Setup](/sdk/setup) first.
+please go through [PowerFeather SDK Setup](/sdk/1.x/setup) first.
 
 ### Arduino
 

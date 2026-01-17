@@ -8,6 +8,7 @@ keywords:
     - arduino
     - esp-idf
 sidebar_position: 0
+parse_number_prefixes: false
 ---
 
 # Setup

@@ -1,0 +1,9 @@
+{
+  "label": "SDK 1.x (stable)",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "title": "SDK 1.x (stable)",
+    "description": "Docs for the 1.x.y SDK series. For the latest preview, see SDK 2.x (preview)."
+  }
+}
