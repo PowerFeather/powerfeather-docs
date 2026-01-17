@@ -13,7 +13,7 @@ sidebar_position: 0
 # Setup
 
 :::caution
-This v2_dev section is a preview. Content currently mirrors v1 and will be updated from the v2_dev SDK source.
+This v2 section is a preview. Content currently mirrors v1 and will be updated from the v2 SDK source.
 :::
 
 ## Arduino

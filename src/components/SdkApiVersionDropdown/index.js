@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 const VERSION_OPTIONS = [
   {
-    id: 'v2_dev',
+    id: 'v2',
     label: 'SDK v2 (latest preview)',
     basePath: '/sdk/v2_dev',
   },

@@ -14,10 +14,10 @@ import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
 
 # Mainboard
 
-<SdkApiVersionDropdown page="mainboard" current="v2_dev" />
+<SdkApiVersionDropdown page="mainboard" current="v2" />
 
 :::caution
-This v2_dev section is a preview. Content currently mirrors v1 and will be updated from the v2_dev SDK source.
+This v2 section is a preview. Content currently mirrors v1 and will be updated from the v2 SDK source.
 :::
 
 ## class Mainboard
