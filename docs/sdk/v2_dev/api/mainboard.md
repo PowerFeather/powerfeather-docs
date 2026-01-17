@@ -16,10 +16,6 @@ import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
 
 <SdkApiVersionDropdown page="mainboard" current="v2" />
 
-:::caution
-This v2 section is a preview. Content currently mirrors v1 and will be updated from the v2 SDK source.
-:::
-
 ## class Mainboard
 
 ### enum class BatteryType
