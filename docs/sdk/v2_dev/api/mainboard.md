@@ -10,7 +10,15 @@ keywords:
 sidebar_position: 1
 ---
 
+import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
+
 # Mainboard
+
+<SdkApiVersionDropdown page="mainboard" current="v2_dev" />
+
+:::caution
+This v2_dev section is a preview. Content currently mirrors v1 and will be updated from the v2_dev SDK source.
+:::
 
 ## class Mainboard
 

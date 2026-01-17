@@ -74,3 +74,8 @@ nav .navbar__item {
   padding: 1rem;
   margin-top: 0 !important;
 }
+
+.theme-doc-sidebar-item-category.sdk-v1-hidden,
+.theme-doc-sidebar-item-link.sdk-v1-hidden {
+  display: none;
+}

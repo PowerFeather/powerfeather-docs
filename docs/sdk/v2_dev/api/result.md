@@ -10,7 +10,15 @@ keywords:
 sidebar_position: 2
 ---
 
+import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
+
 # Result
+
+<SdkApiVersionDropdown page="result" current="v2_dev" />
+
+:::caution
+This v2_dev section is a preview. Content currently mirrors v1 and will be updated from the v2_dev SDK source.
+:::
 
 ## enum class Result
 

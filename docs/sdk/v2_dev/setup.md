@@ -12,6 +12,10 @@ sidebar_position: 0
 
 # Setup
 
+:::caution
+This v2_dev section is a preview. Content currently mirrors v1 and will be updated from the v2_dev SDK source.
+:::
+
 ## Arduino
 
 Install the following:
@@ -20,13 +24,13 @@ Install the following:
 
 2. Arduino ESP32 v2.0.15 or newer. Please follow the [installation guide from Espressif](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html).
 
-    ![Adding Boards Manager URL](assets/setup/add_board_manager_url.png)
+    ![Adding Boards Manager URL](../assets/setup/add_board_manager_url.png)
 
-    ![Installing ESP32-S3 PowerFeather board support](assets/setup/install_board_support.png)
+    ![Installing ESP32-S3 PowerFeather board support](../assets/setup/install_board_support.png)
 
 3. PowerFeather-SDK 1.0.0 or newer. Follow the [instructions for installing a library](https://docs.arduino.cc/software/ide-v2/tutorials/ide-v2-installing-a-library/).
 
-    ![Installing PowerFeather-SDK](assets/setup/install_powerfeather_sdk.png)
+    ![Installing PowerFeather-SDK](../assets/setup/install_powerfeather_sdk.png)
 
 To test if setup was done properly, create a sketch with the following content:
 
@@ -48,7 +52,7 @@ void loop()
 The above is the minimal sketch code for PowerFeather, which just initializes the board hardware.
 Build the sketch, it should proceed without any errors.
 
-![Building Arduino minimal sketch](assets/setup/build_arduino_min_sketch.png)
+![Building Arduino minimal sketch](../assets/setup/build_arduino_min_sketch.png)
 
 
 :::info
@@ -68,15 +72,15 @@ Open a terminal with the ESP-IDF environment loaded on [Windows](https://docs.es
 idf.py create-project "powerfeather_project"
 ```
 
-![Creating ESP-IDF sample project](assets/setup/create_idf_project.png)
+![Creating ESP-IDF sample project](../assets/setup/create_idf_project.png)
 
 Navigate into the created sample ESP-IDF project directory. Rename `main/powerfeather_project.c` to `main/powerfeather_project.cpp`. Your project tree should look like the following:
 
-![Renaming main C file](assets/setup/rename_main_c.png)
+![Renaming main C file](../assets/setup/rename_main_c.png)
 
 Edit `main/CMakeLists.txt` and change `powerfeather_project.c` to `powerfeather_project.cpp`, to reflect the rename done in the previous step.
 
-![Editing CMakeLists.txt](assets/setup/edit_cmakelists.png)
+![Editing CMakeLists.txt](../assets/setup/edit_cmakelists.png)
 
 Replace the contents of `main/main.cpp` with the following:
 
@@ -93,14 +97,14 @@ extern "C" void app_main()
 
 The above is the minimal ESP-IDF project code for PowerFeather, which just initializes the board hardware.
 
-![Editing main CPP](assets/setup/edit_main_cpp.png)
+![Editing main CPP](../assets/setup/edit_main_cpp.png)
 
 To add PowerFeather-SDK as a component for the sample ESP-IDF project, run the command:
 ```bash
 idf.py add-dependency "powerfeather/powerfeather-sdk^1.0.0"
 ```
 
-![Adding PowerFeather-SDK dependency](assets/setup/add_sdk_dependency.png)
+![Adding PowerFeather-SDK dependency](../assets/setup/add_sdk_dependency.png)
 
 Build the sample ESP-IDF project by issuing the commands:
 
@@ -111,4 +115,4 @@ idf.py build
 
 If everything was set up correctly, the build should proceed without any compilation errors.
 
-![Building ESP-IDF sample project](assets/setup/build_idf_project.png)
+![Building ESP-IDF sample project](../assets/setup/build_idf_project.png)
