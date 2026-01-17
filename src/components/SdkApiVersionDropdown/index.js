@@ -7,7 +7,7 @@ const VERSION_OPTIONS = [
   {
     id: 'v2',
     label: 'SDK v2 (latest preview)',
-    basePath: '/sdk/v2_dev',
+    basePath: '/sdk/v2',
   },
   {
     id: 'v1',
