@@ -52,7 +52,7 @@ with correct polarity. Incorrect polarity can cause permanent damage to PowerFea
 ## Code
 
 In order to maximize power from the solar panel, the MPP voltage should be set. It can be done by calling
-[Mainboard::setSupplyMaintainVoltage](../sdk/api/mainboard.md#result-setsupplymaintainvoltageuint16_t-voltage) in your code
+[Mainboard::setSupplyMaintainVoltage](../sdk/v1/api/mainboard.md#result-setsupplymaintainvoltageuint16_t-voltage) in your code
 with the panel's MPP voltage as argument (in millivolts).
 
 For example, for the PowerFeather Solar Panel, it would be:

@@ -1,8 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
 import {useWindowSize} from '@docusaurus/theme-common';
-import {useDoc} from '@docusaurus/theme-common/internal';
-import {useActivePluginAndVersion} from '@docusaurus/plugin-content-docs/client';
+import {
+  useActivePluginAndVersion,
+  useDoc,
+} from '@docusaurus/plugin-content-docs/client';
 import DocItemPaginator from '@theme/DocItem/Paginator';
 import DocVersionBanner from '@theme/DocVersionBanner';
 import DocVersionBadge from '@theme/DocVersionBadge';
@@ -11,7 +13,6 @@ import DocItemTOCMobile from '@theme/DocItem/TOC/Mobile';
 import DocItemTOCDesktop from '@theme/DocItem/TOC/Desktop';
 import DocItemContent from '@theme/DocItem/Content';
 import DocBreadcrumbs from '@theme/DocBreadcrumbs';
-import Unlisted from '@theme/Unlisted';
 import SdkVersionDropdown from '@site/src/components/SdkVersionDropdown';
 import styles from './styles.module.css';
 
@@ -37,16 +38,12 @@ function useDocTOC() {
 
 export default function DocItemLayout({children}) {
   const docTOC = useDocTOC();
-  const {
-    metadata: {unlisted},
-  } = useDoc();
   const activePlugin = useActivePluginAndVersion();
   const showSdkVersionDropdown = activePlugin?.activePlugin?.pluginId === 'sdk';
 
   return (
     <div className="row">
       <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
-        {unlisted && <Unlisted />}
         <DocVersionBanner />
         <div className={styles.docItemContainer}>
           <article>
