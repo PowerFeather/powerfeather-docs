@@ -132,7 +132,13 @@ import TabItem from '@theme/TabItem';
   {label: 'V1', value: 'v1'},
 ]}>
   <TabItem value="v2">
-  TBD
+
+  | Power State | `BATP` Current |
+  |-|-|
+  |Deep-Sleep, Fuel Gauge Enabled | 24 uA |
+  |Deep-Sleep, Fuel Gauge Disabled | 19 uA |
+  |Ship Mode, Fuel Gauge Disabled | 1 uA |
+  |Shutdown Mode, Fuel Gauge Disabled | 1 uA |
   </TabItem>
   <TabItem value="v1">
 
@@ -365,16 +371,27 @@ on the silkscreen!
 
 ### Current Measurements
 
+  These are measurements for the figures in [Current Consumption](#current-consumption). These were measured using Nordic [Power Profiler Kit II](https://www.nordicsemi.com/Products/Development-hardware/Power-Profiler-Kit-2) (a.k.a PPK2) acting as a battery @3.7 V plugged into `BATP` and `BATN`; and with no external supply (`VUSB` or `VDC`).
+
 <Tabs className="pf-tabs-compact" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
   <TabItem value="v2">
-  TBD
+
+  | | |
+  |-|-|
+  | **Deep Sleep, Fuel Gauge Enabled** <br/> [![Fuel gauge enabled current measurement trace](assets/esp32s3/current_measurements/fg_on_v2.png)](assets/esp32s3/current_measurements/fg_on_v2.png) | **Deep Sleep, Fuel Gauge Disabled** <br/> [![Fuel gauge disabled current measurement trace](assets/esp32s3/current_measurements/fg_off_v2.png)](assets/esp32s3/current_measurements/fg_off_v2.png) |
+  | **Ship Mode, Fuel Gauge Disabled** <br/> [![Ship mode current measurement trace](assets/esp32s3/current_measurements/fg_off_ship_v2.png)](assets/esp32s3/current_measurements/fg_off_ship_v2.png) | **Shutdown Mode, Fuel Gauge Disabled** <br/> [![Shutdown mode current measurement trace](assets/esp32s3/current_measurements/fg_off_shutdown_v2.png)](assets/esp32s3/current_measurements/fg_off_shutdown_v2.png) |
+
+  <p>You can download the raw traces obtained from PPK2 using the links below, and open them with your <a href="https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop">nRF Connect Power Profiler Software</a>.</p>
+
+  - [Current measurement trace for deep sleep with fuel gauge enabled](assets/esp32s3/current_measurements/ppk_trace_fg_on_v2.ppk2)
+  - [Current measurement trace for deep sleep with fuel gauge disabled](assets/esp32s3/current_measurements/ppk_trace_fg_off_v2.ppk2)
+  - [Current measurement trace for ship mode](assets/esp32s3/current_measurements/ppk_trace_fg_off_ship_v2.ppk2)
+  - [Current measurement trace for shutdown mode](assets/esp32s3/current_measurements/ppk_trace_fg_off_shutdown_v2.ppk2)
   </TabItem>
   <TabItem value="v1">
-
-  These are measurements for the figures in [Current Consumption](#current-consumption). These were measured using Nordic [Power Profiler Kit II](https://www.nordicsemi.com/Products/Development-hardware/Power-Profiler-Kit-2) (a.k.a PPK2) acting as a battery @3.7 V plugged into `BATP` and `BATN`; and with no external supply (`VUSB` or `VDC`).
 
   | Deep Sleep, Fuel Gauge Enabled (Initial) | Deep Sleep, Fuel Gauge Enabled (Settled) |
   |-|-|
