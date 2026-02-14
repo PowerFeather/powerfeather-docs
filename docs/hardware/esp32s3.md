@@ -30,6 +30,7 @@ import TabItem from '@theme/TabItem';
 
 :::note V2 Status
 V2 details on this page are preliminary and may change as validation and documentation are finalized.
+V1 and V2 are very similar overall, so only sections with meaningful differences are split by version.
 :::
 
 ## Features & Specifications
@@ -477,7 +478,9 @@ Parts of the showcase video can also be found in written format on:
   {label: 'V1', value: 'v1'},
 ]}>
   <TabItem value="v2">
-  TBD
+
+  - [Schematic](assets/esp32s3/esp32-s3-powerfeather-v2.pdf)
+  - [3D Model](assets/esp32s3/esp32-s3-powerfeather-v2.step)
   </TabItem>
   <TabItem value="v1">
 
@@ -488,16 +491,7 @@ Parts of the showcase video can also be found in written format on:
 
 ### Photos
 
-<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
-  {label: 'V2', value: 'v2'},
-  {label: 'V1', value: 'v1'},
-]}>
-  <TabItem value="v2">
-  TBD
-  </TabItem>
-  <TabItem value="v1">
+These photos apply to both V1 and V2.
 
-  | [![ESP32-S3 PowerFeather product photo 1](assets/esp32s3/photos/1.jpg)](assets/esp32s3/photos/1.jpg) | [![ESP32-S3 PowerFeather product photo 4](assets/esp32s3/photos/4.jpg)](assets/esp32s3/photos/4.jpg) | [![ESP32-S3 PowerFeather product photo 5](assets/esp32s3/photos/5.jpg)](assets/esp32s3/photos/5.jpg) | [![ESP32-S3 PowerFeather product photo 2](assets/esp32s3/photos/2.jpg)](assets/esp32s3/photos/2.jpg) | [![ESP32-S3 PowerFeather product photo 3](assets/esp32s3/photos/3.jpg)](assets/esp32s3/photos/3.jpg) |
-  |-|-|-|-|-|
-  </TabItem>
-</Tabs>
+| [![ESP32-S3 PowerFeather product photo 1](assets/esp32s3/photos/1.jpg)](assets/esp32s3/photos/1.jpg) | [![ESP32-S3 PowerFeather product photo 4](assets/esp32s3/photos/4.jpg)](assets/esp32s3/photos/4.jpg) | [![ESP32-S3 PowerFeather product photo 5](assets/esp32s3/photos/5.jpg)](assets/esp32s3/photos/5.jpg) | [![ESP32-S3 PowerFeather product photo 2](assets/esp32s3/photos/2.jpg)](assets/esp32s3/photos/2.jpg) | [![ESP32-S3 PowerFeather product photo 3](assets/esp32s3/photos/3.jpg)](assets/esp32s3/photos/3.jpg) |
+|-|-|-|-|-|
