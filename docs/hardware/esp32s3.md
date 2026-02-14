@@ -28,6 +28,10 @@ import TabItem from '@theme/TabItem';
 
 # ESP32-S3 PowerFeather
 
+:::note V2 Status
+V2 details on this page are preliminary and may change as validation and documentation are finalized.
+:::
+
 ## Features & Specifications
 
 ### Physical
@@ -127,7 +131,7 @@ import TabItem from '@theme/TabItem';
 
 #### Current Consumption
 
-<Tabs className="pf-tabs-compact" values={[
+<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -255,7 +259,7 @@ Supplies power to the board.
 
 Powers loads connected to the board. Please don't connect power supplies to these.
 
-<Tabs className="pf-tabs-compact" values={[
+<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -263,8 +267,8 @@ Powers loads connected to the board. Please don't connect power supplies to thes
 
   | Name | Description
   |-|-|
-  | VBAT | Battery output (tracks battery voltage; up to 4.2 V for Li-ion/LiPo or 3.6 V for LiFePO4) |
-  | VS | 3.8 V - 18 V Supply Voltage; Higher of `VDC` and `VUSB` |
+  | VBAT | Battery Output (tracks battery voltage; up to 4.2 V for Li-ion/LiPo or 3.6 V for LiFePO4) |
+  | VS | 3.8 V - 18 V Supply Voltage (higher of `VDC` and `VUSB`) |
   | 3V3 | Header Pin 3.3 V Output |
   | VSQT | STEMMA QT 3.3 V Output |
   </TabItem>
@@ -273,7 +277,7 @@ Powers loads connected to the board. Please don't connect power supplies to thes
   | Name | Description
   |-|-|
   | VBAT | 3.7 V - 4.2 V Battery Output |
-  | VS | 3.8 V - 18 V Supply Voltage; Higher of `VDC` and `VUSB` |
+  | VS | 3.8 V - 18 V Supply Voltage (higher of `VDC` and `VUSB`) |
   | 3V3 | Header Pin 3.3 V Output |
   | VSQT | STEMMA QT 3.3 V Output |
   </TabItem>
@@ -348,7 +352,7 @@ on the silkscreen!
 
 - Does ESP32-S3 PowerFeather support LiFePO4/LFP?
 
-    <Tabs className="pf-tabs-compact" values={[
+    <Tabs className="pf-tabs-compact" defaultValue="v1" values={[
       {label: 'V2', value: 'v2'},
       {label: 'V1', value: 'v1'},
     ]}>
@@ -373,7 +377,7 @@ on the silkscreen!
 
   These are measurements for the figures in [Current Consumption](#current-consumption). These were measured using Nordic [Power Profiler Kit II](https://www.nordicsemi.com/Products/Development-hardware/Power-Profiler-Kit-2) (a.k.a PPK2) acting as a battery @3.7 V plugged into `BATP` and `BATN`; and with no external supply (`VUSB` or `VDC`).
 
-<Tabs className="pf-tabs-compact" values={[
+<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -410,7 +414,7 @@ on the silkscreen!
 
 ### Key Components
 
-<Tabs className="pf-tabs-compact" values={[
+<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -468,7 +472,7 @@ Parts of the showcase video can also be found in written format on:
 
 ### Hardware Design Files
 
-<Tabs className="pf-tabs-compact" values={[
+<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -484,7 +488,7 @@ Parts of the showcase video can also be found in written format on:
 
 ### Photos
 
-<Tabs className="pf-tabs-compact" values={[
+<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
