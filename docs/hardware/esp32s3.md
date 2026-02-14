@@ -491,7 +491,7 @@ Parts of the showcase video can also be found in written format on:
 
 ### Photos
 
-These photos apply to both V1 and V2.
+V1 and V2 are visually very similar, so these photos are representative of both.
 
 | [![ESP32-S3 PowerFeather product photo 1](assets/esp32s3/photos/1.jpg)](assets/esp32s3/photos/1.jpg) | [![ESP32-S3 PowerFeather product photo 4](assets/esp32s3/photos/4.jpg)](assets/esp32s3/photos/4.jpg) | [![ESP32-S3 PowerFeather product photo 5](assets/esp32s3/photos/5.jpg)](assets/esp32s3/photos/5.jpg) | [![ESP32-S3 PowerFeather product photo 2](assets/esp32s3/photos/2.jpg)](assets/esp32s3/photos/2.jpg) | [![ESP32-S3 PowerFeather product photo 3](assets/esp32s3/photos/3.jpg)](assets/esp32s3/photos/3.jpg) |
 |-|-|-|-|-|
