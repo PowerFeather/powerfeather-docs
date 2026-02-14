@@ -20,3 +20,5 @@ yarn-debug.log*
 yarn-error.log*
 
 .dev
+
+._.DS_Store
