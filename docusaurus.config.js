@@ -58,7 +58,7 @@ const config = {
         logo: {
           alt: 'PowerFeather Logo',
           src: 'img/powerfeather.svg',
-          href: 'https://www.powerfeather.dev',
+          href: '/',
           target: '_self',
         },
         items: [
