@@ -27,7 +27,6 @@ The following are solar panels we have tested first-hand to work well with Power
 
 | Name | Wattage | MPP voltage | Open-circuit voltage | Purchase Link
 |-|-|-|-|-|
-| [PowerFeather Solar Panel](/hardware/solar_panel) | 10 W | 12 V | 13.9 V | https://www.elecrow.com/powerfeather-solar-panel.html |
 | NETCOMLAB COV-35105  | 10 W | 15 V | 16.5 V | https://www.kobetradingusa.com/products/cov-35105-solar-panel-15v-10w |
 
 ## Connection
@@ -39,8 +38,8 @@ pin, respectively.
 
 
 :::info
-If you are using a solar panel with a center-positive barrel jack (like the PowerFeather Solar Panel), you might be interested in the
-[PowerFeather ProtoWing](/hardware/protowing) which has a barrel connector and can be connected to `VDC` and `GND` of PowerFeather.
+If you are using a solar panel with a center-positive barrel jack, you might be interested in the
+PowerFeather ProtoWing which has a barrel connector and can be connected to `VDC` and `GND` of PowerFeather.
 :::
 
 :::danger
@@ -55,10 +54,10 @@ In order to maximize power from the solar panel, the MPP voltage should be set. 
 [Mainboard::setSupplyMaintainVoltage](../sdk/api/mainboard.md#result-setsupplymaintainvoltageuint16_t-voltage) in your code
 with the panel's MPP voltage as argument (in millivolts).
 
-For example, for the PowerFeather Solar Panel, it would be:
+For example, for a solar panel with 12 V MPP, it would be:
 
 ```cpp
 Board.init(500); // Assuming a 500 mAh battery
 // ...
-Board.setSupplyMaintainVoltage(12000); // PowerFeather Solar Panel MPP voltage = 12000 mV
+Board.setSupplyMaintainVoltage(12000); // 12 V MPP = 12000 mV
 ```
