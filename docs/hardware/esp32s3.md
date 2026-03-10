@@ -132,7 +132,7 @@ V1 and V2 are very similar overall, so only sections with meaningful differences
 
 #### Current Consumption
 
-<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
+<Tabs className="pf-tabs-compact" defaultValue="v2" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -260,7 +260,7 @@ Supplies power to the board.
 
 Powers loads connected to the board. Please don't connect power supplies to these.
 
-<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
+<Tabs className="pf-tabs-compact" defaultValue="v2" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -353,7 +353,7 @@ on the silkscreen!
 
 - Does ESP32-S3 PowerFeather support LiFePO4/LFP?
 
-    <Tabs className="pf-tabs-compact" defaultValue="v1" values={[
+    <Tabs className="pf-tabs-compact" defaultValue="v2" values={[
       {label: 'V2', value: 'v2'},
       {label: 'V1', value: 'v1'},
     ]}>
@@ -378,7 +378,7 @@ on the silkscreen!
 
   These are measurements for the figures in [Current Consumption](#current-consumption). These were measured using Nordic [Power Profiler Kit II](https://www.nordicsemi.com/Products/Development-hardware/Power-Profiler-Kit-2) (a.k.a PPK2) acting as a battery @3.7 V plugged into `BATP` and `BATN`; and with no external supply (`VUSB` or `VDC`).
 
-<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
+<Tabs className="pf-tabs-compact" defaultValue="v2" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -415,7 +415,7 @@ on the silkscreen!
 
 ### Key Components
 
-<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
+<Tabs className="pf-tabs-compact" defaultValue="v2" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
@@ -473,7 +473,7 @@ Parts of the showcase video can also be found in written format on:
 
 ### Hardware Design Files
 
-<Tabs className="pf-tabs-compact" defaultValue="v1" values={[
+<Tabs className="pf-tabs-compact" defaultValue="v2" values={[
   {label: 'V2', value: 'v2'},
   {label: 'V1', value: 'v1'},
 ]}>
