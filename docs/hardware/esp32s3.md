@@ -7,32 +7,44 @@ keywords:
     - power management
     - power monitoring
     - lipo
-    - battery
     - li-ion
+    - lifepo4
+    - lfp
+    - battery
     - current measurement
     - charger
     - fuel gauge
+    - buck-boost
+    - tps631013
+    - max17260
     - feather
     - stemma qt
 sidebar_position: 0
 slug: /
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # ESP32-S3 PowerFeather
 
+:::note V2 Status
+V2 details on this page are preliminary and may change as validation and documentation are finalized.
+V1 and V2 are very similar overall, so only sections with meaningful differences are split by version.
+:::
 
 ## Features & Specifications
 
 ### Physical
 
-- Board Dimensions: 65 mm L x 23 mm W  x 7 mm H
+- Board Dimensions: 65 mm L x 23 mm W x 7 mm H
 - Feather-compatible format, Feather Wings support
 - Board Features
     - USB-C connector
     - Two 2.5 mm mounting holes
     - Two 1x16 2.54 mm header pin holes
     - Thermistor pin hole
-    - 2-pin JST PH Li-ion/LiPo battery connector
+    - 2-pin JST PH battery connector
     - 4-pin JST SH STEMMA QT connector
     - Green user LED
     - Red charger status LED
@@ -109,24 +121,41 @@ slug: /
 #### Input
 
 - 5 V, 2 A max on `VUSB` USB-C connector
-- 5 V - 18 V, 2A max on `VDC` header pin
-- 4.2 V max, 2 A max on `BATP` and `BATN` JST PH Li-ion/LiPo battery connector
+- 5 V - 18 V, 2 A max on `VDC` header pin
+- 4.2 V max, 2 A max on `BATP` and `BATN` JST PH battery connector
 
 #### Output
 
 - 3.3 V, 1 A max shared between board, `3V3` header pin and `VSQT` STEMMA QT connector
-- 3.3 V - 4.2 V, 3 A max shared between board and `VBAT` header pin
+- Battery output on `VBAT` (tracks battery voltage), 3 A max shared between board and `VBAT` header pin
 - 5 V - 18 V, 2 A max shared between board and `VS` header pin
 
 #### Current Consumption
 
-| Power State | `BATP` Current |
-|-|-|
-|Deep-Sleep, Fuel Gauge Enabled (Initial) | 26 μA |
-|Deep-Sleep, Fuel Gauge Enabled (Settled) | 18.5 μA |
-|Deep-Sleep, Fuel Gauge Disabled | 18 μA |
-|Ship Mode, Fuel Gauge Disabled | 1.5 μA |
-|Shutdown Mode, Fuel Gauge Disabled | 1.4 μA |
+<Tabs className="pf-tabs-compact" defaultValue="v2" values={[
+  {label: 'V2', value: 'v2'},
+  {label: 'V1', value: 'v1'},
+]}>
+  <TabItem value="v2">
+
+  | Power State | `BATP` Current |
+  |-|-|
+  |Deep-Sleep, Fuel Gauge Enabled | 24 uA |
+  |Deep-Sleep, Fuel Gauge Disabled | 19 uA |
+  |Ship Mode, Fuel Gauge Disabled | 1 uA |
+  |Shutdown Mode, Fuel Gauge Disabled | 1 uA |
+  </TabItem>
+  <TabItem value="v1">
+
+  | Power State | `BATP` Current |
+  |-|-|
+  |Deep-Sleep, Fuel Gauge Enabled (Initial) | 26 uA |
+  |Deep-Sleep, Fuel Gauge Enabled (Settled) | 18.5 uA |
+  |Deep-Sleep, Fuel Gauge Disabled | 18 uA |
+  |Ship Mode, Fuel Gauge Disabled | 1.5 uA |
+  |Shutdown Mode, Fuel Gauge Disabled | 1.4 uA |
+  </TabItem>
+</Tabs>
 
 ## Pins & Signals
 
@@ -222,21 +251,38 @@ Supplies power to the board.
 
 | Name | Description
 |-|-|
-| BATN | Li-ion/LiPo Negative Terminal |
-| BATP | Li-ion/LiPo Positive Terminal |
-| VUSB | 5V USB Power Input |
+| BATN | Battery negative terminal |
+| BATP | Battery positive terminal |
+| VUSB | 5 V USB Power Input |
 | VDC | 3.8 V - 18 V Header Pin Input |
 
 ### Power Output
 
 Powers loads connected to the board. Please don't connect power supplies to these.
 
-| Name | Description
-|-|-|
-| VBAT | 3.7 V - 4.2 V Battery Output |
-| VS | 3.8 V - 18 V Supply Voltage; Higher of `VDC` and `VUSB` |
-| 3V3 | Header Pin 3.3 V Output |
-| VSQT | STEMMA QT 3.3 V Output |
+<Tabs className="pf-tabs-compact" defaultValue="v2" values={[
+  {label: 'V2', value: 'v2'},
+  {label: 'V1', value: 'v1'},
+]}>
+  <TabItem value="v2">
+
+  | Name | Description
+  |-|-|
+  | VBAT | Battery Output (tracks battery voltage; up to 4.2 V for Li-ion/LiPo or 3.6 V for LiFePO4) |
+  | VS | 3.8 V - 18 V Supply Voltage (higher of `VDC` and `VUSB`) |
+  | 3V3 | Header Pin 3.3 V Output |
+  | VSQT | STEMMA QT 3.3 V Output |
+  </TabItem>
+  <TabItem value="v1">
+
+  | Name | Description
+  |-|-|
+  | VBAT | 3.7 V - 4.2 V Battery Output |
+  | VS | 3.8 V - 18 V Supply Voltage (higher of `VDC` and `VUSB`) |
+  | 3V3 | Header Pin 3.3 V Output |
+  | VSQT | STEMMA QT 3.3 V Output |
+  </TabItem>
+</Tabs>
 
 ### Ground
 
@@ -251,7 +297,7 @@ Powers loads connected to the board. Please don't connect power supplies to thes
 
 ### Feather Differences
 
-While ESP32-S3 PowerFeather is largely compatible with the Adafruit Feather ecosystem, it has has a few deviations from the [Feather specification](https://learn.adafruit.com/adafruit-feather/feather-specification).
+While ESP32-S3 PowerFeather is largely compatible with the Adafruit Feather ecosystem, it has a few deviations from the [Feather specification](https://learn.adafruit.com/adafruit-feather/feather-specification).
 
 - `EN` Behavior
 
@@ -290,7 +336,7 @@ on the silkscreen!
 
 ![Proper battery polarity](assets/esp32s3/battery_polarity.jpg)
 
-### Miscelleanous Questions
+### Miscellaneous Questions
 
 - Can `VUSB` and `VDC` be plugged in at the same time?
 
@@ -303,12 +349,22 @@ on the silkscreen!
 
     PowerFeather uses a charger IC that implements a power path, so it is safe to have PowerFeather and connected devices draw power while
     charging the battery. Furthermore, the power path allows the battery to supplement `VUSB` or `VDC` during load power spikes to prevent brownouts.
-    Also, if there is `VDC` or `VUSB`, but there is no battery or the battery is fully depleted, `VBAT` is still regulated to 3.7 V.
+    Also, if there is `VDC` or `VUSB`, but there is no battery or the battery is fully depleted, `VBAT` is still regulated by the charger.
 
 - Does ESP32-S3 PowerFeather support LiFePO4/LFP?
 
-    The board as a whole does not support LiFePO4 batteries. While the charger IC supports LiFePO4, the fuel gauge IC does not. Furthermore,
-    PowerFeather uses a linear regulator to provide the 3.3 V power rail, which won't function properly under a LiFePO4 battery with nominal voltage of 3.2 V.
+    <Tabs className="pf-tabs-compact" defaultValue="v2" values={[
+      {label: 'V2', value: 'v2'},
+      {label: 'V1', value: 'v1'},
+    ]}>
+      <TabItem value="v2">
+        <p>Yes. V2 uses the MAX17260 fuel gauge (with LiFePO4 profiles) and a TPS631013 buck-boost regulator, so the 3.3 V rail remains regulated across the LiFePO4 voltage range. Use LiFePO4 cells (3.6 V max) and configure the SDK battery type or model profile accordingly for accurate fuel gauging.</p>
+      </TabItem>
+      <TabItem value="v1">
+        <p>The board as a whole does not support LiFePO4 batteries. While the charger IC supports LiFePO4, the fuel gauge IC does not. Furthermore,
+        PowerFeather uses a linear regulator to provide the 3.3 V power rail, which won't function properly under a LiFePO4 battery with nominal voltage of 3.2 V.</p>
+      </TabItem>
+    </Tabs>
 
 - What do you mean by near/pseudo-MPPT?
 
@@ -320,31 +376,68 @@ on the silkscreen!
 
 ### Current Measurements
 
-These are measurements for the figures in [Current Consumption](#current-consumption). These were measured using Nordic [Power Profiler Kit II](https://www.nordicsemi.com/Products/Development-hardware/Power-Profiler-Kit-2) (a.k.a PPK2) acting as a battery @3.7 V plugged into `BATP` and `BATN`; and with no external supply (`VBUS` or `VDC`).
+  These are measurements for the figures in [Current Consumption](#current-consumption). These were measured using Nordic [Power Profiler Kit II](https://www.nordicsemi.com/Products/Development-hardware/Power-Profiler-Kit-2) (a.k.a PPK2) acting as a battery @3.7 V plugged into `BATP` and `BATN`; and with no external supply (`VUSB` or `VDC`).
 
-| Deep Sleep, Fuel Gauge Enabled (Initial) | Deep Sleep, Fuel Gauge Enabled (Settled) |
-|-|-|
-| [![Fuel gauge enabled, initial current measurement trace](assets/esp32s3/current_measurements/fg_on_initial.png)](assets/esp32s3/current_measurements/fg_on_initial.png) <br/> The fuel gauge *initially* samples around every ~1 s, with each sample registering a current spike to up ~5 mA. | [![Fuel gauge enabled, settled current measurement trace](assets/esp32s3/current_measurements/fg_on_settled.png)](assets/esp32s3/current_measurements/fg_on_settled.png) <br/> The fuel gauge samples *settles* down to around every ~2 s, with each sample registering a current spike up to ~50 μA. |
+<Tabs className="pf-tabs-compact" defaultValue="v2" values={[
+  {label: 'V2', value: 'v2'},
+  {label: 'V1', value: 'v1'},
+]}>
+  <TabItem value="v2">
 
+  | | |
+  |-|-|
+  | **Deep Sleep, Fuel Gauge Enabled** <br/> [![Fuel gauge enabled current measurement trace](assets/esp32s3/current_measurements/fg_on_v2.png)](assets/esp32s3/current_measurements/fg_on_v2.png) | **Deep Sleep, Fuel Gauge Disabled** <br/> [![Fuel gauge disabled current measurement trace](assets/esp32s3/current_measurements/fg_off_v2.png)](assets/esp32s3/current_measurements/fg_off_v2.png) |
+  | **Ship Mode, Fuel Gauge Disabled** <br/> [![Ship mode current measurement trace](assets/esp32s3/current_measurements/fg_off_ship_v2.png)](assets/esp32s3/current_measurements/fg_off_ship_v2.png) | **Shutdown Mode, Fuel Gauge Disabled** <br/> [![Shutdown mode current measurement trace](assets/esp32s3/current_measurements/fg_off_shutdown_v2.png)](assets/esp32s3/current_measurements/fg_off_shutdown_v2.png) |
 
-| Deep Sleep, Fuel Gauge Disabled | Ship Mode, Fuel Gauge Disabled | Shutdown Mode, Fuel Gauge Disabled |
-|-|-|-|
-| [![No fuel gauge current measurement trace](assets/esp32s3/current_measurements/fg_off.png)](assets/esp32s3/current_measurements/fg_off.png) | [![Ship mode current measurement trace](assets/esp32s3/current_measurements/fg_off_ship.png)](assets/esp32s3/current_measurements/fg_off_ship.png) | [![Shutdown mode current measurement trace](assets/esp32s3/current_measurements/fg_off_shutdown.png)](assets/esp32s3/current_measurements/fg_off_shutdown.png) |
+  <p>You can download the raw traces obtained from PPK2 using the links below, and open them with your <a href="https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop">nRF Connect Power Profiler Software</a>.</p>
 
-You can download the raw traces obtained from PPK2 using the links below, and open them with your [nRF Connect Power Profiler Software](https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop).
+  - [Current measurement trace for deep sleep with fuel gauge enabled](assets/esp32s3/current_measurements/ppk_trace_fg_on_v2.ppk2)
+  - [Current measurement trace for deep sleep with fuel gauge disabled](assets/esp32s3/current_measurements/ppk_trace_fg_off_v2.ppk2)
+  - [Current measurement trace for ship mode](assets/esp32s3/current_measurements/ppk_trace_fg_off_ship_v2.ppk2)
+  - [Current measurement trace for shutdown mode](assets/esp32s3/current_measurements/ppk_trace_fg_off_shutdown_v2.ppk2)
+  </TabItem>
+  <TabItem value="v1">
 
-- [Current measurement trace for deep sleep with fuel gauge enabled - initial and settled](assets/esp32s3/current_measurements/ppk_trace_fg_on_initial_and_settled.ppk)
-- [Current measurement trace for deep dleep with duel gauge gisabled, ship mode and shutdown mode](assets/esp32s3/current_measurements/ppk_trace_fg_off_ship_and_shutdown.ppk)
+  | Deep Sleep, Fuel Gauge Enabled (Initial) | Deep Sleep, Fuel Gauge Enabled (Settled) |
+  |-|-|
+  | [![Fuel gauge enabled, initial current measurement trace](assets/esp32s3/current_measurements/fg_on_initial.png)](assets/esp32s3/current_measurements/fg_on_initial.png) <br/> The fuel gauge *initially* samples around every ~1 s, with each sample registering a current spike to up ~5 mA. | [![Fuel gauge enabled, settled current measurement trace](assets/esp32s3/current_measurements/fg_on_settled.png)](assets/esp32s3/current_measurements/fg_on_settled.png) <br/> The fuel gauge samples *settles* down to around every ~2 s, with each sample registering a current spike up to ~50 uA. |
+
+  | Deep Sleep, Fuel Gauge Disabled | Ship Mode, Fuel Gauge Disabled | Shutdown Mode, Fuel Gauge Disabled |
+  |-|-|-|
+  | [![No fuel gauge current measurement trace](assets/esp32s3/current_measurements/fg_off.png)](assets/esp32s3/current_measurements/fg_off.png) | [![Ship mode current measurement trace](assets/esp32s3/current_measurements/fg_off_ship.png)](assets/esp32s3/current_measurements/fg_off_ship.png) | [![Shutdown mode current measurement trace](assets/esp32s3/current_measurements/fg_off_shutdown.png)](assets/esp32s3/current_measurements/fg_off_shutdown.png) |
+
+  You can download the raw traces obtained from PPK2 using the links below, and open them with your [nRF Connect Power Profiler Software](https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop).
+
+  - [Current measurement trace for deep sleep with fuel gauge enabled - initial and settled](assets/esp32s3/current_measurements/ppk_trace_fg_on_initial_and_settled.ppk)
+  - [Current measurement trace for deep sleep with fuel gauge disabled, ship mode and shutdown mode](assets/esp32s3/current_measurements/ppk_trace_fg_off_ship_and_shutdown.ppk)
+  </TabItem>
+</Tabs>
 
 ### Key Components
 
-| Component | Manufacturer | Part | Datasheet |
-|-|-|-|-|
-| Microcontroller & WiFi + Bluetooth LE SoC | Espressif | ESP32-S3-WROOM-1 | https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf |
-| Battery Charger | Texas Instruments | BQ25628E | https://www.ti.com/lit/ds/symlink/bq25628e.pdf?ts=1712390973163&ref_url=https%253A%252F%252Fwww.google.com%252F |
-| Battery Fuel Gauge | Onsemi | LC709204F | https://www.onsemi.com/pdf/datasheet/lc709204f-d.pdf |
-| 3.3 V Regulator | Torex | XC6220 | https://product.torexsemi.com/system/files/series/xc6220.pdf |
+<Tabs className="pf-tabs-compact" defaultValue="v2" values={[
+  {label: 'V2', value: 'v2'},
+  {label: 'V1', value: 'v1'},
+]}>
+  <TabItem value="v2">
 
+  | Component | Manufacturer | Part | Datasheet |
+  |-|-|-|-|
+  | Microcontroller & WiFi + Bluetooth LE SoC | Espressif | ESP32-S3-WROOM-1 | https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf |
+  | Battery Charger | Texas Instruments | BQ25628E | https://www.ti.com/lit/ds/symlink/bq25628e.pdf |
+  | Battery Fuel Gauge | Analog Devices | MAX17260 | https://www.analog.com/media/en/technical-documentation/data-sheets/MAX17260-MAX17261.pdf |
+  | 3.3 V Buck-Boost | Texas Instruments | TPS631013 | https://www.ti.com/lit/ds/symlink/tps631013.pdf |
+  </TabItem>
+  <TabItem value="v1">
+
+  | Component | Manufacturer | Part | Datasheet |
+  |-|-|-|-|
+  | Microcontroller & WiFi + Bluetooth LE SoC | Espressif | ESP32-S3-WROOM-1 | https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf |
+  | Battery Charger | Texas Instruments | BQ25628E | https://www.ti.com/lit/ds/symlink/bq25628e.pdf?ts=1712390973163&ref_url=https%253A%252F%252Fwww.google.com%252F |
+  | Battery Fuel Gauge | Onsemi | LC709204F | https://www.onsemi.com/pdf/datasheet/lc709204f-d.pdf |
+  | 3.3 V Regulator | Torex | XC6220 | https://product.torexsemi.com/system/files/series/xc6220.pdf |
+  </TabItem>
+</Tabs>
 
 ### Showcase
 
@@ -380,12 +473,25 @@ Parts of the showcase video can also be found in written format on:
 
 ### Hardware Design Files
 
+<Tabs className="pf-tabs-compact" defaultValue="v2" values={[
+  {label: 'V2', value: 'v2'},
+  {label: 'V1', value: 'v1'},
+]}>
+  <TabItem value="v2">
 
-- [Schematic](assets/esp32s3/esp32-s3-powerfeather.pdf)
-- [3D Model](assets/esp32s3/esp32-s3-powerfeather.step)
+  - [Schematic](assets/esp32s3/esp32-s3-powerfeather-v2.pdf)
+  - [3D Model](assets/esp32s3/esp32-s3-powerfeather-v2.step)
+  </TabItem>
+  <TabItem value="v1">
 
+  - [Schematic](assets/esp32s3/esp32-s3-powerfeather.pdf)
+  - [3D Model](assets/esp32s3/esp32-s3-powerfeather.step)
+  </TabItem>
+</Tabs>
 
 ### Photos
+
+V1 and V2 are visually very similar, so these photos are representative of both.
 
 | [![ESP32-S3 PowerFeather product photo 1](assets/esp32s3/photos/1.jpg)](assets/esp32s3/photos/1.jpg) | [![ESP32-S3 PowerFeather product photo 4](assets/esp32s3/photos/4.jpg)](assets/esp32s3/photos/4.jpg) | [![ESP32-S3 PowerFeather product photo 5](assets/esp32s3/photos/5.jpg)](assets/esp32s3/photos/5.jpg) | [![ESP32-S3 PowerFeather product photo 2](assets/esp32s3/photos/2.jpg)](assets/esp32s3/photos/2.jpg) | [![ESP32-S3 PowerFeather product photo 3](assets/esp32s3/photos/3.jpg)](assets/esp32s3/photos/3.jpg) |
 |-|-|-|-|-|

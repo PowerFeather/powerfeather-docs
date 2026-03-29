@@ -26,7 +26,7 @@ The red `CHG` LED should flash momentarily, after which the green user `LED` bli
 
 The demo application showcases how to get basic information from the supply and battery. To build and flash the demo,
 ESP-IDF or Arduino with the *PowerFeather SDK* must be installed on your system. If you have not done this yet,
-please go through [PowerFeather SDK Setup](/sdk/setup.md) first.
+please go through [PowerFeather SDK Setup](/sdk/setup) first.
 
 ### Arduino
 
@@ -38,6 +38,12 @@ On a host computer, open the Arduino IDE. Then open the example *PowerFeather-SD
 Once it is connected open the board selector drop-down, click *Select other board and port* and choose *ESP32-S3 PowerFeather*.
 
 ![Selecting ESP32-S3 PowerFeather as board](assets/get_started/select_board.png)
+
+:::note
+Set *Tools* > *Board Revision* to match your hardware revision:
+- *ESP32-S3 PowerFeather* for V1 boards
+- *ESP32-S3 PowerFeather V2* for V2 boards
+:::
 
 Upload the example, then open the *Serial Monitor* when done.
 
@@ -86,6 +92,13 @@ Once connected `cd` into the just downloaded *supply_and_battery_info* directory
 idf.py set-target esp32s3
 idf.py flash monitor
 ```
+
+:::note
+Before flashing, run `idf.py menuconfig` and select your board revision in:
+*PowerFeather-SDK* > *ESP32-S3 PowerFeather board revision*.
+
+Choose either *ESP32-S3 PowerFeather* or *ESP32-S3 PowerFeather V2* to match your hardware.
+:::
 
 ![Setting ESP32-S3 as example project target](assets/get_started/set_target_esp32s3.png)
 ![Building example project](assets/get_started/idf_example_build.png)
