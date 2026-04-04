@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 const VERSION_OPTIONS = [
   {
     id: '2.x',
-    label: '2.x (2.0.0beta1)',
+    label: '2.x (preview)',
     basePath: '/sdk/2.x',
   },
   {

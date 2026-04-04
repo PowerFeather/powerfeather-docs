@@ -14,15 +14,15 @@ displayed_sidebar: defaultSidebar
 ---
 
 import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
-import SdkSetupV2Content from '@site/src/components/SdkSetupV2Content/index.mdx';
+import SdkSetupV2Content from '../_partials/SdkSetupV2Content.mdx';
 
 # Setup
 
 <SdkApiVersionDropdown page="setup" current="2.x" />
 
 :::note
-`2.x` is currently a preview track. The instructions below are pinned to tag `2.0.0beta1`.
-Use that tag for evaluation instead of the moving `v2` branch unless you explicitly want ongoing preview changes.
+`2.x` is currently a preview track. The instructions below follow the curated `v2` branch.
+Use `v2` for external evaluation.
 :::
 
 <SdkSetupV2Content />
