@@ -76,6 +76,7 @@ nav .navbar__item {
 }
 
 .theme-doc-sidebar-item-category.sdk-1x-hidden,
-.theme-doc-sidebar-item-link.sdk-1x-hidden {
+.theme-doc-sidebar-item-link.sdk-1x-hidden,
+.theme-doc-sidebar-item-link.sdk-setup-hidden {
   display: none;
 }

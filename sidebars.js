@@ -26,6 +26,8 @@ const sidebars = {
       link: {type: 'doc', id: 'sdk/index'},
       items: [
         'sdk/setup',
+        {type: 'doc', id: 'sdk/2.x/setup', className: 'sdk-setup-hidden'},
+        {type: 'doc', id: 'sdk/1.x/setup', className: 'sdk-setup-hidden'},
         {
           type: 'category',
           label: 'API',
