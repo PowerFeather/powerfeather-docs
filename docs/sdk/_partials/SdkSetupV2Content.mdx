@@ -158,7 +158,13 @@ New-Item -ItemType Directory -Force components | Out-Null
 git clone --branch v2 --single-branch https://github.com/PowerFeather/powerfeather-sdk.git components/powerfeather-sdk
 ```
 
-Before building, configure the board revision in Kconfig:
+Before configuring the board revision in Kconfig, set the target:
+
+```bash
+idf.py set-target esp32s3
+```
+
+Then open Kconfig:
 
 ```bash
 idf.py menuconfig
@@ -173,8 +179,6 @@ Component config -> PowerFeather-SDK -> ESP32-S3 PowerFeather board revision -> 
 Then run:
 
 ```bash
-idf.py reconfigure
-idf.py set-target esp32s3
 idf.py build
 ```
 
