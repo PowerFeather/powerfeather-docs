@@ -61,7 +61,14 @@ Sketch -> Include Library -> Add .ZIP Library...
 
 ### Clone into the Arduino libraries folder
 
-Clone the preview tag into the Arduino sketchbook libraries directory:
+Clone the preview tag into the Arduino sketchbook libraries directory.
+
+Typical locations are:
+
+- Linux/macOS: `~/Arduino/libraries`
+- Windows: `C:\Users\<your-user>\Documents\Arduino\libraries`
+
+Linux/macOS example:
 
 ```bash
 cd ~/Arduino/libraries
@@ -72,6 +79,21 @@ If the directory already exists:
 
 ```bash
 cd ~/Arduino/libraries/PowerFeather-SDK
+git fetch --tags origin
+git checkout 2.0.0beta1
+```
+
+Windows PowerShell example:
+
+```powershell
+cd "$HOME\\Documents\\Arduino\\libraries"
+git clone --branch 2.0.0beta1 --single-branch https://github.com/PowerFeather/powerfeather-sdk.git PowerFeather-SDK
+```
+
+If the directory already exists:
+
+```powershell
+cd "$HOME\\Documents\\Arduino\\libraries\\PowerFeather-SDK"
 git fetch --tags origin
 git checkout 2.0.0beta1
 ```
