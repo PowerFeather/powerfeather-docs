@@ -19,10 +19,6 @@ import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
 
 <SdkApiVersionDropdown page="setup" current="1.x" />
 
-:::note
-This page covers the stable `1.x` setup track.
-:::
-
 ## Arduino
 
 Install the following:
