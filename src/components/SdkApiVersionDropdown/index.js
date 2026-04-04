@@ -23,7 +23,7 @@ const PAGE_PATHS = {
   setup: '/setup',
 };
 
-export default function SdkApiVersionDropdown({page = 'api', current = '1.x'}) {
+export default function SdkApiVersionDropdown({page = 'api', current = '2.x'}) {
   const history = useHistory();
   const pagePath = PAGE_PATHS[page] || '';
 
