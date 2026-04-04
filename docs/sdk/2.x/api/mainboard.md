@@ -48,22 +48,22 @@ Initialize the board power management and monitoring features.
 Initializes the battery charger, battery fuel gauge and other hardware related to power management and monitoring.
 
 Sets the following defaults:
- - `EN`: high
- - `3V3`: enabled
- - `VSQT`: enabled
- - Charging: disabled
- - Maximum battery charging current: 50 mA
- - Maintain supply voltage: 4600 mV
- - Fuel gauge: enabled (use [Mainboard](#class-mainboard)::init() to disable)
- - Battery temperature sense: disabled
- - Battery alarms (low charge, high/low voltage): disabled
+- `EN`: high
+- `3V3`: enabled
+- `VSQT`: enabled
+- Charging: disabled
+- Maximum battery charging current: 50 mA
+- Maintain supply voltage: 4600 mV
+- Fuel gauge: enabled (use [Mainboard](#class-mainboard)::init() to disable)
+- Battery temperature sense: disabled
+- Battery alarms (low charge, high/low voltage): disabled
 
 This function should be called once, before calling all other [Mainboard](#class-mainboard) functions.
 
 #### Parameters
 
 - **capacity** [in] The capacity of the connected Li-ion/LiPo battery in milliamp-hours (mAh).
-Valid range depends on the active fuel gauge; see `FuelGauge::getBatteryCapacityRange()`.
+Valid range depends on board revision: V1 supports 50-6000 mAh, V2 supports 1-16383 mAh.
 Must be non-zero; use [Mainboard](#class-mainboard)::init() when no battery is expected. If using multiple batteries connected in parallel, specify
 only the capacity for one cell. Ignored when **type** is [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or [BatteryType](#enum-class-batterytype)::`UR18650ZY`.
 - **type** [in] Type of Li-ion/LiPo battery; ignored when value is [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or
@@ -80,6 +80,9 @@ Initialize the board using a MAX17260 model profile.
 
 #### Description
 The battery capacity is inferred from the profile.
+
+The profile must provide a valid charger constant-voltage target in `chargeVoltageMv`.
+Accepted range is 3500-4800 mV.
 
 #### Parameters
 
@@ -119,7 +122,7 @@ Enables or disables `3V3`, the 3.3 V header pin power output. When disabled, pow
 
 #### Parameters
 
-- **enable** [in] If `true`, `3V3` is enabled; if `fals`, `3V3` is disabled.
+- **enable** [in] If `true`, `3V3` is enabled; if `false`, `3V3` is disabled.
 
 #### Return
 
@@ -136,9 +139,9 @@ Enable or disable `VSQT`.
 Enables or disables `VSQT`, the 3.3 V STEMMA QT power output. When disabled, power to the
 connected STEMMA QT modules is cut, reducing power consumption.
 
-A side effect of disabling `VSQT` is that communications to the battery charger and fuel gauge is also disabled.
-This means that some of the other [Mainboard](#class-mainboard) functions will return [Result](./result.md#enum-class-result)::`InvalidState` when
-`VSQT` is disabled. Make sure to enable `VSQT` prior to calling these functions.
+On V1, disabling `VSQT` also disables communications to the battery charger and fuel gauge.
+This means that some of the other [Mainboard](#class-mainboard) functions will return [Result](./result.md#enum-class-result)::`InvalidState` while
+`VSQT` is disabled. On V2, power-management I2C remains usable even with `VSQT` disabled.
 
 #### Parameters
 
@@ -212,7 +215,7 @@ This function can block for 100 ms.
 
 #### Parameters
 
-- **voltage** [out] The measured current draw in milliamperes (mA).
+- **current** [out] The measured current draw in milliamperes (mA).
 
 #### Return
 
@@ -411,11 +414,11 @@ disabled successfully; returns a value other than [Result](./result.md#enum-clas
 
 #### Brief
 
-Enable or disable the battery fuel guage.
+Enable or disable the battery fuel gauge.
 
 #### Description
 
-Disabling the battery fuel guage can save around 0.5 μA. However, once disabled, it
+Disabling the battery fuel gauge can save around 0.5 μA. However, once disabled, it
 cannot keep track of battery information such as voltage, charge, health, cycle count, etc.
 Nonetheless, this is useful when trying to reduce power as much as possible, such as when going
 into ship mode or shutdown mode for a long time.
@@ -468,7 +471,10 @@ Measure battery current.
 
 #### Description
 
-Measures the current to or from the battery during charging and discharging, respectively. Resolution is 4 mA.
+Measures the current to or from the battery during charging and discharging, respectively, using the
+charger `IBAT_ADC` measurement path.
+
+This overload uses the charger `IBAT_ADC` register on both V1 and V2, with a 4 mA LSb.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -480,7 +486,7 @@ This function can block for 100 ms.
 
 #### Parameters
 
-- **current** [out] Measured battery voltage in milliamps (mA). If battery is discharging,
+- **current** [out] Measured battery current in milliamps (mA). If battery is discharging,
 this value is negative; positive if battery is charging.
 
 #### Return
@@ -577,8 +583,8 @@ Estimate time left for battery to charge or discharge.
 #### Description
 
 Gives an estimate of the battery time-to-empty or time-to-full in minutes. The battery charge must have
-previously dropped and/or risen by a certain percentage to be able to estimate time-to-empty or time-to-full, respectively;
-else [Result](./result.md#enum-class-result)::`NotReady` is returned.
+previously dropped and/or risen by a certain percentage to be able to estimate time-to-empty or time-to-full, respectively.
+If the gauge has not accumulated enough history yet, this function returns [Result](./result.md#enum-class-result)::`NotReady`.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -615,7 +621,7 @@ A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t,
 [Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
 [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-Battery temperature measurement must be enabled prior calling this function, else [Result](./result.md#enum-class-result)::`InvalidState`
+Battery temperature measurement must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState`
 is returned.
 
 This function can block for 100 ms.
@@ -648,8 +654,14 @@ The battery fuel gauge must be enabled prior to calling this function, else [Res
 
 #### Parameters
 
-- **voltage** [in] The voltage at which the low voltage alarm will trigger in millivolts (mV), from 2500 mV to 5000 mV.
-If zero, triggering of the alarm is disabled and any existing low voltage alarm is cleared.
+- **voltage** [in] The voltage at which the low voltage alarm will trigger in millivolts (mV).
+Valid non-zero range depends on board revision (2500-5000 mV for V1, 20-5100 mV for V2). If zero,
+triggering of the alarm is disabled and any existing low voltage
+alarm is cleared.
+
+Alarm handling differs by board revision:
+- V1 (LC709204F): low-voltage status naturally clears once voltage returns above threshold.
+- V2 (MAX17260): low-voltage status is latched until explicitly cleared. Use `setBatteryLowVoltageAlarm(0)` to clear, then set a non-zero threshold to re-arm.
 
 #### Return
 
@@ -675,8 +687,14 @@ The battery fuel gauge must be enabled prior to calling this function, else [Res
 
 #### Parameters
 
-- **voltage** [in] The voltage at which the high voltage alarm will trigger in millivolts (mV), from 2500 mV to 5000 mV.
-If zero, triggering of the alarm is disabled and any existing high voltage alarm is cleared.
+- **voltage** [in] The voltage at which the high voltage alarm will trigger in millivolts (mV).
+Valid non-zero range depends on board revision (2500-5000 mV for V1, 20-5100 mV for V2). If zero,
+triggering of the alarm is disabled and any existing high voltage
+alarm is cleared.
+
+Alarm handling differs by board revision:
+- V1 (LC709204F): high-voltage status naturally clears once voltage returns below threshold.
+- V2 (MAX17260): high-voltage status is latched until explicitly cleared. Use `setBatteryHighVoltageAlarm(0)` to clear, then set a non-zero threshold to re-arm.
 
 #### Return
 
@@ -705,6 +723,10 @@ The battery fuel gauge must be enabled prior to calling this function, else [Res
 - **percent** [in] The percentage at which the low charge alarm will trigger in percent, from 1% to 100%.
 If zero, triggering of the alarm is disabled and any existing low charge alarm is cleared.
 
+Alarm handling differs by board revision:
+- V1 (LC709204F): low-charge status follows gauge behavior.
+- V2 (MAX17260): low-charge status is latched until explicitly cleared. Use `setBatteryLowChargeAlarm(0)` to clear, then set a non-zero threshold to re-arm.
+
 #### Return
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the battery low charge alarm was set successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
@@ -713,11 +735,15 @@ Returns [Result](./result.md#enum-class-result)::`Ok` if the battery low charge 
 
 #### Brief
 
-Update fuel guage with measured battery temperature.
+Update fuel gauge with measured battery temperature.
 
 #### Description
 
 In order to increase fuel gauge accuracy, you can update the fuel gauge with the battery temperature obtained from `getBatteryTemperature()` or other sources.
+
+Temperature mode behavior depends on board revision:
+- V1: after initialization, fuel gauge temperature is host-updated.
+- V2: after initialization, fuel gauge temperature defaults to on-IC measurement until the first call to this API or its no-arg overload, after which host-updated temperature is used.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -733,7 +759,33 @@ The battery fuel gauge must be enabled prior to calling this function, else [Res
 
 #### Return
 
-Returns [Result](./result.md#enum-class-result)::`Ok` if the fuel gauge's battery temperature has been update successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
+Returns [Result](./result.md#enum-class-result)::`Ok` if the fuel gauge's battery temperature has been updated successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
+
+### [Result](./result.md#enum-class-result) updateBatteryFuelGaugeTemp()
+
+#### Brief
+
+Update fuel gauge temperature using the current battery thermistor measurement.
+
+#### Description
+
+Equivalent to calling `getBatteryTemperature()` then `updateBatteryFuelGaugeTemp(float)`.
+See `updateBatteryFuelGaugeTemp(float)` for V1/V2 temperature mode behavior details.
+
+`VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
+
+A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
+[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
+[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+
+Battery temperature measurement must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState`
+is returned.
+
+The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
+
+#### Return
+
+Returns [Result](./result.md#enum-class-result)::`Ok` if the fuel gauge's battery temperature has been updated successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
 
 ## extern [Mainboard](#class-mainboard) &Board 
