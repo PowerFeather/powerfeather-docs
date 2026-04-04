@@ -144,8 +144,17 @@ The `v2` preview branch is not published to the ESP-IDF component registry, so d
 
 Instead, add the preview SDK as a local component checkout inside your project:
 
+Linux/macOS example:
+
 ```bash
 mkdir -p components
+git clone --branch v2 --single-branch https://github.com/PowerFeather/powerfeather-sdk.git components/powerfeather-sdk
+```
+
+Windows PowerShell example:
+
+```powershell
+New-Item -ItemType Directory -Force components | Out-Null
 git clone --branch v2 --single-branch https://github.com/PowerFeather/powerfeather-sdk.git components/powerfeather-sdk
 ```
 
