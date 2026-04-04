@@ -8,10 +8,13 @@ keywords:
     - arduino
     - esp-idf
 sidebar_position: 0
+parse_number_prefixes: false
+slug: /sdk/2.x/setup
+displayed_sidebar: defaultSidebar
 ---
 
 import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
-import SdkSetupV2Content from './_partials/SdkSetupV2Content.mdx';
+import SdkSetupV2Content from '../_partials/SdkSetupV2Content.mdx';
 
 # Setup
 

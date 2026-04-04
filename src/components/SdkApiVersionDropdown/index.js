@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 const VERSION_OPTIONS = [
   {
     id: '2.x',
-    label: '2.x',
+    label: '2.x (preview)',
     basePath: '/sdk/2.x',
   },
   {
@@ -20,9 +20,10 @@ const PAGE_PATHS = {
   api: '/api',
   mainboard: '/api/mainboard',
   result: '/api/result',
+  setup: '/setup',
 };
 
-export default function SdkApiVersionDropdown({page = 'api', current = '1.x'}) {
+export default function SdkApiVersionDropdown({page = 'api', current = '2.x'}) {
   const history = useHistory();
   const pagePath = PAGE_PATHS[page] || '';
 

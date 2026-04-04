@@ -95,7 +95,7 @@ idf.py flash monitor
 
 :::note
 Before flashing, run `idf.py menuconfig` and select your board revision in:
-*PowerFeather-SDK* > *ESP32-S3 PowerFeather board revision*.
+*Component config* > *PowerFeather-SDK* > *ESP32-S3 PowerFeather board revision*.
 
 Choose either *ESP32-S3 PowerFeather* or *ESP32-S3 PowerFeather V2* to match your hardware.
 :::
