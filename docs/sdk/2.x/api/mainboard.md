@@ -174,6 +174,9 @@ One instance where disabling this LED is desirable is during low-sunlight chargi
 where the current extracted from the solar panel should be used to charge the battery as
 much as possible.
 
+On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
+On V2, power-management I2C remains usable with `VSQT` disabled.
+
 #### Parameters
 
 - **enable** [in] If `true`, `STAT` LED is enabled; if `false`, `STAT` LED is disabled.
