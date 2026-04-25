@@ -44,6 +44,7 @@ const sidebars = {
             {type: 'doc', id: 'sdk/1.x/api/result', className: 'sdk-1x-hidden'},
           ],
         },
+        'sdk/usage-notes',
       ],
     },
     {
