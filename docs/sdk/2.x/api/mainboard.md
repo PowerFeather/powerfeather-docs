@@ -64,6 +64,8 @@ This function should be called once, before calling all other [Mainboard](#class
 
 - **capacity** [in] The capacity of the connected Li-ion/LiPo battery in milliamp-hours (mAh).
 Valid range depends on board revision: V1 supports 50-6000 mAh, V2 supports 1-16383 mAh.
+On V2, capacities below 50 mAh are supported for monitoring only: battery charging remains disabled
+and charge-current configuration is rejected.
 Must be non-zero; use [Mainboard](#class-mainboard)::init() when no battery is expected. If using multiple batteries connected in parallel, specify
 only the capacity for one cell. Ignored when **type** is [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or [BatteryType](#enum-class-batterytype)::`UR18650ZY`.
 - **type** [in] Type of Li-ion/LiPo battery; ignored when value is [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or
@@ -80,6 +82,8 @@ Initialize the board using a MAX17260 model profile.
 
 #### Description
 The battery capacity is inferred from the profile.
+On V2, inferred capacities below 50 mAh are supported for monitoring only: battery charging remains
+disabled and charge-current configuration is rejected.
 
 The profile must provide a valid charger constant-voltage target in `chargeVoltageMv`.
 Accepted range is 3500-4800 mV.
@@ -347,6 +351,8 @@ A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t,
 [Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
 [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
+On V2, charging is not available for configured battery capacities below 50 mAh.
+
 #### Parameters
 
 - **enable** [in] If `true`, battery charging is enabled; if `false`, battery charging is disabled.
@@ -373,6 +379,8 @@ recommended. That current limit of 550 mA can be specified using this function.
 A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
 [Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
 [Result](./result.md#enum-class-result)::`InvalidState` is returned.
+
+On V2, this function is not available for configured battery capacities below 50 mAh.
 
 #### Parameters
 
@@ -445,7 +453,8 @@ Measure battery voltage.
 
 #### Description
 
-Resolution is 2 mV.
+Resolution is 2 mV. If the fuel gauge is enabled and available, it is used;
+otherwise, the charger VBAT ADC path is used as a fallback.
 
 `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
