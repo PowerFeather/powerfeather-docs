@@ -26,7 +26,6 @@ const sidebars = {
       link: {type: 'doc', id: 'sdk/index'},
       items: [
         'sdk/setup',
-        'sdk/usage-notes',
         {type: 'doc', id: 'sdk/2.x/setup', className: 'sdk-setup-hidden'},
         {type: 'doc', id: 'sdk/1.x/setup', className: 'sdk-setup-hidden'},
         {
@@ -45,6 +44,7 @@ const sidebars = {
             {type: 'doc', id: 'sdk/1.x/api/result', className: 'sdk-1x-hidden'},
           ],
         },
+        'sdk/usage-notes',
       ],
     },
     {
