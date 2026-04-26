@@ -39,6 +39,9 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 
 ### Charger safety defaults
 
+- In the 2.x API, high-level `Mainboard` voltage APIs use `float` volts. Current APIs use `float` milliamps.
+- For example, code that passed `4600` mV to `setSupplyMaintainVoltage()` in 1.x should pass `4.6f` in 2.x.
+
 - Battery temperature-fault protection is disabled by default.
 - Call `enableBatteryTempSense(true)` after `init()` if you want the charger to reduce or stop charging when the thermistor reading is out of range.
 
@@ -54,7 +57,8 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 - Normal readings come from the board's fuel gauge, but callers should not assume the same source is always used during early boot or transient recovery states.
 
 - Charger-backed battery and supply getters can block for around 100 ms while waiting for ADC refresh.
-- This affects functions such as `getSupplyVoltage()`, `getSupplyCurrent()`, `getBatteryCurrent()`, and `getBatteryTemperature()`.
+- This affects functions such as `getSupplyVoltage()`, `getSupplyCurrent()`, `getBatteryTemperature()`, and V1 `getBatteryCurrent()`.
+- On V2, `getBatteryCurrent()` reads from the MAX17260 fuel gauge and requires the fuel gauge to be enabled.
 
 - `getBatteryTemperature()` requires a Semitec 103AT thermistor on the `TS` pin.
 - The function returns `Failure` when the thermistor reading is outside the plausible range, such as when the thermistor is missing, open, or shorted.
@@ -66,8 +70,8 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 - `BatteryType::Generic_LFP` is supported only on V2 boards.
 - V1 uses the LC709204F fuel gauge and does not provide an LFP profile.
 
-- Custom `MAX17260::Model` profiles must provide a sane `chargeVoltageMv`.
-- The SDK validates the general `3500-4800 mV` range, but it does not verify that the chosen charge voltage matches the selected chemistry.
+- Custom `MAX17260::Model` profiles must provide a sane `chargeVoltage`.
+- The SDK validates the general `3.5-4.8 V` range, but it does not verify that the chosen charge voltage matches the selected chemistry.
 
 ### Small-battery support
 
