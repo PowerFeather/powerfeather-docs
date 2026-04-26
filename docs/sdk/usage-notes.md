@@ -78,6 +78,8 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 
 - `BatteryType::Generic_LFP` is supported only on V2 boards.
 - V1 uses the LC709204F fuel gauge and does not provide an LFP profile.
+- On V2, `BatteryType::Generic_LFP` uses the MAX17260 EZ LFP profile. The SDK programs a 3.6 V charge voltage and an LFP-tuned fuel-gauge empty threshold (`VE = 2.50 V`, `VR = 3.00 V`).
+- For production-grade LFP state-of-charge and state-of-health reporting, prefer a cell-characterized `MAX17260::Model` passed to `init(const MAX17260::Model &)`.
 
 - Custom `MAX17260::Model` profiles must provide a sane `chargeVoltage`.
 - The SDK validates the general `3.5-4.8 V` range, but it does not verify that the chosen charge voltage matches the selected chemistry.

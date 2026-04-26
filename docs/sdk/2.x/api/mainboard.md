@@ -24,7 +24,8 @@ import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
 - `Generic_3V7` Generic Li-ion/LiPo, 3.7 V nominal and 4.2 V max
 - `ICR18650_26H` Samsung ICR18650-26H
 - `UR18650ZY` Panasonic UR18650ZY
-- `Generic_LFP` Generic LiFePO4 (LFP), 3.2 V nominal and 3.6 V max
+- `Generic_LFP` Generic LiFePO4 (LFP), 3.2 V nominal and 3.6 V max. V2 only; uses
+the MAX17260 EZ LFP profile with an LFP-tuned empty threshold.
 
 ### [Result](./result.md#enum-class-result) init()
 
@@ -72,7 +73,8 @@ and charge-current configuration is rejected.
 Must be non-zero; use [Mainboard](#class-mainboard)::init() when no battery is expected. If using multiple batteries connected in parallel, specify
 only the capacity for one cell. Ignored when **type** is [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or [BatteryType](#enum-class-batterytype)::`UR18650ZY`.
 - **type** [in] Type of Li-ion/LiPo battery; ignored when value is [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or
-[BatteryType](#enum-class-batterytype)::`UR18650ZY`. Use [Mainboard](#class-mainboard)::init(const MAX17260::Model &) for MAX17260 profiles.
+[BatteryType](#enum-class-batterytype)::`UR18650ZY`. [BatteryType](#enum-class-batterytype)::`Generic_LFP` is available only on V2 boards;
+on V1, selecting it returns [Result](./result.md#enum-class-result)::`InvalidArg`. Use [Mainboard](#class-mainboard)::init(const MAX17260::Model &) for MAX17260 profiles.
 
 #### Return
 
