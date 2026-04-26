@@ -53,7 +53,7 @@ Sets the following defaults:
 - `VSQT`: enabled
 - Charging: disabled
 - Maximum battery charging current: 50 mA
-- Maintain supply voltage: 4600 mV
+- Maintain supply voltage: 4.6 V
 - Fuel gauge: enabled (use [Mainboard](#class-mainboard)::init() to disable)
 - Battery temperature sense: disabled
 - Battery alarms (low charge, high/low voltage): disabled
@@ -88,8 +88,8 @@ The battery capacity is inferred from the profile.
 On V2, inferred capacities below 50 mAh are supported for monitoring only: battery charging remains
 disabled and charge-current configuration is rejected.
 
-The profile must provide a valid charger constant-voltage target in `chargeVoltageMv`.
-Accepted range is 3500-4800 mV.
+The profile must provide a valid charger constant-voltage target in `chargeVoltage`.
+Accepted range is 3.5-4.8 V.
 
 #### Parameters
 
@@ -185,7 +185,7 @@ On V2, power-management I2C remains usable with `VSQT` disabled.
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if `STAT` LED was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) getSupplyVoltage(uint16_t &voltage)
+### [Result](./result.md#enum-class-result) getSupplyVoltage(float &voltage)
 
 #### Brief
 
@@ -194,7 +194,7 @@ Measure the supply voltage.
 #### Description
 
 Measures the `VUSB` or `VDC` voltage. `VUSB` is the power input from the USB-C connector,
-while `VDC` is the power input from the header pin. Resolution is 4 mV.
+while `VDC` is the power input from the header pin. Resolution is approximately 0.004 V.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
@@ -203,13 +203,13 @@ This function can block for 100 ms.
 
 #### Parameters
 
-- **voltage** [out] The measured voltage in millivolts (mV).
+- **voltage** [out] The measured voltage in volts (V).
 
 #### Return
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the supply voltage was measured successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) getSupplyCurrent(int16_t &current)
+### [Result](./result.md#enum-class-result) getSupplyCurrent(float &current)
 
 #### Brief
 
@@ -252,7 +252,7 @@ means that it powers the board and connected loads, not the battery.
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the supply was checked successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) setSupplyMaintainVoltage(uint16_t voltage)
+### [Result](./result.md#enum-class-result) setSupplyMaintainVoltage(float voltage)
 
 #### Brief
 
@@ -269,7 +269,7 @@ On V2, power-management I2C remains usable with `VSQT` disabled.
 
 #### Parameters
 
-- **voltage** [in] The supply voltage to maintain in millivolts (mV), from 4600 mV to 16800 mV.
+- **voltage** [in] The supply voltage to maintain in volts (V), from 4.6 V to 16.8 V.
 
 #### Return
 
@@ -374,7 +374,7 @@ On V2, charging is not available for configured battery capacities below 50 mAh.
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if battery charging was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) setBatteryChargingMaxCurrent(uint16_t current)
+### [Result](./result.md#enum-class-result) setBatteryChargingMaxCurrent(float current)
 
 #### Brief
 
@@ -461,7 +461,7 @@ A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t,
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the battery fuel gauge was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) getBatteryVoltage(uint16_t &voltage)
+### [Result](./result.md#enum-class-result) getBatteryVoltage(float &voltage)
 
 #### Brief
 
@@ -469,7 +469,7 @@ Measure battery voltage.
 
 #### Description
 
-Resolution is 2 mV. If the fuel gauge is enabled and available, it is used;
+Resolution is approximately 0.002 V. If the fuel gauge is enabled and available, it is used;
 otherwise, the charger VBAT ADC path is used as a fallback.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -483,13 +483,13 @@ This function can block for 100 ms.
 
 #### Parameters
 
-- **voltage** [out] Measured battery voltage in millivolts (mV).
+- **voltage** [out] Measured battery voltage in volts (V).
 
 #### Return
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the battery voltage was measured successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) getBatteryCurrent(int16_t &current)
+### [Result](./result.md#enum-class-result) getBatteryCurrent(float &current)
 
 #### Brief
 
@@ -497,10 +497,10 @@ Measure battery current.
 
 #### Description
 
-Measures the current to or from the battery during charging and discharging, respectively, using the
-charger `IBAT_ADC` measurement path.
+Measures the current to or from the battery during charging and discharging, respectively.
 
-This overload uses the charger `IBAT_ADC` register on both V1 and V2, with a 4 mA LSb.
+On V1, this function uses the charger `IBAT_ADC` register with a 4 mA LSb.
+On V2, this function uses the MAX17260 `Current` register with a 0.078125 mA LSb.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
@@ -509,7 +509,10 @@ A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t,
 [Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
 [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-This function can block for 100 ms.
+The battery fuel gauge must be enabled on V2 prior to calling this function, else
+[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+
+This function can block for 100 ms on V1.
 
 #### Parameters
 
@@ -669,7 +672,7 @@ This function can block for 100 ms.
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the battery temperature was measured successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) setBatteryLowVoltageAlarm(uint16_t voltage)
+### [Result](./result.md#enum-class-result) setBatteryLowVoltageAlarm(float voltage)
 
 #### Brief
 
@@ -690,20 +693,20 @@ The battery fuel gauge must be enabled prior to calling this function, else [Res
 
 #### Parameters
 
-- **voltage** [in] The voltage at which the low voltage alarm will trigger in millivolts (mV).
-Valid non-zero range depends on board revision (2500-5000 mV for V1, 20-5100 mV for V2). If zero,
+- **voltage** [in] The voltage at which the low voltage alarm will trigger in volts (V).
+Valid non-zero range depends on board revision (2.5-5.0 V for V1, 0.02-5.1 V for V2). If zero,
 triggering of the alarm is disabled and any existing low voltage
 alarm is cleared.
 
 Alarm handling differs by board revision:
 - V1 (LC709204F): low-voltage status naturally clears once voltage returns above threshold.
-- V2 (MAX17260): low-voltage status is latched until explicitly cleared. Use `setBatteryLowVoltageAlarm(0)` to clear, then set a non-zero threshold to re-arm.
+- V2 (MAX17260): low-voltage status is latched until explicitly cleared. Use `setBatteryLowVoltageAlarm(0.0f)` to clear, then set a non-zero threshold to re-arm.
 
 #### Return
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the battery low voltage alarm was set successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) setBatteryHighVoltageAlarm(uint16_t voltage)
+### [Result](./result.md#enum-class-result) setBatteryHighVoltageAlarm(float voltage)
 
 #### Brief
 
@@ -724,14 +727,14 @@ The battery fuel gauge must be enabled prior to calling this function, else [Res
 
 #### Parameters
 
-- **voltage** [in] The voltage at which the high voltage alarm will trigger in millivolts (mV).
-Valid non-zero range depends on board revision (2500-5000 mV for V1, 20-5100 mV for V2). If zero,
+- **voltage** [in] The voltage at which the high voltage alarm will trigger in volts (V).
+Valid non-zero range depends on board revision (2.5-5.0 V for V1, 0.02-5.1 V for V2). If zero,
 triggering of the alarm is disabled and any existing high voltage
 alarm is cleared.
 
 Alarm handling differs by board revision:
 - V1 (LC709204F): high-voltage status naturally clears once voltage returns below threshold.
-- V2 (MAX17260): high-voltage status is latched until explicitly cleared. Use `setBatteryHighVoltageAlarm(0)` to clear, then set a non-zero threshold to re-arm.
+- V2 (MAX17260): high-voltage status is latched until explicitly cleared. Use `setBatteryHighVoltageAlarm(0.0f)` to clear, then set a non-zero threshold to re-arm.
 
 #### Return
 
