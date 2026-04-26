@@ -14,7 +14,7 @@ Install the following:
 
     [Arduino Library Manager showing PowerFeather-SDK 2.0.0 or newer installed](https://placehold.co/1200x675/000000/000000.png)
 
-Before building or uploading, set the board revision in Arduino IDE:
+Before building or uploading, set the board revision in Arduino IDE. Choose the revision that matches your board: `ESP32-S3 PowerFeather` for V1 boards, or `ESP32-S3 PowerFeather V2` for V2 boards.
 
 ```text
 Tools -> Board Revision -> ESP32-S3 PowerFeather V2
@@ -108,7 +108,7 @@ Then open Kconfig:
 idf.py menuconfig
 ```
 
-Then select:
+Then select the board revision that matches your board through Kconfig. Choose `ESP32-S3 PowerFeather` for V1 boards, or `ESP32-S3 PowerFeather V2` for V2 boards.
 
 ```text
 Component config -> PowerFeather-SDK -> ESP32-S3 PowerFeather board revision -> ESP32-S3 PowerFeather V2
