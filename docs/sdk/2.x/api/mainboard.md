@@ -89,7 +89,9 @@ On V2, inferred capacities below 50 mAh are supported for monitoring only: batte
 disabled and charge-current configuration is rejected.
 
 The profile must provide a valid charger constant-voltage target in `chargeVoltage`.
-Accepted range is 3.5-4.8 V.
+This value is applied directly to the charger VREG/CV limit. Accepted range is 3.5-4.8 V.
+The SDK does not infer a safe charge voltage from the custom model data; ensure this value
+matches the connected cell chemistry because an incorrect value can overcharge the cell.
 
 #### Parameters
 
@@ -199,7 +201,9 @@ while `VDC` is the power input from the header pin. Resolution is approximately 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-This function can block for 100 ms.
+This function can block for about 100 ms on a normal charger ADC refresh, plus
+power-management I2C transfer time. I2C faults can add one or more 50 ms transaction
+timeout windows before the function returns failure.
 
 #### Parameters
 
@@ -223,7 +227,9 @@ while `VDC` is the power input from the header pin. Resolution is 2 mA.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-This function can block for 100 ms.
+This function can block for about 100 ms on a normal charger ADC refresh, plus
+power-management I2C transfer time. I2C faults can add one or more 50 ms transaction
+timeout windows before the function returns failure.
 
 #### Parameters
 
@@ -479,7 +485,9 @@ A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t,
 [Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
 [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-This function can block for 100 ms.
+This function can block for about 100 ms plus power-management I2C transfer time when
+the charger ADC fallback path is used. I2C faults can add one or more 50 ms transaction
+timeout windows before the function returns failure.
 
 #### Parameters
 
@@ -499,7 +507,9 @@ Measure battery current.
 
 Measures the current to or from the battery during charging and discharging, respectively.
 
-On V1, this function uses the charger `IBAT_ADC` register with a 4 mA LSb.
+On V1, this function uses the charger `IBAT_ADC` register with a 4 mA LSb. The V1
+charger reports an ambiguous 0 mA while charging is disabled; in that case this
+function returns [Result](./result.md#enum-class-result)::`NotReady` instead of reporting a misleading zero current.
 On V2, this function uses the MAX17260 `Current` register with a 0.078125 mA LSb.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -512,12 +522,15 @@ A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t,
 The battery fuel gauge must be enabled on V2 prior to calling this function, else
 [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-This function can block for 100 ms on V1.
+This function can block for about 100 ms on a normal V1 charger ADC refresh, plus
+power-management I2C transfer time. I2C faults can add one or more 50 ms transaction
+timeout windows before the function returns failure.
 
 #### Parameters
 
 - **current** [out] Measured battery current in milliamps (mA). If battery is discharging,
-this value is negative; positive if battery is charging.
+this value is negative; positive if battery is charging. On V1, this signed contract
+applies only when the charger provides a valid `IBAT_ADC` reading.
 
 #### Return
 
@@ -662,7 +675,9 @@ A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t,
 Battery temperature measurement must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState`
 is returned.
 
-This function can block for 100 ms.
+This function can block for about 100 ms on a normal charger ADC refresh, plus
+power-management I2C transfer time. I2C faults can add one or more 50 ms transaction
+timeout windows before the function returns failure.
 
 #### Parameters
 
