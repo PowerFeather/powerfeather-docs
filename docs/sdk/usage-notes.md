@@ -63,10 +63,11 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 - If a battery is swapped without a clean power-off and fresh `init()` sequence, the fuel gauge can report plausible-looking values from the previous cell until enough full charge and discharge cycles overwrite them.
 
 - Charger-backed battery and supply getters can block for around 100 ms while waiting for ADC refresh.
-- Power-management I2C faults can add one or more 50 ms transaction timeout windows before the call returns failure.
+- Power-management I2C faults can add several 50 ms transaction timeout windows before the call returns failure.
+- The SDK releases its internal mutex while waiting for ADC refresh, but other tasks can still wait up to the mutex timeout before receiving `Result::LockFailed`.
 - This affects functions such as `getSupplyVoltage()`, `getSupplyCurrent()`, `getBatteryTemperature()`, V1 `getBatteryCurrent()`, and the charger fallback path in `getBatteryVoltage()`.
 - On V2, `getBatteryCurrent()` reads from the MAX17260 fuel gauge and requires the fuel gauge to be enabled.
-- On V1, `getBatteryCurrent()` uses the charger `IBAT_ADC` reading and cannot report discharge current while charging is disabled. In that state, the SDK returns `Result::NotReady` instead of reporting a misleading zero current.
+- On V1, `getBatteryCurrent()` uses the BQ25628E charger `IBAT_ADC` reading and cannot report discharge current while charging is disabled. BQ25628E Table 8-35 states that `IBAT_ADC` resets to zero when `EN_CHG=0`, so the SDK returns `Result::NotReady` instead of reporting a misleading zero current.
 
 - `getBatteryTemperature()` requires a Semitec 103AT thermistor on the `TS` pin.
 - The function returns `Failure` when the thermistor reading is outside the plausible range, such as when the thermistor is missing, open, or shorted.
@@ -92,8 +93,9 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 - For LFP deployments, call a charger-backed getter at least every 30 s while charging.
 - `getSupplyVoltage()` and `getSupplyCurrent()` qualify. `getBatteryTemperature()` also qualifies after `enableBatteryTempSense(true)`.
 - These calls talk to the charger and trigger the SDK's post-power-on-reset reapply check. `getBatteryVoltage()` normally reads from the fuel gauge and does not trigger the reapply check.
+  `getBatteryCurrent()` on V2 also reads from the fuel gauge, so it is not a charger-backed keepalive call.
 
 ### Alarms
 
-- `setBatteryHighVoltageAlarm(0)` disables the high-voltage alarm by writing an unreachable threshold internally.
+- `setBatteryHighVoltageAlarm(0)` disables the high-voltage alarm by writing an unreachable 5100 mV threshold internally.
 - This is the documented disable mechanism; it does not mean "alarm at 0 V."

@@ -202,8 +202,9 @@ On V1, `VSQT` must be enabled prior to calling this function, else [Result](./re
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
 This function can block for about 100 ms on a normal charger ADC refresh, plus
-power-management I2C transfer time. I2C faults can add one or more 50 ms transaction
-timeout windows before the function returns failure.
+power-management I2C transfer time. I2C faults can add several 50 ms transaction
+timeout windows before the function returns failure. Tasks contending for the SDK
+mutex are bounded by the mutex timeout while this call waits for the ADC conversion.
 
 #### Parameters
 
@@ -228,8 +229,9 @@ On V1, `VSQT` must be enabled prior to calling this function, else [Result](./re
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
 This function can block for about 100 ms on a normal charger ADC refresh, plus
-power-management I2C transfer time. I2C faults can add one or more 50 ms transaction
-timeout windows before the function returns failure.
+power-management I2C transfer time. I2C faults can add several 50 ms transaction
+timeout windows before the function returns failure. Tasks contending for the SDK
+mutex are bounded by the mutex timeout while this call waits for the ADC conversion.
 
 #### Parameters
 
@@ -486,8 +488,9 @@ A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t,
 [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for about 100 ms plus power-management I2C transfer time when
-the charger ADC fallback path is used. I2C faults can add one or more 50 ms transaction
-timeout windows before the function returns failure.
+the charger ADC fallback path is used. I2C faults can add several 50 ms transaction
+timeout windows before the function returns failure. Tasks contending for the SDK
+mutex are bounded by the mutex timeout while this call waits for the ADC conversion.
 
 #### Parameters
 
@@ -507,9 +510,9 @@ Measure battery current.
 
 Measures the current to or from the battery during charging and discharging, respectively.
 
-On V1, this function uses the charger `IBAT_ADC` register with a 4 mA LSb. The V1
-charger reports an ambiguous 0 mA while charging is disabled; in that case this
-function returns [Result](./result.md#enum-class-result)::`NotReady` instead of reporting a misleading zero current.
+On V1, this function uses the BQ25628E charger `IBAT_ADC` register with a 4 mA LSb.
+BQ25628E Table 8-35 states that `IBAT_ADC` resets to zero when charging is disabled;
+the SDK returns [Result](./result.md#enum-class-result)::`NotReady` instead of reporting a misleading zero current.
 On V2, this function uses the MAX17260 `Current` register with a 0.078125 mA LSb.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -523,8 +526,9 @@ The battery fuel gauge must be enabled on V2 prior to calling this function, els
 [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for about 100 ms on a normal V1 charger ADC refresh, plus
-power-management I2C transfer time. I2C faults can add one or more 50 ms transaction
-timeout windows before the function returns failure.
+power-management I2C transfer time. I2C faults can add several 50 ms transaction
+timeout windows before the function returns failure. Tasks contending for the SDK
+mutex are bounded by the mutex timeout while this call waits for the ADC conversion.
 
 #### Parameters
 
@@ -676,8 +680,9 @@ Battery temperature measurement must be enabled prior to calling this function, 
 is returned.
 
 This function can block for about 100 ms on a normal charger ADC refresh, plus
-power-management I2C transfer time. I2C faults can add one or more 50 ms transaction
-timeout windows before the function returns failure.
+power-management I2C transfer time. I2C faults can add several 50 ms transaction
+timeout windows before the function returns failure. Tasks contending for the SDK
+mutex are bounded by the mutex timeout while this call waits for the ADC conversion.
 
 #### Parameters
 
