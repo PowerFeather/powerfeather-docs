@@ -31,7 +31,7 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 ### Power and sleep behavior
 
 - `enterShipMode()` and `enterShutdownMode()` require `VBUS` to be below the charger's UVLO threshold.
-- If USB or another valid supply is still connected, the charger rejects these requests.
+- If USB or another valid supply is still connected, the charger rejects these requests. Unplug USB before calling either function.
 
 - `VSQT` controls power to the STEMMA QT connector.
 - On V1, disabling `VSQT` also disables access to the power-management I2C devices. On V2, the charger and fuel gauge remain accessible with `VSQT` disabled.
@@ -47,7 +47,7 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 - Battery temperature-fault protection is disabled by default.
 - Call `enableBatteryTempSense(true)` after `init()` if you want the charger to reduce or stop charging when the thermistor reading is out of range.
 
-- The SDK does not program cold-side NTC thresholds.
+- The SDK does not program cold-side NTC thresholds (`TH1`-`TH3`).
 - If charging below 0 C is a concern, gate charging from your application using `getBatteryTemperature()`.
 
 - `setBatteryChargingMaxCurrent()` clamps only to charger hardware limits (40-2000 mA), not to battery capacity.
@@ -63,7 +63,7 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 - This fallback can happen during early boot or when the fuel gauge is not ready or not responding. Normal readings come from the board's fuel gauge, but callers should not assume the same source is always used during transient recovery states.
 - The charger fallback is less precise: about 1.99 mV LSb. Normal fuel-gauge readings are 78.125 uV LSb on V2 (MAX17260) and 1 mV LSb on V1 (LC709204F).
 
-- Fuel-gauge learned state, such as state of health, cycle count, and time-to-empty, is not valid after a battery change.
+- Fuel-gauge learned state, such as state of health (SOH), cycle count, and time-to-empty, is not valid after a battery change.
 - If a battery is swapped without a clean power-off and fresh `init()` sequence, the fuel gauge can report plausible-looking values from the previous cell until enough full charge and discharge cycles overwrite them.
 
 - Charger-backed battery and supply getters can block for around 100 ms while waiting for ADC refresh.
@@ -83,11 +83,11 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 - `BatteryType::Generic_LFP` is supported only on V2 boards.
 - V1 uses the LC709204F fuel gauge and does not provide an LFP profile.
 - On V2, `BatteryType::Generic_LFP` uses the MAX17260 EZ LFP profile. The SDK programs a 3.6 V charge voltage and an LFP-tuned fuel-gauge empty threshold (`VE = 2.50 V`, `VR = 3.00 V`).
-- For production-grade LFP state-of-charge and state-of-health reporting, prefer a cell-characterized `MAX17260::Model` passed to `init(const MAX17260::Model &)`.
+- For production-grade LFP state-of-charge (SOC) and state-of-health (SOH) reporting, prefer a cell-characterized `MAX17260::Model` passed to `init(const MAX17260::Model &)`.
 
 - Custom `MAX17260::Model` profiles must provide a sane `chargeVoltage`.
 - The SDK validates the general `3.5-4.8 V` range, but it does not verify that the chosen charge voltage matches the selected chemistry.
-- The `chargeVoltage` field is applied directly to the charger constant-voltage limit. An incorrect value can overcharge the connected cell.
+- The `chargeVoltage` field is applied directly to the charger VREG/CV constant-voltage limit. An incorrect value can overcharge the connected cell.
 - The profile's `ichgTerm` is converted from MAX17260 register units and applied to the charger termination-current setting. Profiles whose termination current is outside the charger-supported `5-310 mA` range are rejected.
 - When upgrading from SDK versions that used the older raw-byte custom-profile hash, the first boot with a custom profile may treat the profile as changed and reinitialize the MAX17260 once, discarding learned state. Built-in battery profiles are not affected, and later boots with the same custom profile preserve learned state normally.
 

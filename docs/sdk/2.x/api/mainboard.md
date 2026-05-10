@@ -376,9 +376,8 @@ This is useful when choosing not to fully charge a battery in order to prolong i
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 On V2, charging is not available for configured battery capacities below 50 mAh.
 
@@ -408,9 +407,8 @@ charger limit does not exceed the requested maximum.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 On V2, this function is not available for configured battery capacities below 50 mAh.
 
@@ -438,9 +436,8 @@ reduction or cutoff.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -468,9 +465,8 @@ into ship mode or shutdown mode for a long time.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -494,9 +490,8 @@ otherwise, the charger VBAT ADC path is used as a fallback.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 This function can block for about 100 ms plus power-management I2C transfer time when
 the charger ADC fallback path is used. I2C faults can add several 50 ms transaction
@@ -529,9 +524,8 @@ On V2, this function uses the MAX17260 `Current` register with a 0.078125 mA LSB
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled on V2 before calling this function, else
 [Result](./result.md#enum-class-result)::`InvalidState` is returned.
@@ -565,9 +559,8 @@ of whether the battery still has much charge or is nearly empty.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -593,9 +586,8 @@ sense of how much the battery has degraded over time.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -621,9 +613,8 @@ rated cycle count of the battery.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -650,9 +641,8 @@ If the gauge has not accumulated enough history yet, this function returns [Resu
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -683,9 +673,8 @@ range, such as when the thermistor is missing, open, or shorted.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 Battery temperature measurement must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState`
 is returned.
@@ -716,9 +705,8 @@ If the battery voltage is less than the set voltage, the `ALARM` pin is pulled l
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -750,9 +738,8 @@ If the battery voltage is greater than the set voltage, the `ALARM` pin is pulle
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -784,9 +771,8 @@ If the battery charge is less than the set percentage, the `ALARM` pin is pulled
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -820,9 +806,8 @@ Temperature mode behavior depends on board revision:
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -848,9 +833,8 @@ See `updateBatteryFuelGaugeTemp(float)` for V1/V2 temperature mode behavior deta
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 Battery temperature measurement must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState`
 is returned.
