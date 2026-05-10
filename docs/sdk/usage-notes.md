@@ -41,7 +41,7 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 
 ### Charger safety defaults
 
-- In the 2.x API, high-level `Mainboard` voltage APIs use `float` volts. Current APIs use `float` milliamps.
+- In the 2.x API, high-level `Mainboard` voltage APIs use `float` values in volts. Current APIs use `float` values in milliamperes.
 - For example, code that passed `4600` mV to `setSupplyMaintainVoltage()` in 1.x should pass `4.6f` in 2.x.
 
 - Battery temperature-fault protection is disabled by default.
@@ -52,6 +52,10 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 
 - `setBatteryChargingMaxCurrent()` clamps only to charger hardware limits (40-2000 mA), not to battery capacity.
 - The SDK does not automatically enforce a 1C charging rule based on the configured battery capacity, so callers must choose a cell-safe current.
+- The BQ charger encodes charge current in 40 mA steps. The SDK rounds requests down to the nearest supported step, so the default 50 mA request programs a 40 mA charger limit.
+
+- `setSupplyMaintainVoltage()` programs the charger VINDPM request, not a guaranteed exact input threshold.
+- The BQ charger's input-voltage regulation behavior can also be influenced by its battery-tracking policy, so the effective regulation point can be higher than the value written by the SDK.
 
 ### Fuel-gauge and measurement behavior
 
@@ -84,6 +88,8 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 - Custom `MAX17260::Model` profiles must provide a sane `chargeVoltage`.
 - The SDK validates the general `3.5-4.8 V` range, but it does not verify that the chosen charge voltage matches the selected chemistry.
 - The `chargeVoltage` field is applied directly to the charger constant-voltage limit. An incorrect value can overcharge the connected cell.
+- The profile's `ichgTerm` is converted from MAX17260 register units and applied to the charger termination-current setting. Profiles whose termination current is outside the charger-supported `5-310 mA` range are rejected.
+- When upgrading from SDK versions that used the older raw-byte custom-profile hash, the first boot with a custom profile may treat the profile as changed and reinitialize the MAX17260 once, discarding learned state. Built-in battery profiles are not affected, and later boots with the same custom profile preserve learned state normally.
 
 ### Small-battery support
 
@@ -92,9 +98,9 @@ V1 and V2 refer to ESP32-S3 PowerFeather board revisions.
 
 ### Long idle with charging enabled
 
-- For LFP deployments, call a charger-backed getter at least every 30 s while charging.
+- LFP charging is not an unattended charger-POR supervision feature. For LFP deployments, call a charger-backed getter at least every 30 s while charging.
 - `getSupplyVoltage()` and `getSupplyCurrent()` qualify. `getBatteryTemperature()` also qualifies after `enableBatteryTempSense(true)`.
-- These calls talk to the charger and trigger the SDK's post-power-on-reset reapply check. `getBatteryVoltage()` normally reads from the fuel gauge and does not trigger the reapply check.
+- These calls talk to the charger and trigger the SDK's post-power-on-reset reapply check. Rare charger power-on-reset events from pack-protection trips or supply transients otherwise leave the chip at POR defaults, including the default 4.2 V charge limit, until the next SDK call that touches the charger. `getBatteryVoltage()` normally reads from the fuel gauge and does not trigger the reapply check.
   `getBatteryCurrent()` on V2 also reads from the fuel gauge, so it is not a charger-backed keepalive call.
 
 ### Alarms

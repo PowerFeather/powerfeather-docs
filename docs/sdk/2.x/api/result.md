@@ -20,9 +20,9 @@ import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
 ## enum class Result
 
 - `Ok` Operation succeeded.
-- `Failure` Operation unspecified failure.
+- `Failure` Unspecified operation failure.
 - `InvalidState` Operation is not allowed given current internal state.
 - `Timeout` Operation took longer than expected.
-- `InvalidArg` Operation argument out of range or invalid.
+- `InvalidArg` Operation argument is out of range or invalid.
 - `NotReady` Unable to complete operation at this time.
-- `LockFailed` Exclusive resource lock acquisition by operation failed.
+- `LockFailed` Operation failed to acquire an exclusive resource lock.
