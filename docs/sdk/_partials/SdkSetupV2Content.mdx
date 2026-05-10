@@ -6,19 +6,21 @@ Install the following:
 
 2. Arduino ESP32 v2.0.15 or newer. Please follow the [installation guide from Espressif](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html).
 
-    ![Adding Boards Manager URL](../assets/setup/add_board_manager_url.png)
+    [Arduino IDE Boards Manager URL setup for ESP32 board support](https://placehold.co/1200x675/000000/000000.png)
 
-    ![Installing ESP32-S3 PowerFeather board support](../assets/setup/install_board_support.png)
+    [Arduino IDE Boards Manager showing ESP32 board support installed](https://placehold.co/1200x675/000000/000000.png)
 
 3. PowerFeather-SDK 2.0.0 or newer. Follow the [instructions for installing a library](https://docs.arduino.cc/software/ide-v2/tutorials/ide-v2-installing-a-library/).
 
-    ![Installing PowerFeather-SDK](../assets/setup/install_powerfeather_sdk.png)
+    [Arduino Library Manager showing PowerFeather-SDK 2.0.0 or newer installed](https://placehold.co/1200x675/000000/000000.png)
 
 Before building or uploading, set the board revision in Arduino IDE. Choose the revision that matches your board: `ESP32-S3 PowerFeather` for V1 boards, or `ESP32-S3 PowerFeather V2` for V2 boards.
 
 ```text
 Tools -> Board Revision -> ESP32-S3 PowerFeather V2
 ```
+
+[Arduino IDE Tools menu showing Board Revision set to ESP32-S3 PowerFeather V2](https://placehold.co/1200x675/000000/000000.png)
 
 To test if setup was done properly, create a sketch with the following content:
 
@@ -40,7 +42,7 @@ void loop()
 The above is the minimal sketch code for PowerFeather, which just initializes the board hardware.
 Build the sketch, it should proceed without any errors.
 
-![Building Arduino minimal sketch](../assets/setup/build_arduino_min_sketch.png)
+[Arduino IDE output showing the minimal PowerFeather sketch built successfully](https://placehold.co/1200x675/000000/000000.png)
 
 :::info
 If you have trouble uploading future sketches, try putting the ESP32-S3 in download mode. This can be done by pressing and
@@ -59,15 +61,15 @@ Open a terminal with the ESP-IDF environment loaded on [Windows](https://docs.es
 idf.py create-project "powerfeather_project"
 ```
 
-![Creating ESP-IDF sample project](../assets/setup/create_idf_project.png)
+[Terminal showing `idf.py create-project "powerfeather_project"` completed successfully](https://placehold.co/1200x675/000000/000000.png)
 
 Navigate into the created sample ESP-IDF project directory. Rename `main/powerfeather_project.c` to `main/powerfeather_project.cpp`. Your project tree should look like the following:
 
-![Renaming main C file](../assets/setup/rename_main_c.png)
+[File explorer or terminal tree showing `main/powerfeather_project.cpp` after renaming](https://placehold.co/1200x675/000000/000000.png)
 
 Edit `main/CMakeLists.txt` and change `powerfeather_project.c` to `powerfeather_project.cpp`, to reflect the rename done in the previous step.
 
-![Editing CMakeLists.txt](../assets/setup/edit_cmakelists.png)
+[Editor showing `main/CMakeLists.txt` updated to reference `powerfeather_project.cpp`](https://placehold.co/1200x675/000000/000000.png)
 
 Replace the contents of `main/powerfeather_project.cpp` with the following:
 
@@ -84,7 +86,7 @@ extern "C" void app_main()
 
 The above is the minimal ESP-IDF project code for PowerFeather, which just initializes the board hardware.
 
-![Editing main CPP](../assets/setup/edit_main_cpp.png)
+[Editor showing the minimal `main/powerfeather_project.cpp` code](https://placehold.co/1200x675/000000/000000.png)
 
 To add PowerFeather-SDK as a component for the sample ESP-IDF project, run the command:
 
@@ -92,7 +94,7 @@ To add PowerFeather-SDK as a component for the sample ESP-IDF project, run the c
 idf.py add-dependency "powerfeather/powerfeather-sdk^2.0.0"
 ```
 
-![Adding PowerFeather-SDK dependency](../assets/setup/add_sdk_dependency.png)
+[Terminal showing `idf.py add-dependency "powerfeather/powerfeather-sdk^2.0.0"` completed successfully](https://placehold.co/1200x675/000000/000000.png)
 
 Before configuring the board revision in Kconfig, set the target:
 
@@ -112,6 +114,8 @@ Then select the board revision that matches your board through Kconfig. Choose `
 Component config -> PowerFeather-SDK -> ESP32-S3 PowerFeather board revision -> ESP32-S3 PowerFeather V2
 ```
 
+[ESP-IDF menuconfig showing the PowerFeather board revision set to ESP32-S3 PowerFeather V2](https://placehold.co/1200x675/000000/000000.png)
+
 Build the sample ESP-IDF project by issuing the command:
 
 ```bash
@@ -120,4 +124,4 @@ idf.py build
 
 If everything was set up correctly, the build should proceed without any compilation errors.
 
-![Building ESP-IDF sample project](../assets/setup/build_idf_project.png)
+[Terminal showing the ESP-IDF sample project build completed successfully](https://placehold.co/1200x675/000000/000000.png)
