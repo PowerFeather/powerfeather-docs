@@ -28,11 +28,6 @@ import TabItem from '@theme/TabItem';
 
 # ESP32-S3 PowerFeather
 
-:::note V2 Status
-V2 details on this page are preliminary and may change as validation and documentation are finalized.
-V1 and V2 are very similar overall, so only sections with meaningful differences are split by version.
-:::
-
 ## Features & Specifications
 
 ### Physical

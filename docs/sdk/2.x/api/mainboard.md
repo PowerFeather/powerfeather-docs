@@ -24,7 +24,8 @@ import SdkApiVersionDropdown from '@site/src/components/SdkApiVersionDropdown';
 - `Generic_3V7` Generic Li-ion/LiPo, 3.7 V nominal and 4.2 V max
 - `ICR18650_26H` Samsung ICR18650-26H
 - `UR18650ZY` Panasonic UR18650ZY
-- `Generic_LFP` Generic LiFePO4 (LFP), 3.2 V nominal and 3.6 V max
+- `Generic_LFP` Generic LiFePO4 (LFP), 3.2 V nominal and 3.6 V max. V2 only; uses
+the MAX17260 EZ LFP profile with an LFP-tuned empty threshold.
 
 ### [Result](./result.md#enum-class-result) init()
 
@@ -45,15 +46,15 @@ Returns [Result](./result.md#enum-class-result)::`Ok` if the board was initializ
 Initialize the board power management and monitoring features.
 
 #### Description
-Initializes the battery charger, battery fuel gauge and other hardware related to power management and monitoring.
+Initializes the battery charger, battery fuel gauge, and other hardware related to power management and monitoring.
 
 Sets the following defaults:
 - `EN`: high
 - `3V3`: enabled
 - `VSQT`: enabled
 - Charging: disabled
-- Maximum battery charging current: 50 mA
-- Maintain supply voltage: 4600 mV
+- Maximum battery charging current request: 50 mA (programs 40 mA after BQ step quantization)
+- Maintain supply voltage: 4.6 V
 - Fuel gauge: enabled (use [Mainboard](#class-mainboard)::init() to disable)
 - Battery temperature sense: disabled
 - Battery alarms (low charge, high/low voltage): disabled
@@ -69,10 +70,13 @@ This function should be called once, before calling all other [Mainboard](#class
 Valid range depends on board revision: V1 supports 50-6000 mAh, V2 supports 1-16383 mAh.
 On V2, capacities below 50 mAh are supported for monitoring only: battery charging remains disabled
 and charge-current configuration is rejected.
-Must be non-zero; use [Mainboard](#class-mainboard)::init() when no battery is expected. If using multiple batteries connected in parallel, specify
-only the capacity for one cell. Ignored when **type** is [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or [BatteryType](#enum-class-batterytype)::`UR18650ZY`.
-- **type** [in] Type of Li-ion/LiPo battery; ignored when value is [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or
-[BatteryType](#enum-class-batterytype)::`UR18650ZY`. Use [Mainboard](#class-mainboard)::init(const MAX17260::Model &) for MAX17260 profiles.
+Must be non-zero; use [Mainboard](#class-mainboard)::init() when no battery is expected. If using multiple batteries connected
+in parallel, specify only the capacity for one cell. Ignored when **type** is [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or
+[BatteryType](#enum-class-batterytype)::`UR18650ZY`.
+- **type** [in] Type of Li-ion/LiPo battery. When set to [BatteryType](#enum-class-batterytype)::`ICR18650_26H` or
+[BatteryType](#enum-class-batterytype)::`UR18650ZY`, the supplied **capacity** is ignored and 2600 mAh is used.
+[BatteryType](#enum-class-batterytype)::`Generic_LFP` is available only on V2 boards;
+on V1, selecting it returns [Result](./result.md#enum-class-result)::`InvalidArg`. Use [Mainboard](#class-mainboard)::init(const MAX17260::Model &) for MAX17260 profiles.
 
 #### Return
 
@@ -88,8 +92,12 @@ The battery capacity is inferred from the profile.
 On V2, inferred capacities below 50 mAh are supported for monitoring only: battery charging remains
 disabled and charge-current configuration is rejected.
 
-The profile must provide a valid charger constant-voltage target in `chargeVoltageMv`.
-Accepted range is 3500-4800 mV.
+The profile must provide a valid charger constant-voltage target in `chargeVoltage`.
+This value is applied directly to the charger VREG/CV limit. Accepted range is 3.5-4.8 V.
+The SDK does not infer a safe charge voltage from the custom model data; ensure this value
+matches the connected cell chemistry because an incorrect value can overcharge the cell.
+The profile's `ichgTerm` is also applied to the charger termination-current setting after
+conversion from MAX17260 register units; it must correspond to 5-310 mA.
 
 #### Parameters
 
@@ -107,7 +115,7 @@ Set `EN` pin high or low.
 
 #### Description
 
-This is useful for enabling or disabling connected Feather Wings to reduce power consumption.
+This is useful for enabling or disabling connected FeatherWings to reduce power consumption.
 
 #### Parameters
 
@@ -185,7 +193,7 @@ On V2, power-management I2C remains usable with `VSQT` disabled.
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if `STAT` LED was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) getSupplyVoltage(uint16_t &voltage)
+### [Result](./result.md#enum-class-result) getSupplyVoltage(float &voltage)
 
 #### Brief
 
@@ -194,22 +202,25 @@ Measure the supply voltage.
 #### Description
 
 Measures the `VUSB` or `VDC` voltage. `VUSB` is the power input from the USB-C connector,
-while `VDC` is the power input from the header pin. Resolution is 4 mV.
+while `VDC` is the power input from the header pin. Resolution is approximately 0.004 V.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-This function can block for 100 ms.
+This function can block for about 100 ms on a normal charger ADC refresh, plus
+power-management I2C transfer time. I2C faults can add several 50 ms transaction
+timeout windows before the function returns failure. Tasks contending for the SDK
+mutex are bounded by the mutex timeout while this call waits for the ADC conversion.
 
 #### Parameters
 
-- **voltage** [out] The measured voltage in millivolts (mV).
+- **voltage** [out] The measured voltage in volts (V).
 
 #### Return
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the supply voltage was measured successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) getSupplyCurrent(int16_t &current)
+### [Result](./result.md#enum-class-result) getSupplyCurrent(float &current)
 
 #### Brief
 
@@ -223,7 +234,10 @@ while `VDC` is the power input from the header pin. Resolution is 2 mA.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-This function can block for 100 ms.
+This function can block for about 100 ms on a normal charger ADC refresh, plus
+power-management I2C transfer time. I2C faults can add several 50 ms transaction
+timeout windows before the function returns failure. Tasks contending for the SDK
+mutex are bounded by the mutex timeout while this call waits for the ADC conversion.
 
 #### Parameters
 
@@ -241,7 +255,7 @@ Check if the supply is good.
 
 #### Description
 
-Checks if the supply, whether `VUSB` or `VDC` is good as determined by the battery charger. A good supply
+Checks whether the supply, either `VUSB` or `VDC`, is good as determined by the battery charger. A good supply
 means that it powers the board and connected loads, not the battery.
 
 #### Parameters
@@ -252,7 +266,7 @@ means that it powers the board and connected loads, not the battery.
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the supply was checked successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) setSupplyMaintainVoltage(uint16_t voltage)
+### [Result](./result.md#enum-class-result) setSupplyMaintainVoltage(float voltage)
 
 #### Brief
 
@@ -260,16 +274,18 @@ Set the supply voltage to maintain.
 
 #### Description
 
-The battery charger dynamically regulates the current drawn from the supply to prevent it from collapsing under
-the set voltage to maintain. This is useful for specifying the maximum power point (MPP) voltage if using a
-solar panel; allowing the battery charger to extract power from the panel at near-MPPT effectiveness.
+The battery charger dynamically regulates the current drawn from the supply to prevent it from collapsing below
+the voltage to maintain. This is useful for specifying the maximum power point (MPP) voltage when using a
+solar panel, allowing the battery charger to extract power from the panel at near-MPPT effectiveness.
+This programs the charger's VINDPM request. The charger's effective regulation point can be higher when
+its battery-tracking behavior applies.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
 #### Parameters
 
-- **voltage** [in] The supply voltage to maintain in millivolts (mV), from 4600 mV to 16800 mV.
+- **voltage** [in] The supply voltage to maintain in volts (V), from 4.6 V to 16.8 V.
 
 #### Return
 
@@ -284,13 +300,13 @@ Enter ship mode.
 #### Description
 
 Ship mode is a power state that only consumes around 1.5 μA. Only the battery charger and
-the battery fuel gauge is powered.
+the battery fuel gauge are powered.
 
-This mode can only be entered into if the battery is powering the board and connected loads;
+This mode can only be entered if the battery is powering the board and connected loads;
 that is, if [Mainboard](#result-checksupplygoodbool-good)::`checkSupplyGood` output parameter **good** is `false`.
 
 Ship mode can be exited by either (1) pulling `QON` header pin low for around 800 ms or
-(2) connecting a power supply which the battery charger determines to be good.
+(2) connecting a power supply that the battery charger determines to be good.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
@@ -299,7 +315,7 @@ This function can block for 30 ms if it fails to enter ship mode.
 
 #### Return
 
-Does not return if ship mode was successfully entered into;
+Does not return if ship mode was successfully entered;
 returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
 ### [Result](./result.md#enum-class-result) enterShutdownMode()
@@ -311,12 +327,12 @@ Enter shutdown mode.
 #### Description
 
 Shutdown mode is a power state that only consumes around 1.4 μA. Only the battery charger and
-the battery fuel gauge is powered.
+the battery fuel gauge are powered.
 
-This mode can only be entered into if the battery is powering the board and connected loads;
+This mode can only be entered if the battery is powering the board and connected loads;
 that is, if [Mainboard](#result-checksupplygoodbool-good)::`checkSupplyGood` output parameter **good** is `false`.
 
-Shutdown mode can only be exited by connecting a power supply which the battery charger determines to be good.
+Shutdown mode can only be exited by connecting a power supply that the battery charger determines to be good.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
@@ -325,7 +341,7 @@ This function can block for 30 ms if it fails to enter shutdown mode.
 
 #### Return
 
-Does not return if shutdown mode was successfully entered into;
+Does not return if shutdown mode was successfully entered;
 returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
 ### [Result](./result.md#enum-class-result) doPowerCycle()
@@ -336,9 +352,9 @@ Perform a power cycle.
 
 #### Description
 
-For all components on the board and connected loads, except the battery fuel gauge
-and loads connected to `VS` (supply output header pin, whichever of `VUSB` and `VDC`),
-the power cycle provides complete reset by removing power and re-applying it after a short delay.
+For all components on the board and connected loads except the battery fuel gauge
+and loads connected to `VS` (supply output header pin, whichever of `VUSB` and `VDC` is present),
+a power cycle provides a complete reset by removing power and re-applying it after a short delay.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
@@ -355,14 +371,13 @@ Enable or disable battery charging.
 
 #### Description
 
-This is useful when opting to not fully charge a battery in order to prolong its lifespan.
+This is useful when choosing not to fully charge a battery in order to prolong its lifespan.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 On V2, charging is not available for configured battery capacities below 50 mAh.
 
@@ -374,7 +389,7 @@ On V2, charging is not available for configured battery capacities below 50 mAh.
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if battery charging was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) setBatteryChargingMaxCurrent(uint16_t current)
+### [Result](./result.md#enum-class-result) setBatteryChargingMaxCurrent(float current)
 
 #### Brief
 
@@ -382,23 +397,25 @@ Set maximum battery charging current.
 
 #### Description
 
-Ensures that the battery is not charged with a current more than the amount specified using this function.
+Limits battery charging current to no more than the requested maximum.
 This is useful for batteries with small capacities, since it is not recommended to charge a battery at
-more than 1C. For example, when charging a 550 mAh battery, a current of no more than 550 mA is
+more than 1 C. For example, when charging a 550 mAh battery, a current of no more than 550 mA is
 recommended. That current limit of 550 mA can be specified using this function.
+The charger encodes this limit in 40 mA steps; values between steps are rounded down so the programmed
+charger limit does not exceed the requested maximum.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 On V2, this function is not available for configured battery capacities below 50 mAh.
 
 #### Parameters
 
-- **current** [in] The maximum charging current in milliamps (mA), from 40 mA to 2000 mA.
+- **current** [in] The maximum charging current in milliamperes (mA), from 40 mA to 2000 mA.
+Values between 40 mA register steps are rounded down.
 
 #### Return
 
@@ -413,15 +430,14 @@ Enable or disable battery temperature measurement.
 #### Description
 
 Enables or disables battery temperature measurement using the thermistor connected to the `TS` pin.
-If enabled, aside from measurement, the battery charger performs temperature-based battery charging current
+When enabled, the battery charger also performs temperature-based battery charging current
 reduction or cutoff.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -449,9 +465,8 @@ into ship mode or shutdown mode for a long time.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
@@ -461,7 +476,7 @@ A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t,
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the battery fuel gauge was enabled or disabled successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) getBatteryVoltage(uint16_t &voltage)
+### [Result](./result.md#enum-class-result) getBatteryVoltage(float &voltage)
 
 #### Brief
 
@@ -469,27 +484,29 @@ Measure battery voltage.
 
 #### Description
 
-Resolution is 2 mV. If the fuel gauge is enabled and available, it is used;
+Resolution is approximately 0.002 V. If the fuel gauge is enabled and available, it is used;
 otherwise, the charger VBAT ADC path is used as a fallback.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-This function can block for 100 ms.
+This function can block for about 100 ms plus power-management I2C transfer time when
+the charger ADC fallback path is used. I2C faults can add several 50 ms transaction
+timeout windows before the function returns failure. Tasks contending for the SDK
+mutex are bounded by the mutex timeout while this call waits for the ADC conversion.
 
 #### Parameters
 
-- **voltage** [out] Measured battery voltage in millivolts (mV).
+- **voltage** [out] Measured battery voltage in volts (V).
 
 #### Return
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the battery voltage was measured successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) getBatteryCurrent(int16_t &current)
+### [Result](./result.md#enum-class-result) getBatteryCurrent(float &current)
 
 #### Brief
 
@@ -497,24 +514,32 @@ Measure battery current.
 
 #### Description
 
-Measures the current to or from the battery during charging and discharging, respectively, using the
-charger `IBAT_ADC` measurement path.
+Measures the current to or from the battery during charging and discharging, respectively.
 
-This overload uses the charger `IBAT_ADC` register on both V1 and V2, with a 4 mA LSb.
+On V1, this function uses the BQ25628E charger `IBAT_ADC` register with a 4 mA LSB.
+BQ25628E Table 8-35 specifies that `IBAT_ADC` resets to zero when charging is disabled;
+in that case this function returns [Result](./result.md#enum-class-result)::`NotReady` instead of reporting a misleading zero current.
+On V2, this function uses the MAX17260 `Current` register with a 0.078125 mA LSB.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
+
+The battery fuel gauge must be enabled on V2 before calling this function, else
 [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
-This function can block for 100 ms.
+This function can block for about 100 ms on a normal V1 charger ADC refresh, plus
+power-management I2C transfer time. I2C faults can add several 50 ms transaction
+timeout windows before the function returns failure. Tasks contending for the SDK
+mutex are bounded by the mutex timeout while this call waits for the ADC conversion.
 
 #### Parameters
 
-- **current** [out] Measured battery current in milliamps (mA). If battery is discharging,
-this value is negative; positive if battery is charging.
+- **current** [out] Measured battery current in milliamperes (mA). If the battery is discharging,
+this value is negative; if the battery is charging, this value is positive. On V1, this signed contract
+applies only when the charger provides a valid `IBAT_ADC` reading.
 
 #### Return
 
@@ -528,15 +553,14 @@ Estimate battery charge.
 
 #### Description
 
-Gives an estimate of battery state-of-charge from 0% to 100%. This is useful to get a sense
-if the battery still has much charge or is nearly empty.
+Gives an estimate of battery state-of-charge from 0% to 100%. This is useful for getting a sense
+of whether the battery still has much charge or is nearly empty.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -562,9 +586,8 @@ sense of how much the battery has degraded over time.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -584,15 +607,14 @@ Estimate battery cycle count.
 
 #### Description
 
-Gives an estimate of the battery cycle count. This is useful to compare against the number of
-cycle counts the battery is rated for.
+Gives an estimate of the battery cycle count. This is useful for comparing against the
+rated cycle count of the battery.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -613,21 +635,20 @@ Estimate time left for battery to charge or discharge.
 #### Description
 
 Gives an estimate of the battery time-to-empty or time-to-full in minutes. The battery charge must have
-previously dropped and/or risen by a certain percentage to be able to estimate time-to-empty or time-to-full, respectively.
+previously changed by a certain percentage to estimate time-to-empty or time-to-full.
 If the gauge has not accumulated enough history yet, this function returns [Result](./result.md#enum-class-result)::`NotReady`.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
-- **minutes** [out] Estimated time left for battery to charge or discharge in minutes. If battery is discharging,
+- **minutes** [out] Estimated time left for the battery to charge or discharge in minutes. If the battery is discharging,
 this value is negative; if battery is charging, this value is positive.
 
 #### Return
@@ -652,24 +673,26 @@ range, such as when the thermistor is missing, open, or shorted.
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 Battery temperature measurement must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState`
 is returned.
 
-This function can block for 100 ms.
+This function can block for about 100 ms on a normal charger ADC refresh, plus
+power-management I2C transfer time. I2C faults can add several 50 ms transaction
+timeout windows before the function returns failure. Tasks contending for the SDK
+mutex are bounded by the mutex timeout while this call waits for the ADC conversion.
 
 #### Parameters
 
-- **celsius** [out] Measured battery temperature in celsius.
+- **celsius** [out] Measured battery temperature in degrees Celsius.
 
 #### Return
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the battery temperature was measured successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) setBatteryLowVoltageAlarm(uint16_t voltage)
+### [Result](./result.md#enum-class-result) setBatteryLowVoltageAlarm(float voltage)
 
 #### Brief
 
@@ -677,33 +700,32 @@ Set an alarm for battery low voltage.
 
 #### Description
 
-If battery voltage is less than the set voltage, the `ALARM` pin is pulled low.
+If the battery voltage is less than the set voltage, the `ALARM` pin is pulled low.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
-- **voltage** [in] The voltage at which the low voltage alarm will trigger in millivolts (mV).
-Valid non-zero range depends on board revision (2500-5000 mV for V1, 20-5100 mV for V2). If zero,
+- **voltage** [in] The voltage at which the low voltage alarm will trigger in volts (V).
+Valid non-zero range depends on board revision (2.5-5.0 V for V1, 0.02-5.1 V for V2). If zero,
 triggering of the alarm is disabled and any existing low voltage
 alarm is cleared.
 
 Alarm handling differs by board revision:
 - V1 (LC709204F): low-voltage status naturally clears once voltage returns above threshold.
-- V2 (MAX17260): low-voltage status is latched until explicitly cleared. Use `setBatteryLowVoltageAlarm(0)` to clear, then set a non-zero threshold to re-arm.
+- V2 (MAX17260): low-voltage status is latched until explicitly cleared. Use `setBatteryLowVoltageAlarm(0.0f)` to clear, then set a non-zero threshold to re-arm.
 
 #### Return
 
 Returns [Result](./result.md#enum-class-result)::`Ok` if the battery low voltage alarm was set successfully; returns a value other than [Result](./result.md#enum-class-result)::`Ok` if not.
 
-### [Result](./result.md#enum-class-result) setBatteryHighVoltageAlarm(uint16_t voltage)
+### [Result](./result.md#enum-class-result) setBatteryHighVoltageAlarm(float voltage)
 
 #### Brief
 
@@ -711,27 +733,26 @@ Set an alarm for battery high voltage.
 
 #### Description
 
-If battery voltage is more than the set voltage, the `ALARM` pin is pulled low.
+If the battery voltage is greater than the set voltage, the `ALARM` pin is pulled low.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
-- **voltage** [in] The voltage at which the high voltage alarm will trigger in millivolts (mV).
-Valid non-zero range depends on board revision (2500-5000 mV for V1, 20-5100 mV for V2). If zero,
+- **voltage** [in] The voltage at which the high voltage alarm will trigger in volts (V).
+Valid non-zero range depends on board revision (2.5-5.0 V for V1, 0.02-5.1 V for V2). If zero,
 triggering of the alarm is disabled and any existing high voltage
 alarm is cleared.
 
 Alarm handling differs by board revision:
 - V1 (LC709204F): high-voltage status naturally clears once voltage returns below threshold.
-- V2 (MAX17260): high-voltage status is latched until explicitly cleared. Use `setBatteryHighVoltageAlarm(0)` to clear, then set a non-zero threshold to re-arm.
+- V2 (MAX17260): high-voltage status is latched until explicitly cleared. Use `setBatteryHighVoltageAlarm(0.0f)` to clear, then set a non-zero threshold to re-arm.
 
 #### Return
 
@@ -745,14 +766,13 @@ Set an alarm for battery low charge.
 
 #### Description
 
-If battery charge is less than the set percentage, the `ALARM` pin is pulled low.
+If the battery charge is less than the set percentage, the `ALARM` pin is pulled low.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
@@ -777,24 +797,23 @@ Update fuel gauge with measured battery temperature.
 
 #### Description
 
-In order to increase fuel gauge accuracy, you can update the fuel gauge with the battery temperature obtained from `getBatteryTemperature()` or other sources.
+To improve fuel gauge accuracy, you can update the fuel gauge with the battery temperature obtained from `getBatteryTemperature()` or other sources.
 
 Temperature mode behavior depends on board revision:
-- V1: after initialization, fuel gauge temperature is host-updated.
+- V1: after initialization, fuel gauge temperature is host-updated (this API writes the value used for gauging).
 - V2: after initialization, fuel gauge temperature defaults to on-IC measurement until the first call to this API or its no-arg overload, after which host-updated temperature is used.
 
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 The battery fuel gauge must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 #### Parameters
 
-- **temperature** [in] The temperature of the battery cell.
+- **temperature** [in] The temperature of the battery cell in degrees Celsius.
 
 #### Return
 
@@ -814,9 +833,8 @@ See `updateBatteryFuelGaugeTemp(float)` for V1/V2 temperature mode behavior deta
 On V1, `VSQT` must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 On V2, power-management I2C remains usable with `VSQT` disabled.
 
-A battery must be configured using [Mainboard](#class-mainboard)::init(uint16_t, [BatteryType](#enum-class-batterytype)) or
-[Mainboard](#class-mainboard)::init(const MAX17260::Model &); calling [Mainboard](#class-mainboard)::init() disables battery monitoring, and
-[Result](./result.md#enum-class-result)::`InvalidState` is returned.
+A non-zero **capacity** or **type** of [BatteryType](#enum-class-batterytype)::`ICR18650_26H` / [BatteryType](#enum-class-batterytype)::`UR18650ZY`
+should have been specified when [Mainboard](#class-mainboard)::init was called, else [Result](./result.md#enum-class-result)::`InvalidState` is returned.
 
 Battery temperature measurement must be enabled prior to calling this function, else [Result](./result.md#enum-class-result)::`InvalidState`
 is returned.
