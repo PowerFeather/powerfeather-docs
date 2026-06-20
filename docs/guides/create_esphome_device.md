@@ -9,7 +9,10 @@ sidebar_position: 4
 # Creating an ESPHome Device
 
 The ESPHome integration exposes the board's supply, battery, output,
-charging, and power-state controls to Home Assistant. The current integration is the `powerfeather` external component and uses PowerFeather-SDK V2.
+charging, and power-state controls to Home Assistant. The current integration is
+the `powerfeather` external component and uses PowerFeather-SDK V2.
+
+This guide covers ESPHome PowerFeather `2.0.0-beta1`.
 
 ## Start a Device Config
 
@@ -46,20 +49,53 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   ap:
-    ssid: "${friendly_name} Fallback"
+    ssid: "${name}"
     password: !secret fallback_ap_password
 
 captive_portal:
 
 external_components:
-  - source: github://powerfeatherdev/esphome-powerfeather@main
+  - source: github://powerfeatherdev/esphome-powerfeather@2.0.0-beta1
     components: [powerfeather]
 ```
 
 The source repository is
 [`PowerFeather/esphome-powerfeather`](https://github.com/PowerFeather/esphome-powerfeather).
-For production devices, use a tagged release instead of `@main` once one is
-available.
+`external_components.source` uses a Git ref, so it cannot express a version
+range such as `V2.0.0+`. Use the exact `2.0.0-beta1` tag for the beta release
+covered by this guide.
+
+## Start from an Example
+
+The component repository includes example configs for each supported board and
+framework combination:
+
+| Example | Purpose |
+| --- | --- |
+| [`powerfeather-v2-idf.yaml`](https://github.com/PowerFeather/esphome-powerfeather/blob/2.0.0-beta1/examples/powerfeather-v2-idf.yaml) | PowerFeather V2, ESP-IDF, 3.7 V lithium battery. |
+| [`powerfeather-v2-arduino.yaml`](https://github.com/PowerFeather/esphome-powerfeather/blob/2.0.0-beta1/examples/powerfeather-v2-arduino.yaml) | PowerFeather V2, Arduino framework, 3.7 V lithium battery. |
+| [`powerfeather-v2-idf-lfp.yaml`](https://github.com/PowerFeather/esphome-powerfeather/blob/2.0.0-beta1/examples/powerfeather-v2-idf-lfp.yaml) | PowerFeather V2, ESP-IDF, LiFePO4 battery. |
+| [`powerfeather-v2-arduino-lfp.yaml`](https://github.com/PowerFeather/esphome-powerfeather/blob/2.0.0-beta1/examples/powerfeather-v2-arduino-lfp.yaml) | PowerFeather V2, Arduino framework, LiFePO4 battery. |
+| [`powerfeather-v1-idf.yaml`](https://github.com/PowerFeather/esphome-powerfeather/blob/2.0.0-beta1/examples/powerfeather-v1-idf.yaml) | PowerFeather V1, ESP-IDF, 3.7 V lithium battery. |
+| [`powerfeather-v1-arduino.yaml`](https://github.com/PowerFeather/esphome-powerfeather/blob/2.0.0-beta1/examples/powerfeather-v1-arduino.yaml) | PowerFeather V1, Arduino framework, 3.7 V lithium battery. |
+
+The examples use these ESPHome secrets:
+
+```yaml
+api_encryption_key: "..."
+fallback_ap_password: "..."
+ota_password: "..."
+wifi_ssid: "..."
+wifi_password: "..."
+```
+
+`api_encryption_key` must be a base64-encoded 32-byte key. Generate one with:
+
+```bash
+openssl rand -base64 32
+```
+
+The other secrets are normal passwords you choose.
 
 ## Configure the Mainboard
 
@@ -183,7 +219,7 @@ powerfeather:
 
 ## Migrating from the Old Syntax
 
-ESPHome integration v2.0.0.  changes the component name and moves all entities under
+ESPHome integration 2.0.0-beta1 changes the component name and moves all entities under
 `powerfeather.mainboard`.
 
 | Old syntax | New syntax |
@@ -270,3 +306,24 @@ unknown at boot until you set them from Home Assistant or a YAML automation.
 | `ship_mode` | Enters ship mode, which exits by pulling `QON` low or plugging in a supply. |
 | `shutdown` | Enters shutdown mode, which exits by plugging in a supply. |
 | `powercycle` | Requests a board power cycle. |
+
+## Development Helpers
+
+The component repository's `test/` directory contains the full internal fixture
+and Docker-based helper scripts:
+
+- [`test/configs/powerfeather.yaml`](https://github.com/PowerFeather/esphome-powerfeather/blob/2.0.0-beta1/test/configs/powerfeather.yaml) exposes every supported entity.
+- [`test/scripts/esphome-ci.sh`](https://github.com/PowerFeather/esphome-powerfeather/blob/2.0.0-beta1/test/scripts/esphome-ci.sh) validates and compiles configs with the official ESPHome Docker image.
+- [`test/justfile`](https://github.com/PowerFeather/esphome-powerfeather/blob/2.0.0-beta1/test/justfile) provides local flash targets.
+
+For local board bring-up from the component repository:
+
+```bash
+cd test
+export WIFI_SSID="..."
+export WIFI_PASSWORD="..."
+just v2-idf /dev/ttyACM0
+```
+
+Use `just --list` in `test/` to see the V1, V2, ESP-IDF, Arduino, and LiFePO4
+flash targets.
